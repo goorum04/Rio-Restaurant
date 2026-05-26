@@ -224,7 +224,7 @@ img, svg { max-width: 100%; display: block; }
   margin-top: -2px;
 }
 
-.site-nav { display: flex; gap: 36px; }
+.site-nav { display: flex; align-items: center; gap: 36px; }
 .site-nav a {
   font-size: 0.92rem;
   font-weight: 500;
@@ -264,6 +264,34 @@ img, svg { max-width: 100%; display: block; }
 /* Mobile nav */
 .menu-toggle { display: none; background: none; border: 0; cursor: pointer; padding: 4px; }
 .menu-toggle span { display: block; width: 22px; height: 2px; background: var(--text); margin: 5px 0; transition: .25s; }
+.menu-toggle.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.menu-toggle.open span:nth-child(2) { opacity: 0; }
+.menu-toggle.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+.site-nav.open {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0;
+  position: absolute;
+  top: 100%; left: 0; right: 0;
+  background: var(--bg);
+  border-bottom: 1px solid var(--line);
+  box-shadow: 0 8px 24px -8px color-mix(in oklch, var(--primary) 20%, transparent);
+  padding: 12px 22px 20px;
+  z-index: 100;
+}
+.site-nav.open a {
+  width: 100%;
+  padding: 14px 0;
+  font-size: 1rem;
+  border-bottom: 1px solid var(--line);
+}
+.site-nav.open a::after { display: none; }
+.site-nav.open .lang-switcher {
+  margin-top: 16px;
+  background: var(--bg-deep);
+}
 
 /* ============================================================
    HERO — dramatic dark with zellige pattern
@@ -1178,6 +1206,7 @@ footer {
 @media (max-width: 980px) {
   .site-header { padding: 16px 22px; }
   .site-nav { display: none; }
+  .site-nav .lang-switcher { display: flex; }
   .menu-toggle { display: block; }
 
   .hero {
