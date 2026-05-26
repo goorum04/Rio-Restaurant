@@ -1,115 +1,377 @@
-/* El Rio — main interactions: i18n, menu tabs, form, mobile nav */
+/* El Rio · Translations
+   Keyed by Catalan source text. Used when language is English or Arabic.
+   Arabic strings include <em>…</em> markers from the source (HTML emphasis preserved).
+*/
+window.ELRIO_I18N = {
+  en: {
+    /* Header / nav */
+    "Encamp · Andorra": "Encamp · Andorra",
+    "Carta": "Menu",
+    "Visita'ns": "Visit",
+    "Reserves": "Reservations",
+    "732 223": "732 223",
 
-(function () {
-  /* ============== LANGUAGE SWITCHING ============== */
-  const supported = ['ca', 'es', 'fr', 'en', 'ar'];
-  const saved = localStorage.getItem('elrio_lang');
-  const initial = supported.includes(saved) ? saved : 'ca';
+    /* Hero */
+    "Encamp · Andorra · Des de fa anys": "Encamp · Andorra · For years",
+    "Sabors del Marroc <em>al cor d'Andorra</em>": "Flavours of Morocco <em>in the heart of Andorra</em>",
+    "Tajín, cuscús, pizzes artesanes i carns a la brasa. Cuina familiar, ingredients honestos, 100% Halal.": "Tagine, couscous, artisan pizzas and grilled meats. Family cooking, honest ingredients, 100% Halal.",
+    "Reservar taula": "Book a table",
+    "Veure la carta": "See the menu",
+    "ressenyes Google": "Google reviews",
+    "per persona": "per person",
+    "Obert avui fins 23:30": "Open today until 23:30",
+    "★ 4,2 · 329 Google": "★ 4.2 · 329 Google",
 
-  function translate(caSource, lang) {
-    if (lang === 'ca') return caSource;
-    // Native attribute (es/fr live on the element)
-    return undefined;
+    /* Specialties */
+    "Les nostres especialitats": "Our specialities",
+    "Tres plats que has <em>de tastar</em>": "Three dishes you <em>must try</em>",
+    "Receptes que viatgen del nord d'Àfrica a la Mediterrània. Tot cuinat a casa, cada dia.": "Recipes that travel from North Africa to the Mediterranean. All cooked in-house, every day.",
+    "Marroquí": "Moroccan",
+    "Tajín de xai amb prunes": "Lamb tagine with prunes",
+    "Espatlla de xai cuita lentament amb prunes, ametlles tostades i sèsam.": "Lamb shoulder slow-cooked with prunes, toasted almonds and sesame.",
+    "Plat de la casa": "House special",
+    "Pizza": "Pizza",
+    "Pizza El Rio": "El Rio Pizza",
+    "La nostra signatura: carn picada especiada, ceba caramel·litzada, olives kalamata i menta fresca.": "Our signature: spiced minced meat, caramelised onion, kalamata olives and fresh mint.",
+    "Original": "Original",
+    "Cuscús reial": "Royal couscous",
+    "Sémola amb xai, pollastre, merguez i set verdures de temporada. Per compartir.": "Semolina with lamb, chicken, merguez and seven seasonal vegetables. To share.",
+    "Per compartir": "To share",
+
+    /* Stats */
+    "329 ressenyes Google": "329 Google reviews",
+    "Carn Halal certificada": "Certified Halal meat",
+    "Preu per persona": "Price per person",
+    "Cuina oberta cada dia": "Kitchen open daily",
+
+    /* Menu */
+    "La nostra carta": "Our menu",
+    "Una taula entre <em>dues ribes</em>": "A table between <em>two shores</em>",
+    "De la pizza italiana al tajín marroquí, tot fet a casa amb productes frescos. Carn 100% Halal.": "From Italian pizza to Moroccan tagine, all made in-house with fresh produce. 100% Halal meat.",
+    "Entrants & Tapes": "Starters & Tapas",
+    "Marroc": "Morocco",
+    "Pizzes": "Pizzas",
+    "Pastes": "Pasta",
+    "A la brasa": "Grill",
+    "Postres & Tes": "Desserts & Teas",
+
+    /* Tapas */
+    "Hummus amb pa àrab": "Hummus with Arabic bread",
+    "Crema de cigrons amb sèsam, comí i oli d'oliva, servit calent.": "Chickpea cream with sesame, cumin and olive oil, served warm.",
+    "Bricks de formatge": "Cheese briouates",
+    "Massa filo cruixent farcida de formatge fos i herbes fresques.": "Crispy filo pastry filled with melted cheese and fresh herbs.",
+    "Falàfel casolà": "Homemade falafel",
+    "Sis boletes de cigrons especiades amb salsa de iogurt i menta.": "Six spiced chickpea balls with yoghurt and mint sauce.",
+    "Harira tradicional": "Traditional harira",
+    "Sopa marroquí amb llenties, cigrons, tomàquet i espècies suaus.": "Moroccan soup with lentils, chickpeas, tomato and mild spices.",
+    "Croquetes de la casa": "House croquettes",
+    "Sis unitats. De pollastre, bolets o espinacs amb pinyons.": "Six pieces. Chicken, mushroom or spinach with pine nuts.",
+    "Pa amb tomàquet": "Bread with tomato",
+    "Pa de coca torrat amb tomàquet madur i oli d'oliva verge.": "Toasted coca bread with ripe tomato and virgin olive oil.",
+    "Olives marinades": "Marinated olives",
+    "Mescla d'olives amb pell de llimona, all confitat i comí.": "Mixed olives with lemon peel, confit garlic and cumin.",
+    "Sambussa de carn": "Beef sambousseks",
+    "Empanadetes triangulars farcides de vedella picada i espècies.": "Triangular pastries filled with spiced minced beef.",
+
+    /* Moroccan mains */
+    "Sémola amb xai, pollastre, merguez i set verdures de temporada.": "Semolina with lamb, chicken, merguez and seven seasonal vegetables.",
+    "Espatlla de xai cuita lentament amb prunes, ametlles i sèsam.": "Lamb shoulder slow-cooked with prunes, almonds and sesame.",
+    "Tajín de pollastre amb llimona": "Chicken tagine with lemon",
+    "Pollastre amb llimona confitada, olives verdes i safrà.": "Chicken with preserved lemon, green olives and saffron.",
+    "Tajín de verdures": "Vegetable tagine",
+    "Carbassó, pastanaga, carbassa, cigrons i set espècies.": "Courgette, carrot, pumpkin, chickpeas and seven spices.",
+    "Pastilla de pollastre": "Chicken pastilla",
+    "Massa filo dolça-salada amb pollastre, ametlles, canyella i sucre.": "Sweet-savoury filo with chicken, almonds, cinnamon and sugar.",
+    "Mètxoui de xai": "Lamb mechoui",
+    "Espatlla de xai rostida lentament amb comí i sal de Maldon.": "Slow-roasted lamb shoulder with cumin and Maldon salt.",
+
+    /* Pizzas */
+    "Margarita": "Margherita",
+    "Tomàquet San Marzano, mozzarella fior di latte, alfàbrega fresca.": "San Marzano tomato, fior di latte mozzarella, fresh basil.",
+    "El Rio": "El Rio",
+    "Carn picada especiada, ceba caramel·litzada, olives kalamata, menta.": "Spiced minced meat, caramelised onion, kalamata olives, mint.",
+    "Quattro Formaggi": "Quattro Formaggi",
+    "Mozzarella, gorgonzola, parmesà i emmental.": "Mozzarella, gorgonzola, parmesan and emmental.",
+    "Diavola Halal": "Diavola Halal",
+    "Salami picant de vedella halal, pebrots, oli de bitxo.": "Spicy halal beef salami, peppers, chilli oil.",
+    "Vegetariana": "Vegetarian",
+    "Carbassó, alberginia, pebrot, ceba i tomàquet sec.": "Courgette, aubergine, pepper, onion and sun-dried tomato.",
+    "Tonyina i ceba": "Tuna and onion",
+    "Tonyina, ceba vermella, olives negres, orenga.": "Tuna, red onion, black olives, oregano.",
+    "Merguez, harissa suau, pebrot rostit, formatge de cabra, menta.": "Merguez, mild harissa, roasted pepper, goat cheese, mint.",
+    "Prosciutto Halal & Bolets": "Halal Prosciutto & Mushrooms",
+    "Pernil de gall dindi halal, bolets de temporada, rúcula.": "Halal turkey ham, seasonal mushrooms, rocket.",
+
+    /* Pasta */
+    "Spaghetti bolonyesa": "Spaghetti bolognese",
+    "Carn de vedella halal, sofregit lent de tomàquet i vi.": "Halal beef, slow-cooked tomato and wine sofrito.",
+    "Penne arrabiata": "Penne arrabbiata",
+    "Tomàquet, all, bitxo, alfàbrega i un raig d'oli verge.": "Tomato, garlic, chilli, basil and a drizzle of virgin oil.",
+    "Tagliatelle de pollastre i bolets": "Tagliatelle with chicken & mushroom",
+    "Crema de bolets de bosc, pollastre saltejat, una mica de timó.": "Wild mushroom cream, sautéed chicken, a touch of thyme.",
+    "Lasanya casolana": "Homemade lasagna",
+    "Cinc capes de pasta fresca, carn halal, beixamel i parmesà.": "Five layers of fresh pasta, halal meat, béchamel and parmesan.",
+    "Tortellini ricotta i espinacs": "Ricotta & spinach tortellini",
+    "Salsa lleugera de mantega, sàlvia i ratlladura de llimona.": "Light butter sauce, sage and lemon zest.",
+
+    /* Grill */
+    "Entrecot de vedella 250 g": "Beef entrecôte 250 g",
+    "Madurat 21 dies, sal de Maldon, patata al caliu i ratatouille.": "21-day aged, Maldon salt, ember-roasted potato and ratatouille.",
+    "Brotxetes mixtes": "Mixed skewers",
+    "Pollastre, xai i merguez, arròs basmati i salsa de iogurt.": "Chicken, lamb and merguez, basmati rice and yoghurt sauce.",
+    "Mig pollastre a la brasa": "Half grilled chicken",
+    "Marinat amb ras el hanout, llimona i all. Patates fregides.": "Marinated in ras el hanout, lemon and garlic. With fries.",
+    "Costelles de xai": "Lamb chops",
+    "Sis costelles fines, romaní fresc i mantega d'all confitat.": "Six thin chops, fresh rosemary and confit garlic butter.",
+    "Hamburguesa El Rio": "El Rio Burger",
+    "200 g vedella halal, cheddar, ceba caramel·litzada, salsa de la casa.": "200 g halal beef, cheddar, caramelised onion, house sauce.",
+    "Hamburguesa vegetal": "Veggie burger",
+    "Llenties, remolatxa i quinoa, formatge de cabra i alvocat.": "Lentils, beetroot and quinoa, goat cheese and avocado.",
+
+    /* Desserts */
+    "Corns de gasela": "Gazelle horns",
+    "Pastetes d'ametlla, aigua de rosa i flor de taronger. Tres unitats.": "Almond pastries with rose water and orange blossom. Three pieces.",
+    "Pastís d'ametlla": "Almond cake",
+    "Esponjós, sense gluten, amb gelat de canyella.": "Light, gluten-free, with cinnamon ice cream.",
+    "Tiramisú casolà": "Homemade tiramisu",
+    "Mascarpone, cafè acabat de fer, cacau pur del Marroc.": "Mascarpone, freshly brewed coffee, pure Moroccan cocoa.",
+    "Dàtils amb mel i sèsam": "Dates with honey & sesame",
+    "Dàtils Medjool farcits d'ametlla i banyats amb mel.": "Medjool dates stuffed with almond and drizzled with honey.",
+    "Te de menta marroquí (tetera)": "Moroccan mint tea (pot)",
+    "Te verd Gunpowder, menta fresca, sucre. Per a dues persones.": "Gunpowder green tea, fresh mint, sugar. For two.",
+    "Cafè i pastissets variats": "Coffee & assorted pastries",
+    "Cafè a l'estil que prefereixis, trio de pastissets marroquins.": "Coffee any style, trio of Moroccan pastries.",
+
+    /* Visit */
+    "Vine a visitar-nos": "Come visit us",
+    "A l'avinguda <em>Joan Martí</em>, Encamp": "On <em>Joan Martí</em> avenue, Encamp",
+    "A 8 minuts del telecabina Funicamp i del centre d'Encamp. Aparcament gratuït a prop.": "8 minutes from the Funicamp cable car and Encamp centre. Free parking nearby.",
+    "On som": "Where we are",
+    "Principat d'Andorra": "Principality of Andorra",
+    "Obre al Google Maps →": "Open in Google Maps →",
+    "Horari": "Hours",
+    "Dilluns": "Monday",
+    "Dimarts": "Tuesday",
+    "Dimecres": "Wednesday",
+    "Dijous": "Thursday",
+    "Divendres": "Friday",
+    "Dissabte": "Saturday",
+    "Diumenge": "Sunday",
+    "Contacte": "Contact",
+    "Telèfon": "Phone",
+    "Reservar taula →": "Book a table →",
+
+    /* Reservations */
+    "Et guardem <em>la millor taula</em>": "We'll save you <em>the best table</em>",
+    "Per a grups de més de 6 persones, truca'ns directament. Per a dies festius, et recomanem reservar amb antelació.": "For groups over 6, please call us directly. On holidays, we recommend booking in advance.",
+    "Truca": "Call",
+    "Resposta en minuts": "Reply in minutes",
+    "Reserva en línia": "Book online",
+    "Et confirmem en menys d'una hora.": "Confirmation within an hour.",
+    "Nom": "Name",
+    "Data": "Date",
+    "Hora": "Time",
+    "Persones": "Guests",
+    "6+ (truca'ns)": "6+ (call us)",
+    "Email (opcional)": "Email (optional)",
+    "Notes (al·lèrgies, ocasió...)": "Notes (allergies, occasion...)",
+    "Demanar reserva": "Request booking",
+    "✓ Hem rebut la teva sol·licitud. Et trucarem aviat per confirmar.": "✓ We've received your request. We'll call you soon to confirm.",
+
+    /* Footer */
+    "Restaurant marroquí i pizzeria 100% Halal a Encamp, Andorra. Cuina familiar des de fa anys.": "Moroccan restaurant and pizzeria, 100% Halal in Encamp, Andorra. Family cooking for years.",
+    "Contacta": "Contact",
+    "Enllaços": "Links",
+    "Fet amb cura · 100% Halal": "Made with care · 100% Halal",
+
+    /* Placeholders */
+    "El teu nom": "Your name",
+    "Aniversari, intolerància al gluten, terrassa...": "Birthday, gluten intolerance, terrace..."
+  },
+
+  ar: {
+    /* Header / nav */
+    "Encamp · Andorra": "إنكامب · أندورا",
+    "Carta": "القائمة",
+    "Visita'ns": "زورونا",
+    "Reserves": "الحجوزات",
+    "732 223": "732 223",
+
+    /* Hero */
+    "Encamp · Andorra · Des de fa anys": "إنكامب · أندورا · منذ سنوات",
+    "Sabors del Marroc <em>al cor d'Andorra</em>": "نكهات المغرب <em>في قلب أندورا</em>",
+    "Tajín, cuscús, pizzes artesanes i carns a la brasa. Cuina familiar, ingredients honestos, 100% Halal.": "طاجين، كسكس، بيتزا حرفية ومشاوي. مطبخ عائلي، مكونات صادقة، حلال 100%.",
+    "Reservar taula": "احجز طاولة",
+    "Veure la carta": "اطّلع على القائمة",
+    "ressenyes Google": "تقييم على جوجل",
+    "per persona": "للشخص",
+    "Obert avui fins 23:30": "مفتوح اليوم حتى 23:30",
+    "★ 4,2 · 329 Google": "★ 4,2 · 329 جوجل",
+
+    /* Specialties */
+    "Les nostres especialitats": "تخصّصاتنا",
+    "Tres plats que has <em>de tastar</em>": "ثلاثة أطباق <em>يجب تجربتها</em>",
+    "Receptes que viatgen del nord d'Àfrica a la Mediterrània. Tot cuinat a casa, cada dia.": "وصفات تسافر من شمال إفريقيا إلى البحر الأبيض المتوسط. كل شيء يُطهى في المطعم يوميًا.",
+    "Marroquí": "مغربي",
+    "Tajín de xai amb prunes": "طاجين لحم الضأن بالبرقوق",
+    "Espatlla de xai cuita lentament amb prunes, ametlles tostades i sèsam.": "كتف ضأن مطبوخ على نار هادئة مع البرقوق واللوز المحمّص والسمسم.",
+    "Plat de la casa": "طبق البيت",
+    "Pizza": "بيتزا",
+    "Pizza El Rio": "بيتزا الريو",
+    "La nostra signatura: carn picada especiada, ceba caramel·litzada, olives kalamata i menta fresca.": "توقيعنا: لحم مفروم بالتوابل، بصل مكرمل، زيتون كالاماتا ونعناع طازج.",
+    "Original": "أصلي",
+    "Cuscús reial": "كسكس ملكي",
+    "Sémola amb xai, pollastre, merguez i set verdures de temporada. Per compartir.": "سميد مع لحم الضأن والدجاج والمرقاز وسبع خضروات موسمية. للمشاركة.",
+    "Per compartir": "للمشاركة",
+
+    /* Stats */
+    "329 ressenyes Google": "329 تقييم على جوجل",
+    "Carn Halal certificada": "لحم حلال موثّق",
+    "Preu per persona": "السعر للشخص",
+    "Cuina oberta cada dia": "المطبخ مفتوح كل يوم",
+
+    /* Menu */
+    "La nostra carta": "قائمتنا",
+    "Una taula entre <em>dues ribes</em>": "مائدة بين <em>ضفّتين</em>",
+    "De la pizza italiana al tajín marroquí, tot fet a casa amb productes frescos. Carn 100% Halal.": "من البيتزا الإيطالية إلى الطاجين المغربي، كل شيء يُحضَّر في المطعم بمنتجات طازجة. لحم حلال 100%.",
+    "Entrants & Tapes": "مقبّلات وتاباس",
+    "Marroc": "المغرب",
+    "Pizzes": "بيتزا",
+    "Pastes": "معكرونة",
+    "A la brasa": "مشاوي",
+    "Postres & Tes": "حلويات وشاي",
+
+    /* Tapas */
+    "Hummus amb pa àrab": "حمّص مع الخبز العربي",
+    "Crema de cigrons amb sèsam, comí i oli d'oliva, servit calent.": "كريمة الحمّص مع السمسم والكمّون وزيت الزيتون، تُقدَّم ساخنة.",
+    "Bricks de formatge": "بريوات بالجبن",
+    "Massa filo cruixent farcida de formatge fos i herbes fresques.": "عجينة فيلو مقرمشة محشوّة بالجبن الذائب والأعشاب الطازجة.",
+    "Falàfel casolà": "فلافل بيتي",
+    "Sis boletes de cigrons especiades amb salsa de iogurt i menta.": "ست كرات حمّص متبّلة مع صلصة اللبن والنعناع.",
+    "Harira tradicional": "حريرة تقليدية",
+    "Sopa marroquí amb llenties, cigrons, tomàquet i espècies suaus.": "شوربة مغربية بالعدس والحمّص والطماطم وبهارات لطيفة.",
+    "Croquetes de la casa": "كروكيت البيت",
+    "Sis unitats. De pollastre, bolets o espinacs amb pinyons.": "ست قطع. بالدجاج أو الفطر أو السبانخ مع الصنوبر.",
+    "Pa amb tomàquet": "خبز بالطماطم",
+    "Pa de coca torrat amb tomàquet madur i oli d'oliva verge.": "خبز محمّص مع طماطم ناضجة وزيت زيتون بكر.",
+    "Olives marinades": "زيتون مخلّل",
+    "Mescla d'olives amb pell de llimona, all confitat i comí.": "تشكيلة زيتون مع قشر الليمون والثوم المعالج والكمّون.",
+    "Sambussa de carn": "سمبوسة باللحم",
+    "Empanadetes triangulars farcides de vedella picada i espècies.": "فطائر مثلّثة محشوّة بلحم البقر المفروم والبهارات.",
+
+    /* Moroccan mains */
+    "Sémola amb xai, pollastre, merguez i set verdures de temporada.": "سميد مع لحم الضأن والدجاج والمرقاز وسبع خضروات موسمية.",
+    "Espatlla de xai cuita lentament amb prunes, ametlles i sèsam.": "كتف ضأن مطبوخ على نار هادئة مع البرقوق واللوز والسمسم.",
+    "Tajín de pollastre amb llimona": "طاجين الدجاج بالحامض",
+    "Pollastre amb llimona confitada, olives verdes i safrà.": "دجاج مع الحامض المصبّر والزيتون الأخضر والزعفران.",
+    "Tajín de verdures": "طاجين الخضار",
+    "Carbassó, pastanaga, carbassa, cigrons i set espècies.": "كوسا، جزر، يقطين، حمّص، وسبعة بهارات.",
+    "Pastilla de pollastre": "بسطيلة الدجاج",
+    "Massa filo dolça-salada amb pollastre, ametlles, canyella i sucre.": "عجينة فيلو حلوة-مالحة مع الدجاج واللوز والقرفة والسكّر.",
+    "Mètxoui de xai": "مشوي الضأن",
+    "Espatlla de xai rostida lentament amb comí i sal de Maldon.": "كتف ضأن مشوي على مهل مع الكمّون وملح مالدون.",
+
+    /* Pizzas */
+    "Margarita": "مارغريتا",
+    "Tomàquet San Marzano, mozzarella fior di latte, alfàbrega fresca.": "طماطم سان مارزانو، موزاريلا فيور دي لاتيه، ريحان طازج.",
+    "El Rio": "إل ريو",
+    "Carn picada especiada, ceba caramel·litzada, olives kalamata, menta.": "لحم مفروم بالتوابل، بصل مكرمل، زيتون كالاماتا، نعناع.",
+    "Quattro Formaggi": "كواترو فورماجي",
+    "Mozzarella, gorgonzola, parmesà i emmental.": "موزاريلا، غورغونزولا، بارميزان وإيمنتال.",
+    "Diavola Halal": "ديافولا حلال",
+    "Salami picant de vedella halal, pebrots, oli de bitxo.": "سلامي بقري حلال حار، فلفل، زيت الفلفل.",
+    "Vegetariana": "نباتية",
+    "Carbassó, alberginia, pebrot, ceba i tomàquet sec.": "كوسا، باذنجان، فلفل، بصل وطماطم مجفّفة.",
+    "Tonyina i ceba": "تونة وبصل",
+    "Tonyina, ceba vermella, olives negres, orenga.": "تونة، بصل أحمر، زيتون أسود، أوريغانو.",
+    "Merguez, harissa suau, pebrot rostit, formatge de cabra, menta.": "مرقاز، هريسة خفيفة، فلفل مشوي، جبن الماعز، نعناع.",
+    "Prosciutto Halal & Bolets": "بروشوتو حلال وفطر",
+    "Pernil de gall dindi halal, bolets de temporada, rúcula.": "لحم ديك رومي حلال، فطر موسمي، جرجير.",
+
+    /* Pasta */
+    "Spaghetti bolonyesa": "سباغيتي بولونيز",
+    "Carn de vedella halal, sofregit lent de tomàquet i vi.": "لحم بقري حلال، صلصة طماطم بطيئة الطهي مع النبيذ.",
+    "Penne arrabiata": "بيني أرابياتا",
+    "Tomàquet, all, bitxo, alfàbrega i un raig d'oli verge.": "طماطم، ثوم، فلفل حار، ريحان ورشّة من زيت الزيتون البكر.",
+    "Tagliatelle de pollastre i bolets": "تالياتيلي بالدجاج والفطر",
+    "Crema de bolets de bosc, pollastre saltejat, una mica de timó.": "كريمة فطر الغابة، دجاج سوتيه، لمسة من الزعتر.",
+    "Lasanya casolana": "لازانيا بيتية",
+    "Cinc capes de pasta fresca, carn halal, beixamel i parmesà.": "خمس طبقات من العجين الطازج، لحم حلال، بشاميل وبارميزان.",
+    "Tortellini ricotta i espinacs": "تورتيليني بالريكوتا والسبانخ",
+    "Salsa lleugera de mantega, sàlvia i ratlladura de llimona.": "صلصة زبدة خفيفة بالميرمية وقشر الليمون.",
+
+    /* Grill */
+    "Entrecot de vedella 250 g": "إنتركوت بقري 250 غ",
+    "Madurat 21 dies, sal de Maldon, patata al caliu i ratatouille.": "معتّق 21 يومًا، ملح مالدون، بطاطا على الجمر وراتاتوي.",
+    "Brotxetes mixtes": "أسياخ متنوّعة",
+    "Pollastre, xai i merguez, arròs basmati i salsa de iogurt.": "دجاج، ضأن ومرقاز، أرز بسمتي وصلصة اللبن.",
+    "Mig pollastre a la brasa": "نصف دجاجة مشوية",
+    "Marinat amb ras el hanout, llimona i all. Patates fregides.": "متبّل برأس الحانوت والليمون والثوم. مع البطاطا المقلية.",
+    "Costelles de xai": "ضلوع ضأن",
+    "Sis costelles fines, romaní fresc i mantega d'all confitat.": "ست ضلوع رفيعة مع إكليل الجبل وزبدة الثوم المعالج.",
+    "Hamburguesa El Rio": "برغر إل ريو",
+    "200 g vedella halal, cheddar, ceba caramel·litzada, salsa de la casa.": "200 غ لحم بقري حلال، شيدر، بصل مكرمل، صلصة البيت.",
+    "Hamburguesa vegetal": "برغر نباتي",
+    "Llenties, remolatxa i quinoa, formatge de cabra i alvocat.": "عدس، شمندر وكينوا، جبن الماعز والأفوكادو.",
+
+    /* Desserts */
+    "Corns de gasela": "كعب الغزال",
+    "Pastetes d'ametlla, aigua de rosa i flor de taronger. Tres unitats.": "حلويات اللوز بماء الورد وزهر البرتقال. ثلاث قطع.",
+    "Pastís d'ametlla": "كعكة اللوز",
+    "Esponjós, sense gluten, amb gelat de canyella.": "هشّة، خالية من الغلوتين، مع آيس كريم القرفة.",
+    "Tiramisú casolà": "تيراميسو بيتي",
+    "Mascarpone, cafè acabat de fer, cacau pur del Marroc.": "ماسكاربوني، قهوة طازجة، كاكاو مغربي خالص.",
+    "Dàtils amb mel i sèsam": "تمر بالعسل والسمسم",
+    "Dàtils Medjool farcits d'ametlla i banyats amb mel.": "تمر مجدول محشوّ باللوز ومغمّس بالعسل.",
+    "Te de menta marroquí (tetera)": "أتاي مغربي بالنعناع (إبريق)",
+    "Te verd Gunpowder, menta fresca, sucre. Per a dues persones.": "شاي أخضر غنباودر، نعناع طازج، سكّر. لشخصين.",
+    "Cafè i pastissets variats": "قهوة وحلويات متنوّعة",
+    "Cafè a l'estil que prefereixis, trio de pastissets marroquins.": "قهوة على ذوقك مع ثلاث حلويات مغربية.",
+
+    /* Visit */
+    "Vine a visitar-nos": "تفضّل بزيارتنا",
+    "A l'avinguda <em>Joan Martí</em>, Encamp": "في شارع <em>جوان مارتي</em>، إنكامب",
+    "A 8 minuts del telecabina Funicamp i del centre d'Encamp. Aparcament gratuït a prop.": "على بُعد 8 دقائق من تلفريك فونيكامب ووسط إنكامب. موقف سيارات مجاني قريب.",
+    "On som": "أين نحن",
+    "Principat d'Andorra": "إمارة أندورا",
+    "Obre al Google Maps →": "افتح على خرائط جوجل ←",
+    "Horari": "الأوقات",
+    "Dilluns": "الإثنين",
+    "Dimarts": "الثلاثاء",
+    "Dimecres": "الأربعاء",
+    "Dijous": "الخميس",
+    "Divendres": "الجمعة",
+    "Dissabte": "السبت",
+    "Diumenge": "الأحد",
+    "Contacte": "اتّصل بنا",
+    "Telèfon": "الهاتف",
+    "Reservar taula →": "احجز طاولة ←",
+
+    /* Reservations */
+    "Et guardem <em>la millor taula</em>": "نحجز لك <em>أفضل طاولة</em>",
+    "Per a grups de més de 6 persones, truca'ns directament. Per a dies festius, et recomanem reservar amb antelació.": "للمجموعات التي تزيد عن 6 أشخاص، اتّصلوا بنا مباشرةً. في أيام العطل ننصح بالحجز مسبقًا.",
+    "Truca": "اتّصل",
+    "Resposta en minuts": "ردّ خلال دقائق",
+    "Reserva en línia": "حجز عبر الإنترنت",
+    "Et confirmem en menys d'una hora.": "نؤكّد لك الحجز خلال أقل من ساعة.",
+    "Nom": "الاسم",
+    "Data": "التاريخ",
+    "Hora": "الوقت",
+    "Persones": "عدد الأشخاص",
+    "6+ (truca'ns)": "+6 (اتّصلوا بنا)",
+    "Email (opcional)": "البريد الإلكتروني (اختياري)",
+    "Notes (al·lèrgies, ocasió...)": "ملاحظات (حساسية، مناسبة...)",
+    "Demanar reserva": "اطلب الحجز",
+    "✓ Hem rebut la teva sol·licitud. Et trucarem aviat per confirmar.": "✓ تمّ استلام طلبك. سنتّصل بك قريبًا للتأكيد.",
+
+    /* Footer */
+    "Restaurant marroquí i pizzeria 100% Halal a Encamp, Andorra. Cuina familiar des de fa anys.": "مطعم مغربي وبيتزيريا حلال 100% في إنكامب، أندورا. مطبخ عائلي منذ سنوات.",
+    "Contacta": "تواصل",
+    "Enllaços": "روابط",
+    "Fet amb cura · 100% Halal": "صُنع بعناية · حلال 100%",
+
+    /* Placeholders */
+    "El teu nom": "اسمك",
+    "Aniversari, intolerància al gluten, terrassa...": "عيد ميلاد، حساسية غلوتين، تراس..."
   }
-
-  function applyLang(lang) {
-    const isRTL = (lang === 'ar');
-    document.documentElement.lang = lang;
-    document.documentElement.dir = isRTL ? 'rtl' : 'ltr';
-    document.body.classList.toggle('rtl', isRTL);
-    document.body.classList.toggle('lang-ar', lang === 'ar');
-
-    const dict = (window.ELRIO_I18N && window.ELRIO_I18N[lang]) || null;
-
-    document.querySelectorAll('[data-ca]').forEach(el => {
-      const src = el.dataset.ca;
-      let v;
-      if (lang === 'ca') {
-        v = src;
-      } else if (lang === 'es' || lang === 'fr') {
-        v = el.dataset[lang];
-      } else if (dict) {
-        v = dict[src];
-      }
-      if (v === undefined || v === null) v = el.dataset.es || el.dataset.fr || src; // fallback
-      if (typeof v === 'string') {
-        if (v.includes('<')) el.innerHTML = v;
-        else el.textContent = v;
-      }
-    });
-
-    document.querySelectorAll('[data-placeholder-ca]').forEach(el => {
-      const src = el.getAttribute('data-placeholder-ca');
-      let v;
-      if (lang === 'ca') v = src;
-      else if (lang === 'es' || lang === 'fr') v = el.getAttribute('data-placeholder-' + lang);
-      else if (dict) v = dict[src];
-      if (v) el.setAttribute('placeholder', v);
-    });
-
-    document.querySelectorAll('.lang-switcher button').forEach(b => {
-      b.classList.toggle('active', b.dataset.lang === lang);
-    });
-    localStorage.setItem('elrio_lang', lang);
-  }
-
-  document.querySelectorAll('.lang-switcher button').forEach(btn => {
-    btn.addEventListener('click', () => applyLang(btn.dataset.lang));
-  });
-  applyLang(initial);
-
-  /* ============== MENU TABS ============== */
-  const tabs = document.querySelectorAll('.menu-tabs .tab');
-  const panels = document.querySelectorAll('.menu-panels .panel');
-  tabs.forEach(tab => {
-    tab.addEventListener('click', () => {
-      const target = tab.dataset.tab;
-      tabs.forEach(t => t.classList.toggle('active', t === tab));
-      panels.forEach(p => p.classList.toggle('active', p.dataset.panel === target));
-    });
-  });
-
-  /* ============== RESERVATION FORM ============== */
-  const form = document.getElementById('reservation-form');
-  if (form) {
-    form.addEventListener('submit', e => {
-      e.preventDefault();
-      const success = document.getElementById('form-success');
-      if (success) {
-        success.classList.add('show');
-        setTimeout(() => success.classList.remove('show'), 5000);
-      }
-      form.reset();
-    });
-    // Set min date = today
-    const dateInput = document.getElementById('res-date');
-    if (dateInput) {
-      const t = new Date();
-      const iso = t.toISOString().slice(0, 10);
-      dateInput.min = iso;
-      dateInput.value = iso;
-    }
-  }
-
-  /* ============== MOBILE NAV ============== */
-  const toggle = document.querySelector('.menu-toggle');
-  const nav = document.querySelector('.site-nav');
-  if (toggle && nav) {
-    toggle.addEventListener('click', () => {
-      nav.classList.toggle('open');
-      toggle.classList.toggle('open');
-    });
-    nav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
-      nav.classList.remove('open');
-      toggle.classList.remove('open');
-    }));
-  }
-
-  /* ============== UPDATE "TODAY" IN HOURS ============== */
-  const dayIdx = new Date().getDay(); // 0=Sun..6=Sat
-  const map = [6, 0, 1, 2, 3, 4, 5]; // map JS sun..sat to data-day index where Monday=0
-  const todayDataIdx = map[dayIdx];
-  document.querySelectorAll('[data-day]').forEach(el => {
-    if (parseInt(el.dataset.day, 10) === todayDataIdx) el.classList.add('today');
-  });
-})();
+};

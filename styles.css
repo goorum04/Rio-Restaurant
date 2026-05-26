@@ -1,968 +1,1221 @@
-<!DOCTYPE html>
-<html lang="ca">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+/* ============================================================
+   El Rio · Restaurant Marroquí & Pizzeria · Encamp, Andorra
+   ============================================================ */
 
-  <!-- PRIMARY SEO -->
-  <title>El Rio · Restaurant Marroquí i Pizzeria · Encamp, Andorra · 100% Halal</title>
-  <meta name="description" content="Restaurant El Rio a Encamp, Andorra. Cuina marroquí autèntica, pizzes artesanes, carns a la brasa i tapes. 100% Halal. Av. de Joan Martí 32, Encamp. Reserves 732 223." />
-  <meta name="keywords" content="restaurant Encamp, restaurant Andorra, restaurant halal Andorra, halal Encamp, cuscús Andorra, tajín Andorra, pizza Encamp, restaurant marroquí Andorra, El Rio Encamp, te menta marroquí, restaurant familiar Andorra, restaurant Av Joan Martí Encamp" />
-  <meta name="robots" content="index, follow, max-image-preview:large" />
-  <meta name="author" content="Restaurant El Rio" />
-  <link rel="canonical" href="https://elrio-encamp.com/" />
+/* THEME TOKENS — switchable via [data-theme] on <html> */
+:root,
+:root[data-theme="royal"] {
+  --bg:        oklch(0.97 0.015 80);
+  --bg-deep:   oklch(0.93 0.025 78);
+  --bg-dark:   oklch(0.22 0.07 252);
+  --primary:   oklch(0.34 0.11 252);
+  --primary-2: oklch(0.26 0.10 252);
+  --accent:    oklch(0.72 0.12 78);
+  --accent-2:  oklch(0.62 0.13 60);
+  --text:      oklch(0.20 0.04 252);
+  --text-mute: oklch(0.45 0.03 252);
+  --line:      oklch(0.86 0.02 80);
+  --on-dark:   oklch(0.97 0.02 80);
+}
+:root[data-theme="desert"] {
+  --bg:        oklch(0.96 0.022 70);
+  --bg-deep:   oklch(0.91 0.035 65);
+  --bg-dark:   oklch(0.28 0.10 40);
+  --primary:   oklch(0.48 0.13 40);
+  --primary-2: oklch(0.36 0.13 38);
+  --accent:    oklch(0.68 0.12 78);
+  --accent-2:  oklch(0.55 0.13 50);
+  --text:      oklch(0.22 0.04 40);
+  --text-mute: oklch(0.46 0.04 40);
+  --line:      oklch(0.86 0.03 65);
+  --on-dark:   oklch(0.97 0.025 70);
+}
+:root[data-theme="mountain"] {
+  --bg:        oklch(0.96 0.006 250);
+  --bg-deep:   oklch(0.90 0.012 250);
+  --bg-dark:   oklch(0.22 0.03 250);
+  --primary:   oklch(0.30 0.04 250);
+  --primary-2: oklch(0.20 0.03 250);
+  --accent:    oklch(0.70 0.11 75);
+  --accent-2:  oklch(0.55 0.10 70);
+  --text:      oklch(0.20 0.02 250);
+  --text-mute: oklch(0.45 0.02 250);
+  --line:      oklch(0.85 0.01 250);
+  --on-dark:   oklch(0.96 0.01 80);
+}
 
-  <!-- Multilingual SEO hints -->
-  <link rel="alternate" hreflang="ca" href="https://elrio-encamp.com/" />
-  <link rel="alternate" hreflang="es" href="https://elrio-encamp.com/?lang=es" />
-  <link rel="alternate" hreflang="fr" href="https://elrio-encamp.com/?lang=fr" />
-  <link rel="alternate" hreflang="x-default" href="https://elrio-encamp.com/" />
+* { box-sizing: border-box; margin: 0; padding: 0; }
 
-  <!-- OPEN GRAPH -->
-  <meta property="og:type" content="restaurant.restaurant" />
-  <meta property="og:locale" content="ca_AD" />
-  <meta property="og:locale:alternate" content="es_ES" />
-  <meta property="og:locale:alternate" content="fr_FR" />
-  <meta property="og:title" content="El Rio · Restaurant Marroquí i Pizzeria · Encamp" />
-  <meta property="og:description" content="Cuina marroquí autèntica, pizzes artesanes i carns a la brasa al cor d'Andorra. 100% Halal." />
-  <meta property="og:url" content="https://elrio-encamp.com/" />
-  <meta property="og:site_name" content="Restaurant El Rio" />
-  <meta property="og:image" content="photos/tajin-hero.jpg" />
+html { scroll-behavior: smooth; }
 
-  <!-- TWITTER -->
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="El Rio · Restaurant Halal a Encamp, Andorra" />
-  <meta name="twitter:description" content="Tajín, cuscús, pizzes i carns a la brasa. 100% Halal." />
+body {
+  font-family: 'Work Sans', system-ui, sans-serif;
+  font-size: 16px;
+  line-height: 1.55;
+  color: var(--text);
+  background: var(--bg);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
 
-  <!-- GEO -->
-  <meta name="geo.region" content="AD-03" />
-  <meta name="geo.placename" content="Encamp, Andorra" />
-  <meta name="geo.position" content="42.5341;1.5816" />
-  <meta name="ICBM" content="42.5341, 1.5816" />
+/* ============================================================
+   ARABIC / RTL SUPPORT
+   ============================================================ */
+body.lang-ar {
+  font-family: 'Noto Naskh Arabic', 'Amiri', 'Work Sans', system-ui, sans-serif;
+  font-size: 16.5px;
+  line-height: 1.75;
+}
+body.lang-ar h1,
+body.lang-ar h2,
+body.lang-ar h3,
+body.lang-ar h4,
+body.lang-ar .display,
+body.lang-ar .brand-name,
+body.lang-ar .dish-head h3,
+body.lang-ar .dish-head .price,
+body.lang-ar .spec-price,
+body.lang-ar .stat .big {
+  font-family: 'Amiri', 'Noto Naskh Arabic', 'Cormorant Garamond', serif;
+  letter-spacing: 0;
+}
+body.lang-ar h1 em,
+body.lang-ar h2 em,
+body.lang-ar h3 em,
+body.lang-ar .stat .big em,
+body.lang-ar .hero h1 em {
+  font-style: normal; /* italic doesn't make sense for arabic */
+}
+body.lang-ar h1,
+body.lang-ar h2,
+body.lang-ar h3,
+body.lang-ar h4 {
+  line-height: 1.4;
+}
+body.lang-ar .hero h1 { font-size: clamp(2.8rem, 6vw, 5.6rem); line-height: 1.3; }
+body.lang-ar .lead { line-height: 1.85; }
+body.lang-ar .overline,
+body.lang-ar .spec-cat,
+body.lang-ar .stat-sub,
+body.lang-ar h4,
+body.lang-ar .qc-label {
+  letter-spacing: 0;
+  font-weight: 600;
+}
 
-  <!-- FAVICON -->
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='16' fill='%231e3a8a'/%3E%3Ctext x='16' y='22' font-family='Georgia,serif' font-size='18' font-weight='600' fill='%23d4b06a' text-anchor='middle'%3ER%3C/text%3E%3C/svg%3E" />
+/* Direction-aware overrides for RTL */
+html[dir="rtl"] .marquee-track { animation-direction: reverse; }
+html[dir="rtl"] .marquee-item + .marquee-item::before { margin-right: 0; margin-left: 64px; }
+html[dir="rtl"] .stat { border-left: 0; border-right: 1px solid var(--line); padding-right: 40px; padding-left: 40px; }
+html[dir="rtl"] .stat:first-child { border-right: 0; padding-right: 0; }
+html[dir="rtl"] .stat:last-child { padding-left: 0; }
+html[dir="rtl"] .quick-contact:hover { transform: translateX(-4px); }
+html[dir="rtl"] .spec-num { left: auto; right: 22px; }
+html[dir="rtl"] .hero-visual .badge { left: auto; right: -32px; }
+html[dir="rtl"] .dish p { text-align: right; }
+html[dir="rtl"] .visit-card { text-align: right; }
+html[dir="rtl"] .form-card { text-align: right; }
+html[dir="rtl"] .field label { text-align: right; }
+html[dir="rtl"] .lang-switcher button[data-lang="ar"] { font-size: 0.95rem; }
 
-  <!-- SCHEMA.ORG · Local Business / Restaurant (critical for Google Maps SEO) -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Restaurant",
-    "name": "El Rio",
-    "alternateName": "Restaurant El Rio Encamp",
-    "image": "photos/tajin-hero.jpg",
-    "url": "https://elrio-encamp.com/",
-    "telephone": "+376732223",
-    "priceRange": "€€",
-    "servesCuisine": ["Moroccan", "Mediterranean", "Italian", "Halal"],
-    "currenciesAccepted": "EUR",
-    "paymentAccepted": "Cash, Credit Card",
-    "address": {
-      "@type": "PostalAddress",
-      "streetAddress": "Av. de Joan Martí, 32",
-      "addressLocality": "Encamp",
-      "postalCode": "AD200",
-      "addressCountry": "AD"
-    },
-    "geo": {
-      "@type": "GeoCoordinates",
-      "latitude": 42.5341,
-      "longitude": 1.5816
-    },
-    "openingHoursSpecification": [
-      { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Sunday"], "opens": "10:00", "closes": "23:30" },
-      { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Friday","Saturday"], "opens": "10:00", "closes": "00:00" }
-    ],
-    "acceptsReservations": "True",
-    "aggregateRating": {
-      "@type": "AggregateRating",
-      "ratingValue": "4.2",
-      "reviewCount": "329"
-    },
-    "menu": "https://elrio-encamp.com/#carta"
+@media (min-width: 981px) {
+  html[dir="rtl"] .hero-visual { justify-self: start; }
+}
+
+/* Lang switcher: 5 buttons need slightly tighter layout */
+.lang-switcher button { padding: 6px 9px; font-size: 0.74rem; }
+.lang-switcher button[data-lang="ar"] {
+  font-family: 'Amiri', 'Noto Naskh Arabic', serif;
+  font-size: 0.92rem;
+  line-height: 1;
+}
+
+h1, h2, h3, h4, .display {
+  font-family: 'Cormorant Garamond', 'Times New Roman', serif;
+  font-weight: 500;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  color: var(--primary);
+}
+h1 em, h2 em { font-style: italic; color: var(--accent-2); font-weight: 500; }
+
+a { color: inherit; text-decoration: none; }
+
+.overline {
+  font-family: 'Work Sans', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--accent-2);
+}
+
+img, svg { max-width: 100%; display: block; }
+
+/* ============================================================
+   GEOMETRIC PATTERNS — original CSS, Moroccan-inspired
+   ============================================================ */
+.pattern-zellige {
+  background-image:
+    radial-gradient(circle at 50% 50%, var(--primary) 0 1px, transparent 1.5px),
+    repeating-linear-gradient(45deg, transparent 0 18px, color-mix(in oklch, var(--primary) 6%, transparent) 18px 19px),
+    repeating-linear-gradient(-45deg, transparent 0 18px, color-mix(in oklch, var(--primary) 6%, transparent) 18px 19px);
+  background-size: 36px 36px, 100% 100%, 100% 100%;
+  background-position: 0 0;
+}
+.pattern-dots {
+  background-image: radial-gradient(circle, color-mix(in oklch, var(--primary) 22%, transparent) 0 1px, transparent 1.5px);
+  background-size: 18px 18px;
+}
+
+/* Eight-pointed star — Moroccan motif (CSS shape) */
+.star8 {
+  --size: 14px;
+  width: var(--size); height: var(--size);
+  background: var(--accent);
+  display: inline-block;
+  transform: rotate(22.5deg);
+  position: relative;
+}
+.star8::before {
+  content: ""; position: absolute; inset: 0;
+  background: inherit;
+  transform: rotate(45deg);
+}
+
+/* ============================================================
+   HEADER
+   ============================================================ */
+.site-header {
+  position: sticky; top: 0; z-index: 50;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 18px 40px;
+  background: color-mix(in oklch, var(--bg) 85%, transparent);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--line);
+}
+.brand { display: flex; align-items: center; gap: 12px; }
+.brand-mark {
+  width: 36px; height: 36px;
+  display: grid; place-items: center;
+  color: var(--bg);
+  background: var(--primary);
+  border-radius: 50%;
+  position: relative;
+}
+.brand-mark::before {
+  content: "";
+  position: absolute; inset: 4px;
+  border: 1px solid var(--accent);
+  border-radius: 50%;
+}
+.brand-mark span { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-weight: 600; line-height: 1; }
+.brand-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.6rem; font-weight: 600;
+  color: var(--primary);
+  letter-spacing: 0.01em;
+}
+.brand-tag {
+  font-size: 0.65rem; letter-spacing: 0.2em;
+  text-transform: uppercase; color: var(--text-mute);
+  margin-top: -2px;
+}
+
+.site-nav { display: flex; gap: 36px; }
+.site-nav a {
+  font-size: 0.92rem;
+  font-weight: 500;
+  color: var(--text);
+  position: relative;
+  padding: 4px 0;
+}
+.site-nav a::after {
+  content: ""; position: absolute; left: 50%; bottom: 0;
+  width: 0; height: 1px; background: var(--accent);
+  transition: width .25s ease, left .25s ease;
+}
+.site-nav a:hover::after { width: 100%; left: 0; }
+
+.utility { display: flex; gap: 18px; align-items: center; }
+.lang-switcher { display: flex; gap: 2px; padding: 3px; background: var(--bg-deep); border-radius: 999px; }
+.lang-switcher button {
+  border: 0; background: transparent;
+  font: inherit; font-size: 0.78rem; font-weight: 500; letter-spacing: 0.08em;
+  color: var(--text-mute);
+  padding: 6px 12px; border-radius: 999px;
+  cursor: pointer; transition: all .2s;
+}
+.lang-switcher button.active {
+  background: var(--primary); color: var(--bg);
+}
+.btn-call {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 9px 18px; border-radius: 999px;
+  background: var(--primary); color: var(--bg);
+  font-size: 0.85rem; font-weight: 500;
+  border: 0; cursor: pointer;
+  transition: transform .2s, background .2s;
+}
+.btn-call:hover { transform: translateY(-1px); background: var(--primary-2); }
+
+/* Mobile nav */
+.menu-toggle { display: none; background: none; border: 0; cursor: pointer; padding: 4px; }
+.menu-toggle span { display: block; width: 22px; height: 2px; background: var(--text); margin: 5px 0; transition: .25s; }
+
+/* ============================================================
+   HERO — dramatic dark with zellige pattern
+   ============================================================ */
+.hero {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  gap: 60px;
+  align-items: center;
+  padding: 100px 56px 120px;
+  min-height: calc(100vh - 76px);
+  overflow: hidden;
+  background: var(--bg-dark);
+  color: var(--on-dark);
+}
+.hero::before {
+  content: "";
+  position: absolute; inset: 0;
+  background-image:
+    radial-gradient(circle at 50% 50%, color-mix(in oklch, var(--accent) 35%, transparent) 0 1.5px, transparent 2px),
+    repeating-linear-gradient(45deg, transparent 0 32px, color-mix(in oklch, var(--accent) 6%, transparent) 32px 33px),
+    repeating-linear-gradient(-45deg, transparent 0 32px, color-mix(in oklch, var(--accent) 6%, transparent) 32px 33px);
+  background-size: 64px 64px, 100% 100%, 100% 100%;
+  background-position: 0 0;
+  opacity: 0.5;
+  pointer-events: none;
+  -webkit-mask-image: radial-gradient(ellipse at 30% 50%, black 20%, transparent 75%);
+          mask-image: radial-gradient(ellipse at 30% 50%, black 20%, transparent 75%);
+}
+.hero::after {
+  content: "";
+  position: absolute;
+  right: -200px; top: -200px;
+  width: 700px; height: 700px;
+  border-radius: 50%;
+  background: radial-gradient(circle, color-mix(in oklch, var(--accent) 22%, transparent), transparent 65%);
+  pointer-events: none;
+}
+.hero-content { position: relative; z-index: 2; max-width: 720px; }
+.hero .overline { color: var(--accent); }
+.hero h1 {
+  font-size: clamp(3.2rem, 7vw, 6.8rem);
+  letter-spacing: -0.02em;
+  margin: 24px 0 30px;
+  color: var(--on-dark);
+}
+.hero h1 em { color: var(--accent); font-style: italic; font-weight: 500; }
+.hero .lead {
+  font-size: 1.28rem;
+  color: color-mix(in oklch, var(--on-dark) 78%, transparent);
+  max-width: 540px;
+  margin-bottom: 40px;
+  line-height: 1.55;
+}
+
+.hero-cta { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 48px; }
+.btn-primary, .btn-secondary {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 15px 28px; border-radius: 999px;
+  font-family: 'Work Sans', sans-serif;
+  font-size: 0.93rem; font-weight: 500;
+  letter-spacing: 0.02em;
+  border: 1px solid transparent;
+  cursor: pointer; transition: all .25s ease;
+  text-decoration: none;
+}
+.btn-primary {
+  background: var(--accent); color: var(--bg-dark);
+  font-weight: 600;
+}
+.btn-primary:hover {
+  background: var(--bg);
+  color: var(--primary-2);
+  transform: translateY(-2px);
+  box-shadow: 0 14px 36px -12px color-mix(in oklch, var(--accent) 60%, transparent);
+}
+.hero .btn-primary { padding: 18px 32px; font-size: 1rem; }
+.btn-secondary {
+  background: transparent; color: var(--on-dark);
+  border-color: color-mix(in oklch, var(--on-dark) 35%, transparent);
+}
+.btn-secondary:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: color-mix(in oklch, var(--accent) 5%, transparent);
+}
+.hero .btn-secondary { padding: 18px 32px; font-size: 1rem; }
+
+/* When hero is dark, secondary buttons elsewhere look default */
+section:not(.hero) .btn-primary {
+  background: var(--primary); color: var(--bg);
+}
+section:not(.hero) .btn-primary:hover {
+  background: var(--primary-2); color: var(--bg);
+}
+section:not(.hero) .btn-secondary {
+  color: var(--primary);
+  border-color: color-mix(in oklch, var(--primary) 30%, transparent);
+}
+section:not(.hero) .btn-secondary:hover {
+  border-color: var(--primary);
+  background: color-mix(in oklch, var(--primary) 5%, transparent);
+  color: var(--primary);
+}
+
+.hero-meta {
+  display: flex; flex-wrap: wrap; gap: 28px 44px;
+  padding-top: 32px;
+  border-top: 1px solid color-mix(in oklch, var(--on-dark) 18%, transparent);
+  font-size: 0.92rem;
+  color: color-mix(in oklch, var(--on-dark) 70%, transparent);
+}
+.hero-meta strong { color: var(--on-dark); font-weight: 600; }
+.hero-meta .big-rating {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2.4rem;
+  font-weight: 600;
+  color: var(--accent);
+  line-height: 0.9;
+  letter-spacing: -0.02em;
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 10px;
+}
+.stars { color: var(--accent); letter-spacing: 1px; }
+
+/* Hero photo area — keyhole arch shape (Moroccan motif) */
+.hero-visual {
+  position: relative; z-index: 2;
+  aspect-ratio: 3/4;
+  width: 100%;
+  max-width: 460px;
+  justify-self: end;
+}
+.hero-photo {
+  position: relative;
+  width: 100%; height: 100%;
+  overflow: hidden;
+  border: 1px solid color-mix(in oklch, var(--accent) 40%, transparent);
+  /* keyhole arch */
+  border-radius: 50% 50% 8px 8px / 30% 30% 8px 8px;
+  background: var(--bg-deep);
+}
+.hero-photo img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  object-position: center 35%;
+  display: block;
+}
+.hero-frame {
+  position: absolute;
+  inset: -22px -22px 22px 22px;
+  border: 1px solid var(--accent);
+  border-radius: 50% 50% 8px 8px / 30% 30% 8px 8px;
+  z-index: 1;
+  pointer-events: none;
+}
+.hero-visual .star8 {
+  position: absolute;
+  bottom: -18px; left: 50%;
+  transform: translateX(-50%) rotate(22.5deg);
+  --size: 36px;
+  z-index: 3;
+  box-shadow: 0 0 0 6px var(--bg-dark);
+}
+.hero-visual .badge {
+  position: absolute;
+  top: 32px; left: -32px;
+  z-index: 3;
+  background: var(--bg-dark);
+  color: var(--accent);
+  border: 1px solid var(--accent);
+  padding: 12px 18px;
+  font-family: 'Work Sans', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+
+/* PHOTO PLACEHOLDERS */
+.photo {
+  position: relative;
+  background: var(--bg-deep);
+  background-image: repeating-linear-gradient(
+    -45deg,
+    transparent 0 12px,
+    color-mix(in oklch, var(--primary) 8%, transparent) 12px 13px
+  );
+  display: grid; place-items: center;
+  color: var(--text-mute);
+  font-family: 'JetBrains Mono', 'Courier New', monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  overflow: hidden;
+}
+.photo::before {
+  content: "";
+  position: absolute; inset: 16px;
+  border: 1px solid color-mix(in oklch, var(--primary) 15%, transparent);
+}
+.photo span {
+  position: relative; z-index: 1;
+  padding: 6px 12px;
+  background: var(--bg);
+  border: 1px solid var(--line);
+}
+.photo.has-img { background: none; }
+.photo.has-img::before { display: none; }
+.photo.has-img img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.photo.on-dark {
+  background-color: color-mix(in oklch, var(--bg-dark) 70%, var(--primary) 30%);
+  background-image: repeating-linear-gradient(-45deg, transparent 0 12px,
+    color-mix(in oklch, var(--accent) 12%, transparent) 12px 13px);
+  color: color-mix(in oklch, var(--accent) 80%, transparent);
+}
+.photo.on-dark::before {
+  border-color: color-mix(in oklch, var(--accent) 30%, transparent);
+}
+.photo.on-dark span {
+  background: var(--bg-dark);
+  border-color: color-mix(in oklch, var(--accent) 30%, transparent);
+  color: var(--accent);
+}
+
+/* ============================================================
+   MARQUEE — scrolling typographic banner
+   ============================================================ */
+.marquee {
+  background: var(--bg);
+  color: var(--primary);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  padding: 22px 0;
+  overflow: hidden;
+  position: relative;
+}
+.marquee-track {
+  display: flex;
+  gap: 0;
+  width: max-content;
+  animation: marquee 38s linear infinite;
+}
+.marquee-item {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-weight: 500;
+  font-size: clamp(2rem, 4.5vw, 3.6rem);
+  letter-spacing: -0.01em;
+  padding: 0 32px;
+  display: flex; align-items: center;
+  white-space: nowrap;
+}
+.marquee-item + .marquee-item::before {
+  content: "";
+  display: inline-block;
+  width: 12px; height: 12px;
+  background: var(--accent);
+  transform: rotate(45deg);
+  margin-right: 64px;
+  flex-shrink: 0;
+}
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track { animation: none; }
+}
+
+/* ============================================================
+   STRIP — value props (kept for compatibility, restyled subtle)
+   ============================================================ */
+.strip {
+  display: flex; flex-wrap: wrap; justify-content: center;
+  gap: 0;
+  padding: 30px 40px;
+  background: var(--bg-dark);
+  color: var(--on-dark);
+}
+.strip-item {
+  display: flex; align-items: center; gap: 14px;
+  padding: 6px 32px;
+  font-size: 0.92rem;
+  letter-spacing: 0.02em;
+  position: relative;
+}
+.strip-item + .strip-item::before {
+  content: ""; position: absolute; left: 0; top: 50%;
+  width: 4px; height: 4px; border-radius: 50%;
+  background: var(--accent);
+  transform: translateY(-50%) rotate(45deg);
+}
+.strip-item .star8 { --size: 10px; }
+
+/* ============================================================
+   SPECIALTIES SHOWCASE — three featured dishes
+   ============================================================ */
+.specialties {
+  background: var(--bg);
+  padding: 120px 40px;
+}
+.specialties-head {
+  max-width: 1280px;
+  margin: 0 auto 70px;
+  display: flex; align-items: end; justify-content: space-between;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+.specialties-head h2 {
+  font-size: clamp(2.6rem, 5vw, 4.4rem);
+  max-width: 720px;
+  line-height: 1.02;
+}
+.specialties-head p {
+  max-width: 360px;
+  font-size: 1.05rem;
+  color: var(--text-mute);
+  line-height: 1.6;
+}
+
+.specialties-grid {
+  max-width: 1280px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+}
+.spec-card {
+  position: relative;
+  display: flex; flex-direction: column;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  overflow: hidden;
+  transition: transform .35s ease, box-shadow .35s ease;
+}
+.spec-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 30px 50px -25px color-mix(in oklch, var(--primary) 30%, transparent);
+}
+.spec-num {
+  position: absolute;
+  top: 18px; left: 22px;
+  z-index: 3;
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 1rem;
+  color: var(--accent);
+  letter-spacing: 0.05em;
+}
+.spec-card .photo {
+  aspect-ratio: 1/1;
+  border-bottom: 1px solid var(--line);
+}
+.spec-card .photo.has-img img {
+  object-position: center;
+}
+.spec-body {
+  padding: 26px 26px 32px;
+  display: flex; flex-direction: column; gap: 10px;
+}
+.spec-cat {
+  font-family: 'Work Sans', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent-2);
+}
+.spec-body h3 {
+  font-size: 1.85rem;
+  line-height: 1.05;
+  color: var(--text);
+  font-weight: 600;
+}
+.spec-body p {
+  color: var(--text-mute);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin-top: 4px;
+}
+.spec-bottom {
+  margin-top: 14px;
+  padding-top: 18px;
+  border-top: 1px dashed var(--line);
+  display: flex; align-items: baseline; justify-content: space-between;
+}
+.spec-price {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 600;
+  font-size: 1.6rem;
+  color: var(--primary);
+}
+.spec-tag {
+  font-size: 0.7rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--accent-2);
+}
+
+/* ============================================================
+   STATS — giant numbers
+   ============================================================ */
+.stats {
+  background: var(--bg-deep);
+  padding: 100px 40px;
+}
+.stats-grid {
+  max-width: 1280px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+}
+.stat {
+  padding: 0 40px;
+  border-left: 1px solid var(--line);
+  position: relative;
+}
+.stat:first-child { border-left: 0; padding-left: 0; }
+.stat .big {
+  display: block;
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 500;
+  font-size: clamp(3.5rem, 6vw, 5.4rem);
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: var(--primary);
+}
+.stat .big em {
+  color: var(--accent-2);
+  font-style: italic;
+  font-weight: 500;
+}
+.stat .stat-sub {
+  display: block;
+  margin-top: 14px;
+  font-size: 0.78rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--text-mute);
+  line-height: 1.4;
+}
+
+/* ============================================================
+   SECTIONS — common
+   ============================================================ */
+section {
+  padding: 100px 40px;
+  position: relative;
+}
+.section-head {
+  max-width: 820px;
+  margin: 0 auto 70px;
+  text-align: center;
+}
+.section-head h2 {
+  font-size: clamp(2.4rem, 4.6vw, 4rem);
+  margin: 14px 0 22px;
+  letter-spacing: -0.015em;
+  line-height: 1.04;
+}
+.section-head p {
+  font-size: 1.08rem;
+  color: var(--text-mute);
+  max-width: 560px;
+  margin: 0 auto;
+}
+.divider {
+  display: flex; align-items: center; justify-content: center;
+  gap: 12px; margin: 16px 0;
+}
+.divider::before, .divider::after {
+  content: ""; height: 1px; width: 40px;
+  background: var(--accent);
+}
+
+/* ============================================================
+   ABOUT
+   ============================================================ */
+.about {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+  background: var(--bg-deep);
+}
+.about-photo {
+  aspect-ratio: 5/6;
+  border-radius: 8px;
+  position: relative;
+}
+.about-text .overline { display: block; margin-bottom: 14px; }
+.about-text h2 {
+  font-size: clamp(2rem, 3.5vw, 3rem);
+  margin-bottom: 24px;
+}
+.about-text p {
+  font-size: 1.05rem;
+  color: var(--text-mute);
+  margin-bottom: 18px;
+  line-height: 1.7;
+}
+.about-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+  margin-top: 40px;
+  padding-top: 36px;
+  border-top: 1px solid var(--line);
+}
+.about-stat strong {
+  display: block;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2.4rem;
+  font-weight: 500;
+  color: var(--primary);
+  line-height: 1;
+}
+.about-stat span {
+  font-size: 0.78rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-mute);
+}
+
+/* ============================================================
+   MENU
+   ============================================================ */
+.menu-tabs {
+  display: flex; flex-wrap: wrap; justify-content: center;
+  gap: 6px;
+  max-width: 1100px;
+  margin: 0 auto 50px;
+  padding: 8px;
+  background: var(--bg-deep);
+  border-radius: 999px;
+  border: 1px solid var(--line);
+}
+.tab {
+  flex: 1; min-width: 110px;
+  padding: 12px 18px;
+  background: transparent;
+  border: 0;
+  font: inherit;
+  font-size: 0.86rem;
+  font-weight: 500;
+  color: var(--text-mute);
+  border-radius: 999px;
+  cursor: pointer;
+  transition: all .25s;
+  white-space: nowrap;
+}
+.tab:hover { color: var(--primary); }
+.tab.active {
+  background: var(--primary); color: var(--bg);
+}
+
+.menu-panels {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.panel { display: none; }
+.panel.active {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px 60px;
+  animation: fadeIn .35s ease;
+}
+@keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+
+.dish {
+  padding: 22px 0;
+  border-bottom: 1px dashed var(--line);
+}
+.dish:last-child { border-bottom: 0; }
+.dish-head {
+  display: flex; align-items: baseline;
+  gap: 10px;
+  margin-bottom: 6px;
+}
+.dish-head h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--text);
+  font-family: 'Cormorant Garamond', serif;
+  flex-shrink: 0;
+}
+.dish-head .dots {
+  flex: 1; height: 1px;
+  background-image: radial-gradient(circle, var(--line) 0 1px, transparent 1.5px);
+  background-size: 6px 1px;
+  background-position: 0 50%;
+  background-repeat: repeat-x;
+  align-self: center;
+  margin: 0 4px;
+}
+.dish-head .price {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--accent-2);
+  flex-shrink: 0;
+}
+.dish p {
+  font-size: 0.92rem;
+  color: var(--text-mute);
+  max-width: 90%;
+}
+.dish .tag {
+  display: inline-block;
+  margin-left: 8px;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  background: color-mix(in oklch, var(--accent) 18%, transparent);
+  color: var(--accent-2);
+  vertical-align: middle;
+}
+.dish .tag.veg {
+  background: color-mix(in oklch, oklch(0.65 0.13 145) 18%, transparent);
+  color: oklch(0.45 0.13 145);
+}
+.dish .tag.hot {
+  background: color-mix(in oklch, oklch(0.6 0.18 25) 18%, transparent);
+  color: oklch(0.5 0.18 25);
+}
+
+/* ============================================================
+   HOURS & VISIT
+   ============================================================ */
+.visit {
+  background: var(--bg-dark);
+  color: var(--on-dark);
+}
+.visit .overline { color: var(--accent); }
+.visit h2 { color: var(--on-dark); }
+.visit h2 em { color: var(--accent); }
+.visit .section-head p { color: color-mix(in oklch, var(--on-dark) 75%, transparent); }
+
+.visit-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 36px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.visit-card {
+  padding: 36px 30px;
+  background: color-mix(in oklch, var(--on-dark) 4%, transparent);
+  border: 1px solid color-mix(in oklch, var(--on-dark) 12%, transparent);
+  border-radius: 8px;
+  position: relative;
+}
+.visit-card .icon {
+  width: 44px; height: 44px;
+  display: grid; place-items: center;
+  border-radius: 50%;
+  background: color-mix(in oklch, var(--accent) 18%, transparent);
+  color: var(--accent);
+  margin-bottom: 20px;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.3rem;
+}
+.visit-card h3 {
+  color: var(--on-dark);
+  font-size: 1.4rem;
+  margin-bottom: 14px;
+}
+.visit-card p, .visit-card li {
+  color: color-mix(in oklch, var(--on-dark) 80%, transparent);
+  font-size: 0.95rem;
+  line-height: 1.7;
+}
+.visit-card ul { list-style: none; }
+.visit-card li {
+  display: flex; justify-content: space-between;
+  padding: 6px 0;
+  border-bottom: 1px solid color-mix(in oklch, var(--on-dark) 8%, transparent);
+}
+.visit-card li:last-child { border: 0; }
+.visit-card li strong { color: var(--on-dark); font-weight: 500; }
+.visit-card li.today {
+  color: var(--accent);
+}
+.visit-card li.today strong { color: var(--accent); }
+.visit-card a.linked {
+  display: inline-flex; align-items: center; gap: 8px;
+  margin-top: 16px;
+  color: var(--accent);
+  border-bottom: 1px solid color-mix(in oklch, var(--accent) 50%, transparent);
+  padding-bottom: 2px;
+  font-size: 0.92rem;
+}
+
+/* Map placeholder */
+.map-wrap {
+  margin-top: 60px;
+  max-width: 1200px; margin-left: auto; margin-right: auto;
+  aspect-ratio: 21/9;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid color-mix(in oklch, var(--on-dark) 12%, transparent);
+  background: var(--bg);
+  position: relative;
+}
+
+/* ============================================================
+   RESERVATIONS
+   ============================================================ */
+.reservations {
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  gap: 80px;
+  max-width: 1200px;
+  margin: 0 auto;
+  align-items: center;
+}
+.reservations-info h2 {
+  font-size: clamp(2rem, 3.5vw, 3rem);
+  margin: 14px 0 24px;
+}
+.reservations-info p {
+  font-size: 1.05rem;
+  color: var(--text-mute);
+  margin-bottom: 32px;
+  max-width: 460px;
+}
+.quick-contacts {
+  display: grid;
+  gap: 14px;
+  margin-bottom: 32px;
+}
+.quick-contact {
+  display: flex; align-items: center;
+  justify-content: space-between;
+  padding: 18px 22px;
+  background: var(--bg-deep);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  transition: all .25s;
+}
+.quick-contact:hover {
+  border-color: var(--accent);
+  transform: translateX(4px);
+}
+.quick-contact .qc-label {
+  font-size: 0.72rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--text-mute);
+  display: block;
+  margin-bottom: 4px;
+}
+.quick-contact .qc-value {
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: var(--text);
+}
+.quick-contact .qc-icon {
+  width: 40px; height: 40px;
+  display: grid; place-items: center;
+  border-radius: 50%;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  color: var(--accent-2);
+  font-size: 1.1rem;
+}
+
+.form-card {
+  padding: 44px;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  position: relative;
+  box-shadow: 0 30px 60px -30px color-mix(in oklch, var(--primary) 15%, transparent);
+}
+.form-card::before {
+  content: "";
+  position: absolute;
+  top: -1px; left: 30px; right: 30px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+}
+.form-card h3 {
+  font-size: 1.6rem;
+  margin-bottom: 8px;
+}
+.form-card .form-sub {
+  font-size: 0.9rem;
+  color: var(--text-mute);
+  margin-bottom: 28px;
+}
+
+.field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.field {
+  margin-bottom: 14px;
+}
+.field label {
+  display: block;
+  font-size: 0.74rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-mute);
+  margin-bottom: 6px;
+}
+.field input, .field select, .field textarea {
+  width: 100%;
+  padding: 12px 14px;
+  background: var(--bg-deep);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  font: inherit;
+  font-size: 0.95rem;
+  color: var(--text);
+  transition: border-color .2s, background .2s;
+}
+.field input:focus, .field select:focus, .field textarea:focus {
+  outline: none;
+  border-color: var(--accent);
+  background: var(--bg);
+}
+.field textarea { min-height: 80px; resize: vertical; }
+.btn-submit {
+  width: 100%;
+  padding: 15px;
+  background: var(--primary);
+  color: var(--bg);
+  border: 0;
+  border-radius: 6px;
+  font: inherit;
+  font-size: 0.95rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  transition: all .25s;
+  margin-top: 8px;
+}
+.btn-submit:hover { background: var(--primary-2); transform: translateY(-1px); }
+.form-success {
+  display: none;
+  padding: 16px;
+  background: color-mix(in oklch, var(--accent) 20%, transparent);
+  border-radius: 6px;
+  font-size: 0.92rem;
+  color: var(--primary);
+  margin-top: 12px;
+}
+.form-success.show { display: block; }
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+footer {
+  background: var(--bg-dark);
+  color: var(--on-dark);
+  padding: 70px 40px 30px;
+}
+.footer-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr 1fr;
+  gap: 60px;
+  padding-bottom: 50px;
+  border-bottom: 1px solid color-mix(in oklch, var(--on-dark) 12%, transparent);
+}
+.footer-grid h4 {
+  font-size: 0.78rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 18px;
+  font-family: 'Work Sans', sans-serif;
+  font-weight: 600;
+}
+.footer-grid p, .footer-grid li, .footer-grid a {
+  font-size: 0.92rem;
+  color: color-mix(in oklch, var(--on-dark) 75%, transparent);
+  line-height: 1.7;
+}
+.footer-grid ul { list-style: none; }
+.footer-grid a:hover { color: var(--accent); }
+.footer-brand .brand-name { color: var(--on-dark); font-size: 1.9rem; }
+.footer-brand p { margin-top: 14px; max-width: 320px; }
+.footer-bottom {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-top: 26px;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+  font-size: 0.82rem;
+  color: color-mix(in oklch, var(--on-dark) 60%, transparent);
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 980px) {
+  .site-header { padding: 16px 22px; }
+  .site-nav { display: none; }
+  .menu-toggle { display: block; }
+
+  .hero {
+    grid-template-columns: 1fr;
+    padding: 60px 22px 90px;
+    gap: 50px;
+    text-align: left;
   }
-  </script>
-
-  <!-- FONTS -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Work+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400&family=Amiri:ital,wght@0,400;0,700;1,400&family=Noto+Naskh+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet" />
-
-  <link rel="stylesheet" href="styles.css" />
-</head>
-
-<body>
-
-<!-- ════════════════════════ HEADER ════════════════════════ -->
-<header class="site-header" data-screen-label="Header">
-  <a href="#top" class="brand" aria-label="El Rio · Restaurant">
-    <span class="brand-mark"><span>R</span></span>
-    <span>
-      <span class="brand-name">El Rio</span>
-      <span class="brand-tag"
-        data-ca="Encamp · Andorra"
-        data-es="Encamp · Andorra"
-        data-fr="Encamp · Andorre">Encamp · Andorra</span>
-    </span>
-  </a>
-
-  <nav class="site-nav" aria-label="Primary">
-    <a href="#carta"
-      data-ca="Carta" data-es="Carta" data-fr="Carte">Carta</a>
-    <a href="#visit"
-      data-ca="Visita'ns" data-es="Visítanos" data-fr="Visitez-nous">Visita'ns</a>
-    <a href="#reserves"
-      data-ca="Reserves" data-es="Reservas" data-fr="Réservations">Reserves</a>
-  </nav>
-
-  <div class="utility">
-    <div class="lang-switcher" role="group" aria-label="Language">
-      <button type="button" data-lang="ca">CA</button>
-      <button type="button" data-lang="es">ES</button>
-      <button type="button" data-lang="fr">FR</button>
-      <button type="button" data-lang="en">EN</button>
-      <button type="button" data-lang="ar" lang="ar">عر</button>
-    </div>
-    <a class="btn-call" href="tel:+376732223" aria-label="Telèfon 732 223">
-      <span aria-hidden="true">✆</span>
-      <span data-ca="732 223" data-es="732 223" data-fr="732 223">732 223</span>
-    </a>
-    <button class="menu-toggle" aria-label="Open menu"><span></span><span></span><span></span></button>
-  </div>
-</header>
-
-<main id="top">
-
-<!-- ════════════════════════ HERO ════════════════════════ -->
-<section class="hero" data-screen-label="Hero">
-  <div class="hero-content">
-    <span class="overline"
-      data-ca="Encamp · Andorra · Des de fa anys"
-      data-es="Encamp · Andorra · Desde hace años"
-      data-fr="Encamp · Andorre · Depuis des années">Encamp · Andorra · Des de fa anys</span>
-
-    <h1
-      data-ca="Sabors del Marroc <em>al cor d'Andorra</em>"
-      data-es="Sabores de Marruecos <em>en el corazón de Andorra</em>"
-      data-fr="Saveurs du Maroc <em>au cœur de l'Andorre</em>">
-      Sabors del Marroc <em>al cor d'Andorra</em>
-    </h1>
-
-    <p class="lead"
-      data-ca="Tajín, cuscús, pizzes artesanes i carns a la brasa. Cuina familiar, ingredients honestos, 100% Halal."
-      data-es="Tajín, cuscús, pizzas artesanas y carnes a la brasa. Cocina familiar, ingredientes honestos, 100% Halal."
-      data-fr="Tajine, couscous, pizzas artisanales et grillades. Cuisine familiale, ingrédients honnêtes, 100% Halal.">
-      Tajín, cuscús, pizzes artesanes i carns a la brasa. Cuina familiar, ingredients honestos, 100% Halal.
-    </p>
-
-    <div class="hero-cta">
-      <a href="#reserves" class="btn-primary"
-        data-ca="Reservar taula" data-es="Reservar mesa" data-fr="Réserver une table">Reservar taula</a>
-      <a href="#carta" class="btn-secondary"
-        data-ca="Veure la carta" data-es="Ver la carta" data-fr="Voir la carte">Veure la carta</a>
-    </div>
-
-    <div class="hero-meta">
-      <span><span class="stars">★ 4,2</span> · <strong>329</strong>
-        <span data-ca="ressenyes Google" data-es="reseñas Google" data-fr="avis Google">ressenyes Google</span></span>
-      <span><strong>10–20 €</strong>
-        <span data-ca="per persona" data-es="por persona" data-fr="par personne">per persona</span></span>
-      <span data-ca="Obert avui fins 23:30" data-es="Abierto hoy hasta 23:30" data-fr="Ouvert aujourd'hui jusqu'à 23h30">
-        Obert avui fins 23:30</span>
-    </div>
-  </div>
-
-  <div class="hero-visual">
-    <div class="badge"
-         data-ca="★ 4,2 · 329 Google"
-         data-es="★ 4,2 · 329 Google"
-         data-fr="★ 4,2 · 329 Google">★ 4,2 · 329 Google</div>
-    <div class="hero-frame" aria-hidden="true"></div>
-    <div class="hero-photo" aria-label="Tajín del Rio">
-      <img src="photos/tajin-hero.jpg" alt="Tajín de xai amb verdures, te de menta marroquí i patates fregides" />
-    </div>
-    <span class="star8" aria-hidden="true"></span>
-  </div>
-</section>
-
-<!-- ════════════════════════ MARQUEE ════════════════════════ -->
-<section class="marquee" aria-hidden="true">
-  <div class="marquee-track">
-    <span class="marquee-item">Tajín</span>
-    <span class="marquee-item">Cuscús reial</span>
-    <span class="marquee-item">Pizza artesana</span>
-    <span class="marquee-item">A la brasa</span>
-    <span class="marquee-item">100% Halal</span>
-    <span class="marquee-item">Te de menta</span>
-    <span class="marquee-item">Tajín</span>
-    <span class="marquee-item">Cuscús reial</span>
-    <span class="marquee-item">Pizza artesana</span>
-    <span class="marquee-item">A la brasa</span>
-    <span class="marquee-item">100% Halal</span>
-    <span class="marquee-item">Te de menta</span>
-  </div>
-</section>
-
-<!-- ════════════════════════ SPECIALTIES ════════════════════════ -->
-<section class="specialties" data-screen-label="Specialties">
-  <div class="specialties-head">
-    <div>
-      <span class="overline"
-        data-ca="Les nostres especialitats"
-        data-es="Nuestras especialidades"
-        data-fr="Nos spécialités">Les nostres especialitats</span>
-      <h2 style="margin-top:18px"
-        data-ca="Tres plats que has <em>de tastar</em>"
-        data-es="Tres platos que tienes <em>que probar</em>"
-        data-fr="Trois plats <em>incontournables</em>">
-        Tres plats que has <em>de tastar</em>
-      </h2>
-    </div>
-    <p
-      data-ca="Receptes que viatgen del nord d'Àfrica a la Mediterrània. Tot cuinat a casa, cada dia."
-      data-es="Recetas que viajan del norte de África al Mediterráneo. Todo cocinado en casa, cada día."
-      data-fr="Des recettes du Maghreb à la Méditerranée. Tout cuisiné maison, chaque jour.">
-      Receptes que viatgen del nord d'Àfrica a la Mediterrània. Tot cuinat a casa, cada dia.
-    </p>
-  </div>
-
-  <div class="specialties-grid">
-    <article class="spec-card">
-      <span class="spec-num">N° 01</span>
-      <div class="photo has-img"><img src="photos/tajin-xai.jpg" alt="Tajín de xai amb prunes, ametlles i sèsam" /></div>
-      <div class="spec-body">
-        <span class="spec-cat" data-ca="Marroquí" data-es="Marroquí" data-fr="Marocain">Marroquí</span>
-        <h3 data-ca="Tajín de xai amb prunes"
-            data-es="Tajín de cordero con ciruelas"
-            data-fr="Tajine d'agneau aux pruneaux">Tajín de xai amb prunes</h3>
-        <p data-ca="Espatlla de xai cuita lentament amb prunes, ametlles tostades i sèsam."
-           data-es="Espalda de cordero cocinada lentamente con ciruelas, almendras tostadas y sésamo."
-           data-fr="Épaule d'agneau mijotée aux pruneaux, amandes torréfiées et sésame.">
-          Espatlla de xai cuita lentament amb prunes, ametlles tostades i sèsam.</p>
-        <div class="spec-bottom">
-          <span class="spec-price">17,00 €</span>
-          <span class="spec-tag" data-ca="Plat de la casa" data-es="Plato de la casa" data-fr="Plat maison">Plat de la casa</span>
-        </div>
-      </div>
-    </article>
-
-    <article class="spec-card">
-      <span class="spec-num">N° 02</span>
-      <div class="photo has-img"><img src="photos/pizza-elrio.jpg" alt="Pizza El Rio amb pernil, bolets i orenga" /></div>
-      <div class="spec-body">
-        <span class="spec-cat" data-ca="Pizza" data-es="Pizza" data-fr="Pizza">Pizza</span>
-        <h3 data-ca="Pizza El Rio"
-            data-es="Pizza El Rio"
-            data-fr="Pizza El Rio">Pizza El Rio</h3>
-        <p data-ca="La nostra signatura: carn picada especiada, ceba caramel·litzada, olives kalamata i menta fresca."
-           data-es="Nuestra firma: carne picada especiada, cebolla caramelizada, aceitunas kalamata y menta fresca."
-           data-fr="Notre signature : viande hachée épicée, oignon caramélisé, olives kalamata et menthe fraîche.">
-          La nostra signatura: carn picada especiada, ceba caramel·litzada, olives kalamata i menta fresca.</p>
-        <div class="spec-bottom">
-          <span class="spec-price">13,00 €</span>
-          <span class="spec-tag" data-ca="Original" data-es="Original" data-fr="Original">Original</span>
-        </div>
-      </div>
-    </article>
-
-    <article class="spec-card">
-      <span class="spec-num">N° 03</span>
-      <div class="photo has-img"><img src="photos/cuscus-reial.jpg" alt="Cuscús reial amb xai, pollastre, merguez i verdures" /></div>
-      <div class="spec-body">
-        <span class="spec-cat" data-ca="Marroquí" data-es="Marroquí" data-fr="Marocain">Marroquí</span>
-        <h3 data-ca="Cuscús reial"
-            data-es="Cuscús real"
-            data-fr="Couscous royal">Cuscús reial</h3>
-        <p data-ca="Sémola amb xai, pollastre, merguez i set verdures de temporada. Per compartir."
-           data-es="Sémola con cordero, pollo, merguez y siete verduras de temporada. Para compartir."
-           data-fr="Semoule à l'agneau, poulet, merguez et sept légumes de saison. À partager.">
-          Sémola amb xai, pollastre, merguez i set verdures de temporada. Per compartir.</p>
-        <div class="spec-bottom">
-          <span class="spec-price">16,00 €</span>
-          <span class="spec-tag" data-ca="Per compartir" data-es="Para compartir" data-fr="À partager">Per compartir</span>
-        </div>
-      </div>
-    </article>
-  </div>
-</section>
-
-<!-- ════════════════════════ STATS ════════════════════════ -->
-<section class="stats" data-screen-label="Stats">
-  <div class="stats-grid">
-    <div class="stat">
-      <span class="big">4,2<em>★</em></span>
-      <span class="stat-sub" data-ca="329 ressenyes Google" data-es="329 reseñas Google" data-fr="329 avis Google">329 ressenyes Google</span>
-    </div>
-    <div class="stat">
-      <span class="big">100<em>%</em></span>
-      <span class="stat-sub" data-ca="Carn Halal certificada" data-es="Carne Halal certificada" data-fr="Viande Halal certifiée">Carn Halal certificada</span>
-    </div>
-    <div class="stat">
-      <span class="big">10<em>—</em>20<em>€</em></span>
-      <span class="stat-sub" data-ca="Preu per persona" data-es="Precio por persona" data-fr="Prix par personne">Preu per persona</span>
-    </div>
-    <div class="stat">
-      <span class="big">23<em>:</em>30</span>
-      <span class="stat-sub" data-ca="Cuina oberta cada dia" data-es="Cocina abierta cada día" data-fr="Cuisine ouverte tous les jours">Cuina oberta cada dia</span>
-    </div>
-  </div>
-</section>
-
-<!-- ════════════════════════ MENU ════════════════════════ -->
-<section id="carta" class="menu" data-screen-label="Menu">
-  <div class="section-head">
-    <span class="overline" data-ca="La nostra carta" data-es="Nuestra carta" data-fr="Notre carte">La nostra carta</span>
-    <div class="divider"><span class="star8" aria-hidden="true"></span></div>
-    <h2
-      data-ca="Una taula entre <em>dues ribes</em>"
-      data-es="Una mesa entre <em>dos orillas</em>"
-      data-fr="Une table entre <em>deux rives</em>">
-      Una taula entre <em>dues ribes</em>
-    </h2>
-    <p
-      data-ca="De la pizza italiana al tajín marroquí, tot fet a casa amb productes frescos. Carn 100% Halal."
-      data-es="De la pizza italiana al tajín marroquí, todo hecho en casa con productos frescos. Carne 100% Halal."
-      data-fr="De la pizza italienne au tajine marocain, tout est fait maison avec des produits frais. Viande 100% Halal.">
-      De la pizza italiana al tajín marroquí, tot fet a casa amb productes frescos. Carn 100% Halal.
-    </p>
-  </div>
-
-  <!-- Tabs -->
-  <div class="menu-tabs" role="tablist">
-    <button class="tab active" data-tab="tapas"
-      data-ca="Entrants & Tapes" data-es="Entrantes & Tapas" data-fr="Entrées & Tapas">Entrants & Tapes</button>
-    <button class="tab" data-tab="marroc"
-      data-ca="Marroc" data-es="Marruecos" data-fr="Maroc">Marroc</button>
-    <button class="tab" data-tab="pizzes"
-      data-ca="Pizzes" data-es="Pizzas" data-fr="Pizzas">Pizzes</button>
-    <button class="tab" data-tab="pastes"
-      data-ca="Pastes" data-es="Pastas" data-fr="Pâtes">Pastes</button>
-    <button class="tab" data-tab="brasa"
-      data-ca="A la brasa" data-es="A la brasa" data-fr="Grillades">A la brasa</button>
-    <button class="tab" data-tab="postres"
-      data-ca="Postres & Tes" data-es="Postres & Tés" data-fr="Desserts & Thés">Postres & Tes</button>
-  </div>
-
-  <div class="menu-panels">
-
-    <!-- TAPAS -->
-    <div class="panel active" data-panel="tapas">
-      <article class="dish">
-        <div class="dish-head"><h3 data-ca="Hummus amb pa àrab" data-es="Hummus con pan árabe" data-fr="Houmous au pain arabe">Hummus amb pa àrab</h3>
-          <span class="tag veg">VEGGIE</span>
-          <span class="dots"></span><span class="price">6,50 €</span></div>
-        <p data-ca="Crema de cigrons amb sèsam, comí i oli d'oliva, servit calent."
-           data-es="Crema de garbanzos con sésamo, comino y aceite de oliva, servido caliente."
-           data-fr="Crème de pois chiches au sésame, cumin et huile d'olive, servie chaude.">
-          Crema de cigrons amb sèsam, comí i oli d'oliva, servit calent.</p>
-      </article>
-
-      <article class="dish">
-        <div class="dish-head"><h3 data-ca="Bricks de formatge" data-es="Bricks de queso" data-fr="Briouates au fromage">Bricks de formatge</h3>
-          <span class="dots"></span><span class="price">7,00 €</span></div>
-        <p data-ca="Massa filo cruixent farcida de formatge fos i herbes fresques."
-           data-es="Masa filo crujiente rellena de queso fundido y hierbas frescas."
-           data-fr="Pâte filo croustillante au fromage fondu et herbes fraîches.">
-          Massa filo cruixent farcida de formatge fos i herbes fresques.</p>
-      </article>
-
-      <article class="dish">
-        <div class="dish-head"><h3 data-ca="Falàfel casolà" data-es="Falafel casero" data-fr="Falafels maison">Falàfel casolà</h3>
-          <span class="dots"></span><span class="price">6,50 €</span></div>
-        <p data-ca="Sis boletes de cigrons especiades amb salsa de iogurt i menta."
-           data-es="Seis bolitas de garbanzos especiadas con salsa de yogur y menta."
-           data-fr="Six boulettes de pois chiches épicées, sauce yaourt-menthe.">
-          Sis boletes de cigrons especiades amb salsa de iogurt i menta.</p>
-      </article>
-
-      <article class="dish">
-        <div class="dish-head"><h3 data-ca="Harira tradicional" data-es="Harira tradicional" data-fr="Harira traditionnelle">Harira tradicional</h3>
-          <span class="dots"></span><span class="price">6,00 €</span></div>
-        <p data-ca="Sopa marroquí amb llenties, cigrons, tomàquet i espècies suaus."
-           data-es="Sopa marroquí con lentejas, garbanzos, tomate y especias suaves."
-           data-fr="Soupe marocaine aux lentilles, pois chiches, tomate et épices douces.">
-          Sopa marroquí amb llenties, cigrons, tomàquet i espècies suaus.</p>
-      </article>
-
-      <article class="dish">
-        <div class="dish-head"><h3 data-ca="Croquetes de la casa" data-es="Croquetas de la casa" data-fr="Croquettes maison">Croquetes de la casa</h3>
-          <span class="dots"></span><span class="price">7,00 €</span></div>
-        <p data-ca="Sis unitats. De pollastre, bolets o espinacs amb pinyons."
-           data-es="Seis unidades. De pollo, setas o espinacas con piñones."
-           data-fr="Six pièces. Poulet, champignons ou épinards aux pignons.">
-          Sis unitats. De pollastre, bolets o espinacs amb pinyons.</p>
-      </article>
-
-      <article class="dish">
-        <div class="dish-head"><h3 data-ca="Pa amb tomàquet" data-es="Pa amb tomàquet" data-fr="Pain à la tomate">Pa amb tomàquet</h3>
-          <span class="dots"></span><span class="price">4,00 €</span></div>
-        <p data-ca="Pa de coca torrat amb tomàquet madur i oli d'oliva verge."
-           data-es="Pan de coca tostado con tomate maduro y aceite de oliva virgen."
-           data-fr="Pain coca grillé, tomate mûre et huile d'olive vierge.">
-          Pa de coca torrat amb tomàquet madur i oli d'oliva verge.</p>
-      </article>
-
-      <article class="dish">
-        <div class="dish-head"><h3 data-ca="Olives marinades" data-es="Aceitunas marinadas" data-fr="Olives marinées">Olives marinades</h3>
-          <span class="dots"></span><span class="price">4,00 €</span></div>
-        <p data-ca="Mescla d'olives amb pell de llimona, all confitat i comí."
-           data-es="Mezcla de aceitunas con piel de limón, ajo confitado y comino."
-           data-fr="Olives variées au citron confit, ail et cumin.">
-          Mescla d'olives amb pell de llimona, all confitat i comí.</p>
-      </article>
-
-      <article class="dish">
-        <div class="dish-head"><h3 data-ca="Sambussa de carn" data-es="Sambussa de carne" data-fr="Sambousseks à la viande">Sambussa de carn</h3>
-          <span class="dots"></span><span class="price">7,50 €</span></div>
-        <p data-ca="Empanadetes triangulars farcides de vedella picada i espècies."
-           data-es="Empanadillas triangulares rellenas de ternera picada y especias."
-           data-fr="Petits chaussons triangulaires à la viande de bœuf hachée épicée.">
-          Empanadetes triangulars farcides de vedella picada i espècies.</p>
-      </article>
-    </div>
-
-    <!-- MARROC -->
-    <div class="panel" data-panel="marroc">
-      <article class="dish">
-        <div class="dish-head"><h3 data-ca="Cuscús reial" data-es="Cuscús real" data-fr="Couscous royal">Cuscús reial</h3>
-          <span class="dots"></span><span class="price">16,00 €</span></div>
-        <p data-ca="Sémola amb xai, pollastre, merguez i set verdures de temporada."
-           data-es="Sémola con cordero, pollo, merguez y siete verduras de temporada."
-           data-fr="Semoule à l'agneau, poulet, merguez et sept légumes de saison.">
-          Sémola amb xai, pollastre, merguez i set verdures de temporada.</p>
-      </article>
-
-      <article class="dish">
-        <div class="dish-head"><h3 data-ca="Tajín de xai amb prunes" data-es="Tajín de cordero con ciruelas" data-fr="Tajine d'agneau aux pruneaux">Tajín de xai amb prunes</h3>
-          <span class="dots"></span><span class="price">17,00 €</span></div>
-        <p data-ca="Espatlla de xai cuita lentament amb prunes, ametlles i sèsam."
-           data-es="Espalda de cordero cocinada lentamente con ciruelas, almendras y sésamo."
-           data-fr="Épaule d'agneau mijotée aux pruneaux, amandes et sésame.">
-          Espatlla de xai cuita lentament amb prunes, ametlles i sèsam.</p>
-      </article>
-
-      <article class="dish">
-        <div class="dish-head"><h3 data-ca="Tajín de pollastre amb llimona" data-es="Tajín de pollo con limón" data-fr="Tajine de poulet au citron">Tajín de pollastre amb llimona</h3>
-          <span class="dots"></span><span class="price">15,00 €</span></div>
-        <p data-ca="Pollastre amb llimona confitada, olives verdes i safrà."
-           data-es="Pollo con limón confitado, aceitunas verdes y azafrán."
-           data-fr="Poulet au citron confit, olives vertes et safran.">
-          Pollastre amb llimona confitada, olives verdes i safrà.</p>
-      </article>
-
-      <article class="dish">
-        <div class="dish-head"><h3 data-ca="Tajín de verdures" data-es="Tajín de verduras" data-fr="Tajine de légumes">Tajín de verdures</h3>
-          <span class="tag veg">VEGGIE</span>
-          <span class="dots"></span><span class="price">13,00 €</span></div>
-        <p data-ca="Carbassó, pastanaga, carbassa, cigrons i set espècies."
-           data-es="Calabacín, zanahoria, calabaza, garbanzos y siete especias."
-           data-fr="Courgette, carotte, courge, pois chiches et sept épices.">
-          Carbassó, pastanaga, carbassa, cigrons i set espècies.</p>
-      </article>
-
-      <article class="dish">
-        <div class="dish-head"><h3 data-ca="Pastilla de pollastre" data-es="Pastela de pollo" data-fr="Pastilla au poulet">Pastilla de pollastre</h3>
-          <span class="dots"></span><span class="price">14,00 €</span></div>
-        <p data-ca="Massa filo dolça-salada amb pollastre, ametlles, canyella i sucre."
-           data-es="Masa filo dulce-salada con pollo, almendras, canela y azúcar."
-           data-fr="Pâte filo sucrée-salée au poulet, amandes, cannelle et sucre.">
-          Massa filo dolça-salada amb pollastre, ametlles, canyella i sucre.</p>
-      </article>
-
-      <article class="dish">
-        <div class="dish-head"><h3 data-ca="Mètxoui de xai" data-es="Méchoui de cordero" data-fr="Méchoui d'agneau">Mètxoui de xai</h3>
-          <span class="dots"></span><span class="price">18,00 €</span></div>
-        <p data-ca="Espatlla de xai rostida lentament amb comí i sal de Maldon."
-           data-es="Espalda de cordero asada lentamente con comino y sal de Maldon."
-           data-fr="Épaule d'agneau rôtie au cumin et fleur de sel.">
-          Espatlla de xai rostida lentament amb comí i sal de Maldon.</p>
-      </article>
-    </div>
-
-    <!-- PIZZES -->
-    <div class="panel" data-panel="pizzes">
-      <article class="dish">
-        <div class="dish-head"><h3 data-ca="Margarita" data-es="Margarita" data-fr="Margherita">Margarita</h3>
-          <span class="tag veg">VEGGIE</span>
-          <span class="dots"></span><span class="price">9,00 €</span></div>
-        <p data-ca="Tomàquet San Marzano, mozzarella fior di latte, alfàbrega fresca."
-           data-es="Tomate San Marzano, mozzarella fior di latte, albahaca fresca."
-           data-fr="Tomate San Marzano, mozzarella fior di latte, basilic frais.">
-          Tomàquet San Marzano, mozzarella fior di latte, alfàbrega fresca.</p>
-      </article>
-
-      <article class="dish">
-        <div class="dish-head"><h3 data-ca="El Rio" data-es="El Rio" data-fr="El Rio">El Rio</h3>
-          <span class="tag hot">★ CASA</span>
-          <span class="dots"></span><span class="price">13,00 €</span></div>
-        <p data-ca="Carn picada especiada, ceba caramel·litzada, olives kalamata, menta."
-           data-es="Carne picada especiada, cebolla caramelizada, aceitunas kalamata, menta."
-           data-fr="Viande hachée épicée, oignon caramélisé, olives kalamata, menthe.">
-          Carn picada especiada, ceba caramel·litzada, olives kalamata, menta.</p>
-      </article>
-
-      <article class="dish">
-        <div class="dish-head"><h3 data-ca="Quattro Formaggi" data-es="Quattro Formaggi" data-fr="Quattro Formaggi">Quattro Formaggi</h3>
-          <span class="tag veg">VEGGIE</span>
-          <span class="dots"></span><span class="price">12,00 €</span></div>
-        <p data-ca="Mozzarella, gorgonzola, parmesà i emmental."
-           data-es="Mozzarella, gorgonzola, parmesano y emmental."
-           data-fr="Mozzarella, gorgonzola, parmesan et emmental.">
-          Mozzarella, gorgonzola, parmesà i emmental.</p>
-      </article>
-
-      <article class="dish">
-        <div class="dish-head"><h3 data-ca="Diavola Halal" data-es="Diavola Halal" data-fr="Diavola Halal">Diavola Halal</h3>
-          <span class="tag hot">PICANT</span>
-          <span class="dots"></span><span class="price">12,00 €</span></div>
-        <p data-ca="Salami picant de vedella halal, pebrots, oli de bitxo."
-           data-es="Salami picante de ternera halal, pimientos, aceite de guindilla."
-           data-fr="Salami épicé de bœuf halal, poivrons, huile pimentée.">
-          Salami picant de vedella halal, pebrots, oli de bitxo.</p>
-      </article>
-
-      <article class="dish">
-        <div class="dish-head"><h3 data-ca="Vegetariana" data-es="Vegetariana" data-fr="Végétarienne">Vegetariana</h3>
-          <span class="tag veg">VEGGIE</span>
-          <span class="dots"></span><span class="price">11,00 €</span></div>
-        <p data-ca="Carbassó, alberginia, pebrot, ceba i tomàquet sec."
-           data-es="Calabacín, berenjena, pimiento, cebolla y tomate seco."
-           data-fr="Courgette, aubergine, poivron, oignon et tomate séchée.">
-          Carbassó, alberginia, pebrot, ceba i tomàquet sec.</p>
-      </article>
-
-      <article class="dish">
-        <div class="dish-head"><h3 data-ca="Tonyina i ceba" data-es="Atún y cebolla" data-fr="Thon et oignon">Tonyina i ceba</h3>
-          <span class="dots"></span><span class="price">11,00 €</span></div>
-        <p data-ca="Tonyina, ceba vermella, olives negres, orenga."
-           data-es="Atún, cebolla roja, aceitunas negras, orégano."
-           data-fr="Thon, oignon rouge, olives noires, origan.">
-          Tonyina, ceba vermella, olives negres, orenga.</p>
-      </article>
-
-      <article class="dish">
-        <div class="dish-head"><h3 data-ca="Marroquí" data-es="Marroquí" data-fr="Marocaine">Marroquí</h3>
-          <span class="dots"></span><span class="price">13,00 €</span></div>
-        <p data-ca="Merguez, harissa suau, pebrot rostit, formatge de cabra, menta."
-           data-es="Merguez, harissa suave, pimiento asado, queso de cabra, menta."
-           data-fr="Merguez, harissa douce, poivron rôti, fromage de chèvre, menthe.">
-          Merguez, harissa suau, pebrot rostit, formatge de cabra, menta.</p>
-      </article>
-
-      <article class="dish">
-        <div class="dish-head"><h3 data-ca="Prosciutto Halal & Bolets" data-es="Prosciutto Halal & Setas" data-fr="Prosciutto Halal & Champignons">Prosciutto Halal & Bolets</h3>
-          <span class="dots"></span><span class="price">13,50 €</span></div>
-        <p data-ca="Pernil de gall dindi halal, bolets de temporada, rúcula."
-           data-es="Jamón de pavo halal, setas de temporada, rúcula."
-           data-fr="Jambon de dinde halal, champignons de saison, roquette.">
-          Pernil de gall dindi halal, bolets de temporada, rúcula.</p>
-      </article>
-    </div>
-
-    <!-- PASTES -->
-    <div class="panel" data-panel="pastes">
-      <article class="dish">
-        <div class="dish-head"><h3 data-ca="Spaghetti bolonyesa" data-es="Spaghetti boloñesa" data-fr="Spaghetti bolognaise">Spaghetti bolonyesa</h3>
-          <span class="dots"></span><span class="price">11,00 €</span></div>
-        <p data-ca="Carn de vedella halal, sofregit lent de tomàquet i vi."
-           data-es="Carne de ternera halal, sofrito lento de tomate y vino."
-           data-fr="Viande de bœuf halal, sauce tomate mijotée au vin.">
-          Carn de vedella halal, sofregit lent de tomàquet i vi.</p>
-      </article>
-
-      <article class="dish">
-        <div class="dish-head"><h3 data-ca="Penne arrabiata" data-es="Penne arrabiata" data-fr="Penne arrabbiata">Penne arrabiata</h3>
-          <span class="tag hot">PICANT</span><span class="tag veg">VEGGIE</span>
-          <span class="dots"></span><span class="price">10,00 €</span></div>
-        <p data-ca="Tomàquet, all, bitxo, alfàbrega i un raig d'oli verge."
-           data-es="Tomate, ajo, guindilla, albahaca y un chorro de aceite virgen."
-           data-fr="Tomate, ail, piment, basilic et un trait d'huile vierge.">
-          Tomàquet, all, bitxo, alfàbrega i un raig d'oli verge.</p>
-      </article>
-
-      <article class="dish">
-        <div class="dish-head"><h3 data-ca="Tagliatelle de pollastre i bolets" data-es="Tagliatelle de pollo y setas" data-fr="Tagliatelles poulet & champignons">Tagliatelle de pollastre i bolets</h3>
-          <span class="dots"></span><span class="price">13,00 €</span></div>
-        <p data-ca="Crema de bolets de bosc, pollastre saltejat, una mica de timó."
-           data-es="Crema de setas de bosque, pollo salteado, un toque de tomillo."
-           data-fr="Crème de champignons des bois, poulet sauté, brin de thym.">
-          Crema de bolets de bosc, pollastre saltejat, una mica de timó.</p>
-      </article>
-
-      <article class="dish">
-        <div class="dish-head"><h3 data-ca="Lasanya casolana" data-es="Lasaña casera" data-fr="Lasagne maison">Lasanya casolana</h3>
-          <span class="dots"></span><span class="price">12,00 €</span></div>
-        <p data-ca="Cinc capes de pasta fresca, carn halal, beixamel i parmesà."
-           data-es="Cinco capas de pasta fresca, carne halal, bechamel y parmesano."
-           data-fr="Cinq couches de pâte fraîche, viande halal, béchamel et parmesan.">
-          Cinc capes de pasta fresca, carn halal, beixamel i parmesà.</p>
-      </article>
-
-      <article class="dish">
-        <div class="dish-head"><h3 data-ca="Tortellini ricotta i espinacs" data-es="Tortellini ricotta y espinacas" data-fr="Tortellinis ricotta-épinards">Tortellini ricotta i espinacs</h3>
-          <span class="tag veg">VEGGIE</span>
-          <span class="dots"></span><span class="price">12,00 €</span></div>
-        <p data-ca="Salsa lleugera de mantega, sàlvia i ratlladura de llimona."
-           data-es="Salsa ligera de mantequilla, salvia y ralladura de limón."
-           data-fr="Sauce légère beurre, sauge et zeste de citron.">
-          Salsa lleugera de mantega, sàlvia i ratlladura de llimona.</p>
-      </article>
-    </div>
-
-    <!-- BRASA -->
-    <div class="panel" data-panel="brasa">
-      <article class="dish">
-        <div class="dish-head"><h3 data-ca="Entrecot de vedella 250 g" data-es="Entrecot de ternera 250 g" data-fr="Entrecôte de bœuf 250 g">Entrecot de vedella 250 g</h3>
-          <span class="tag hot">★ CASA</span>
-          <span class="dots"></span><span class="price">19,00 €</span></div>
-        <p data-ca="Madurat 21 dies, sal de Maldon, patata al caliu i ratatouille."
-           data-es="Madurado 21 días, sal de Maldon, patata al rescoldo y ratatouille."
-           data-fr="Maturé 21 jours, fleur de sel, pomme de terre braisée et ratatouille.">
-          Madurat 21 dies, sal de Maldon, patata al caliu i ratatouille.</p>
-      </article>
-
-      <article class="dish">
-        <div class="dish-head"><h3 data-ca="Brotxetes mixtes" data-es="Brochetas mixtas" data-fr="Brochettes mixtes">Brotxetes mixtes</h3>
-          <span class="dots"></span><span class="price">15,00 €</span></div>
-        <p data-ca="Pollastre, xai i merguez, arròs basmati i salsa de iogurt."
-           data-es="Pollo, cordero y merguez, arroz basmati y salsa de yogur."
-           data-fr="Poulet, agneau et merguez, riz basmati et sauce yaourt.">
-          Pollastre, xai i merguez, arròs basmati i salsa de iogurt.</p>
-      </article>
-
-      <article class="dish">
-        <div class="dish-head"><h3 data-ca="Mig pollastre a la brasa" data-es="Medio pollo a la brasa" data-fr="Demi-poulet grillé">Mig pollastre a la brasa</h3>
-          <span class="dots"></span><span class="price">14,00 €</span></div>
-        <p data-ca="Marinat amb ras el hanout, llimona i all. Patates fregides."
-           data-es="Marinado con ras el hanout, limón y ajo. Patatas fritas."
-           data-fr="Mariné au ras el hanout, citron et ail. Frites maison.">
-          Marinat amb ras el hanout, llimona i all. Patates fregides.</p>
-      </article>
-
-      <article class="dish">
-        <div class="dish-head"><h3 data-ca="Costelles de xai" data-es="Chuletas de cordero" data-fr="Côtelettes d'agneau">Costelles de xai</h3>
-          <span class="dots"></span><span class="price">18,00 €</span></div>
-        <p data-ca="Sis costelles fines, romaní fresc i mantega d'all confitat."
-           data-es="Seis chuletitas finas, romero fresco y mantequilla de ajo confitado."
-           data-fr="Six fines côtelettes, romarin frais et beurre d'ail confit.">
-          Sis costelles fines, romaní fresc i mantega d'all confitat.</p>
-      </article>
-
-      <article class="dish">
-        <div class="dish-head"><h3 data-ca="Hamburguesa El Rio" data-es="Hamburguesa El Rio" data-fr="Burger El Rio">Hamburguesa El Rio</h3>
-          <span class="dots"></span><span class="price">13,00 €</span></div>
-        <p data-ca="200 g vedella halal, cheddar, ceba caramel·litzada, salsa de la casa."
-           data-es="200 g ternera halal, cheddar, cebolla caramelizada, salsa de la casa."
-           data-fr="200 g bœuf halal, cheddar, oignon caramélisé, sauce maison.">
-          200 g vedella halal, cheddar, ceba caramel·litzada, salsa de la casa.</p>
-      </article>
-
-      <article class="dish">
-        <div class="dish-head"><h3 data-ca="Hamburguesa vegetal" data-es="Hamburguesa vegetal" data-fr="Burger végétal">Hamburguesa vegetal</h3>
-          <span class="tag veg">VEGGIE</span>
-          <span class="dots"></span><span class="price">11,00 €</span></div>
-        <p data-ca="Llenties, remolatxa i quinoa, formatge de cabra i alvocat."
-           data-es="Lentejas, remolacha y quinoa, queso de cabra y aguacate."
-           data-fr="Lentilles, betterave et quinoa, fromage de chèvre et avocat.">
-          Llenties, remolatxa i quinoa, formatge de cabra i alvocat.</p>
-      </article>
-    </div>
-
-    <!-- POSTRES -->
-    <div class="panel" data-panel="postres">
-      <article class="dish">
-        <div class="dish-head"><h3 data-ca="Corns de gasela" data-es="Cuernos de gacela" data-fr="Cornes de gazelle">Corns de gasela</h3>
-          <span class="tag hot">★ CASA</span>
-          <span class="dots"></span><span class="price">5,00 €</span></div>
-        <p data-ca="Pastetes d'ametlla, aigua de rosa i flor de taronger. Tres unitats."
-           data-es="Pastelitos de almendra, agua de rosas y azahar. Tres unidades."
-           data-fr="Petits gâteaux à l'amande, eau de rose et fleur d'oranger. Trois pièces.">
-          Pastetes d'ametlla, aigua de rosa i flor de taronger. Tres unitats.</p>
-      </article>
-
-      <article class="dish">
-        <div class="dish-head"><h3 data-ca="Pastís d'ametlla" data-es="Pastel de almendra" data-fr="Gâteau aux amandes">Pastís d'ametlla</h3>
-          <span class="dots"></span><span class="price">5,00 €</span></div>
-        <p data-ca="Esponjós, sense gluten, amb gelat de canyella."
-           data-es="Esponjoso, sin gluten, con helado de canela."
-           data-fr="Moelleux, sans gluten, glace à la cannelle.">
-          Esponjós, sense gluten, amb gelat de canyella.</p>
-      </article>
-
-      <article class="dish">
-        <div class="dish-head"><h3 data-ca="Tiramisú casolà" data-es="Tiramisú casero" data-fr="Tiramisu maison">Tiramisú casolà</h3>
-          <span class="dots"></span><span class="price">5,00 €</span></div>
-        <p data-ca="Mascarpone, cafè acabat de fer, cacau pur del Marroc."
-           data-es="Mascarpone, café recién hecho, cacao puro de Marruecos."
-           data-fr="Mascarpone, café fraîchement préparé, cacao pur du Maroc.">
-          Mascarpone, cafè acabat de fer, cacau pur del Marroc.</p>
-      </article>
-
-      <article class="dish">
-        <div class="dish-head"><h3 data-ca="Dàtils amb mel i sèsam" data-es="Dátiles con miel y sésamo" data-fr="Dattes au miel et sésame">Dàtils amb mel i sèsam</h3>
-          <span class="tag veg">VEGGIE</span>
-          <span class="dots"></span><span class="price">4,00 €</span></div>
-        <p data-ca="Dàtils Medjool farcits d'ametlla i banyats amb mel."
-           data-es="Dátiles Medjool rellenos de almendra y bañados con miel."
-           data-fr="Dattes Medjool farcies aux amandes et nappées de miel.">
-          Dàtils Medjool farcits d'ametlla i banyats amb mel.</p>
-      </article>
-
-      <article class="dish">
-        <div class="dish-head"><h3 data-ca="Te de menta marroquí (tetera)" data-es="Té de menta marroquí (tetera)" data-fr="Thé à la menthe (théière)">Te de menta marroquí (tetera)</h3>
-          <span class="tag hot">★ CASA</span>
-          <span class="dots"></span><span class="price">4,00 €</span></div>
-        <p data-ca="Te verd Gunpowder, menta fresca, sucre. Per a dues persones."
-           data-es="Té verde Gunpowder, menta fresca, azúcar. Para dos personas."
-           data-fr="Thé vert Gunpowder, menthe fraîche, sucre. Pour deux personnes.">
-          Te verd Gunpowder, menta fresca, sucre. Per a dues persones.</p>
-      </article>
-
-      <article class="dish">
-        <div class="dish-head"><h3 data-ca="Cafè i pastissets variats" data-es="Café y pastelitos variados" data-fr="Café et petits gâteaux">Cafè i pastissets variats</h3>
-          <span class="dots"></span><span class="price">5,50 €</span></div>
-        <p data-ca="Cafè a l'estil que prefereixis, trio de pastissets marroquins."
-           data-es="Café al estilo que prefieras, trío de pastelitos marroquíes."
-           data-fr="Café au choix, trio de pâtisseries marocaines.">
-          Cafè a l'estil que prefereixis, trio de pastissets marroquins.</p>
-      </article>
-    </div>
-
-  </div>
-</section>
-
-<!-- ════════════════════════ VISIT / HOURS / LOCATION ════════════════════════ -->
-<section id="visit" class="visit" data-screen-label="Visit">
-  <div class="section-head">
-    <span class="overline" data-ca="Vine a visitar-nos" data-es="Ven a visitarnos" data-fr="Venez nous voir">Vine a visitar-nos</span>
-    <div class="divider"><span class="star8" aria-hidden="true"></span></div>
-    <h2 data-ca="A l'avinguda <em>Joan Martí</em>, Encamp"
-        data-es="En la avenida <em>Joan Martí</em>, Encamp"
-        data-fr="Avenue <em>Joan Martí</em>, Encamp">A l'avinguda <em>Joan Martí</em>, Encamp</h2>
-    <p data-ca="A 8 minuts del telecabina Funicamp i del centre d'Encamp. Aparcament gratuït a prop."
-       data-es="A 8 minutos del telecabina Funicamp y del centro de Encamp. Aparcamiento gratuito cerca."
-       data-fr="À 8 minutes du téléphérique Funicamp et du centre d'Encamp. Parking gratuit à proximité.">
-      A 8 minuts del telecabina Funicamp i del centre d'Encamp. Aparcament gratuït a prop.</p>
-  </div>
-
-  <div class="visit-grid">
-
-    <!-- ADDRESS -->
-    <div class="visit-card">
-      <div class="icon" aria-hidden="true">◇</div>
-      <h3 data-ca="On som" data-es="Dónde estamos" data-fr="Où nous sommes">On som</h3>
-      <p>
-        <strong>El Rio</strong><br />
-        Av. de Joan Martí, 32<br />
-        AD200 Encamp<br />
-        <span data-ca="Principat d'Andorra" data-es="Principado de Andorra" data-fr="Principauté d'Andorre">Principat d'Andorra</span>
-      </p>
-      <a class="linked" href="https://www.google.com/maps/search/?api=1&query=El+Rio+Av+Joan+Marti+32+Encamp+Andorra" target="_blank" rel="noopener"
-         data-ca="Obre al Google Maps →" data-es="Abre en Google Maps →" data-fr="Ouvrir sur Google Maps →">
-        Obre al Google Maps →
-      </a>
-    </div>
-
-    <!-- HOURS -->
-    <div class="visit-card">
-      <div class="icon" aria-hidden="true">◷</div>
-      <h3 data-ca="Horari" data-es="Horario" data-fr="Horaires">Horari</h3>
-      <ul>
-        <li data-day="0"><strong data-ca="Dilluns" data-es="Lunes" data-fr="Lundi">Dilluns</strong><span>10:00 — 23:30</span></li>
-        <li data-day="1"><strong data-ca="Dimarts" data-es="Martes" data-fr="Mardi">Dimarts</strong><span>10:00 — 23:30</span></li>
-        <li data-day="2"><strong data-ca="Dimecres" data-es="Miércoles" data-fr="Mercredi">Dimecres</strong><span>10:00 — 23:30</span></li>
-        <li data-day="3"><strong data-ca="Dijous" data-es="Jueves" data-fr="Jeudi">Dijous</strong><span>10:00 — 23:30</span></li>
-        <li data-day="4"><strong data-ca="Divendres" data-es="Viernes" data-fr="Vendredi">Divendres</strong><span>10:00 — 00:00</span></li>
-        <li data-day="5"><strong data-ca="Dissabte" data-es="Sábado" data-fr="Samedi">Dissabte</strong><span>10:00 — 00:00</span></li>
-        <li data-day="6"><strong data-ca="Diumenge" data-es="Domingo" data-fr="Dimanche">Diumenge</strong><span>10:00 — 23:30</span></li>
-      </ul>
-    </div>
-
-    <!-- CONTACT -->
-    <div class="visit-card">
-      <div class="icon" aria-hidden="true">✆</div>
-      <h3 data-ca="Contacte" data-es="Contacto" data-fr="Contact">Contacte</h3>
-      <ul>
-        <li><strong data-ca="Telèfon" data-es="Teléfono" data-fr="Téléphone">Telèfon</strong><a href="tel:+376732223">+376 732 223</a></li>
-        <li><strong>WhatsApp</strong><a href="https://wa.me/376732223?text=Hola%2C+vull+reservar+taula+a+El+Rio" target="_blank" rel="noopener">+376 732 223</a></li>
-        <li><strong>Email</strong><a href="mailto:hola@elrio-encamp.com">hola@elrio-encamp.com</a></li>
-        <li><strong>Google</strong><span>★ 4,2 · 329</span></li>
-      </ul>
-      <a class="linked" href="#reserves"
-         data-ca="Reservar taula →" data-es="Reservar mesa →" data-fr="Réserver →">Reservar taula →</a>
-    </div>
-
-  </div>
-
-  <!-- MAP -->
-  <div class="map-wrap" aria-label="Mapa: El Rio, Encamp">
-    <iframe
-      title="Mapa: El Rio, Av. de Joan Martí 32, Encamp, Andorra"
-      width="100%" height="100%"
-      style="border:0; display:block;"
-      loading="lazy"
-      referrerpolicy="no-referrer-when-downgrade"
-      src="https://maps.google.com/maps?q=El+Rio+Restaurant+Av+de+Joan+Mart%C3%AD+32+Encamp+Andorra&hl=ca&z=17&output=embed">
-    </iframe>
-  </div>
-</section>
-
-<!-- ════════════════════════ RESERVATIONS ════════════════════════ -->
-<section id="reserves" class="reservations" data-screen-label="Reservations">
-  <div class="reservations-info">
-    <span class="overline" data-ca="Reserves" data-es="Reservas" data-fr="Réservations">Reserves</span>
-    <h2 data-ca="Et guardem <em>la millor taula</em>"
-        data-es="Te guardamos <em>la mejor mesa</em>"
-        data-fr="Nous vous gardons <em>la meilleure table</em>">
-      Et guardem <em>la millor taula</em>
-    </h2>
-    <p data-ca="Per a grups de més de 6 persones, truca'ns directament. Per a dies festius, et recomanem reservar amb antelació."
-       data-es="Para grupos de más de 6 personas, llámanos directamente. Para días festivos, te recomendamos reservar con antelación."
-       data-fr="Pour les groupes de plus de 6 personnes, appelez-nous directement. Pour les jours fériés, réservation conseillée.">
-      Per a grups de més de 6 persones, truca'ns directament. Per a dies festius, et recomanem reservar amb antelació.
-    </p>
-
-    <div class="quick-contacts">
-      <a class="quick-contact" href="tel:+376732223">
-        <div>
-          <span class="qc-label" data-ca="Truca" data-es="Llama" data-fr="Appelez">Truca</span>
-          <span class="qc-value">+376 732 223</span>
-        </div>
-        <span class="qc-icon" aria-hidden="true">✆</span>
-      </a>
-      <a class="quick-contact" href="https://wa.me/376732223?text=Hola%2C+vull+reservar+taula+a+El+Rio" target="_blank" rel="noopener">
-        <div>
-          <span class="qc-label">WhatsApp</span>
-          <span class="qc-value" data-ca="Resposta en minuts" data-es="Respuesta en minutos" data-fr="Réponse en minutes">Resposta en minuts</span>
-        </div>
-        <span class="qc-icon" aria-hidden="true">✓</span>
-      </a>
-    </div>
-  </div>
-
-  <form id="reservation-form" class="form-card" novalidate>
-    <h3 data-ca="Reserva en línia" data-es="Reserva online" data-fr="Réservation en ligne">Reserva en línia</h3>
-    <p class="form-sub"
-       data-ca="Et confirmem en menys d'una hora."
-       data-es="Te confirmamos en menos de una hora."
-       data-fr="Confirmation en moins d'une heure.">Et confirmem en menys d'una hora.</p>
-
-    <div class="field-row">
-      <div class="field">
-        <label data-ca="Nom" data-es="Nombre" data-fr="Nom">Nom</label>
-        <input type="text" name="name" required
-               data-placeholder-ca="El teu nom" data-placeholder-es="Tu nombre" data-placeholder-fr="Votre nom" />
-      </div>
-      <div class="field">
-        <label data-ca="Telèfon" data-es="Teléfono" data-fr="Téléphone">Telèfon</label>
-        <input type="tel" name="phone" required placeholder="+376 ..." />
-      </div>
-    </div>
-
-    <div class="field-row">
-      <div class="field">
-        <label data-ca="Data" data-es="Fecha" data-fr="Date">Data</label>
-        <input type="date" name="date" id="res-date" required />
-      </div>
-      <div class="field">
-        <label data-ca="Hora" data-es="Hora" data-fr="Heure">Hora</label>
-        <select name="time" required>
-          <option>13:00</option><option>13:30</option><option>14:00</option>
-          <option>14:30</option><option>20:00</option><option>20:30</option>
-          <option>21:00</option><option>21:30</option><option>22:00</option>
-        </select>
-      </div>
-    </div>
-
-    <div class="field-row">
-      <div class="field">
-        <label data-ca="Persones" data-es="Personas" data-fr="Personnes">Persones</label>
-        <select name="guests" required>
-          <option>1</option><option selected>2</option><option>3</option><option>4</option>
-          <option>5</option><option>6</option>
-          <option data-ca="6+ (truca'ns)" data-es="6+ (llámanos)" data-fr="6+ (appelez-nous)">6+ (truca'ns)</option>
-        </select>
-      </div>
-      <div class="field">
-        <label data-ca="Email (opcional)" data-es="Email (opcional)" data-fr="Email (optionnel)">Email (opcional)</label>
-        <input type="email" name="email" placeholder="hola@..." />
-      </div>
-    </div>
-
-    <div class="field">
-      <label data-ca="Notes (al·lèrgies, ocasió...)" data-es="Notas (alergias, ocasión...)" data-fr="Notes (allergies, occasion...)">Notes</label>
-      <textarea name="notes"
-        data-placeholder-ca="Aniversari, intolerància al gluten, terrassa..."
-        data-placeholder-es="Cumpleaños, intolerancia al gluten, terraza..."
-        data-placeholder-fr="Anniversaire, intolérance au gluten, terrasse..."></textarea>
-    </div>
-
-    <button type="submit" class="btn-submit"
-            data-ca="Demanar reserva" data-es="Solicitar reserva" data-fr="Demander la réservation">
-      Demanar reserva
-    </button>
-    <div id="form-success" class="form-success"
-         data-ca="✓ Hem rebut la teva sol·licitud. Et trucarem aviat per confirmar."
-         data-es="✓ Hemos recibido tu solicitud. Te llamaremos pronto para confirmar."
-         data-fr="✓ Nous avons reçu votre demande. Nous vous appellerons bientôt.">
-      ✓ Hem rebut la teva sol·licitud. Et trucarem aviat per confirmar.
-    </div>
-  </form>
-</section>
-
-<!-- ════════════════════════ FOOTER ════════════════════════ -->
-<footer data-screen-label="Footer">
-  <div class="footer-grid">
-    <div class="footer-brand">
-      <span class="brand-name">El Rio</span>
-      <p data-ca="Restaurant marroquí i pizzeria 100% Halal a Encamp, Andorra. Cuina familiar des de fa anys."
-         data-es="Restaurante marroquí y pizzería 100% Halal en Encamp, Andorra. Cocina familiar desde hace años."
-         data-fr="Restaurant marocain et pizzeria 100% Halal à Encamp, Andorre. Cuisine familiale depuis des années.">
-        Restaurant marroquí i pizzeria 100% Halal a Encamp, Andorra. Cuina familiar des de fa anys.
-      </p>
-    </div>
-    <div>
-      <h4 data-ca="On som" data-es="Dónde estamos" data-fr="Où nous sommes">On som</h4>
-      <p>Av. de Joan Martí, 32<br />AD200 Encamp<br />Andorra</p>
-    </div>
-    <div>
-      <h4 data-ca="Contacta" data-es="Contacta" data-fr="Contact">Contacta</h4>
-      <ul>
-        <li><a href="tel:+376732223">+376 732 223</a></li>
-        <li><a href="https://wa.me/376732223" target="_blank" rel="noopener">WhatsApp</a></li>
-        <li><a href="mailto:hola@elrio-encamp.com">hola@elrio-encamp.com</a></li>
-      </ul>
-    </div>
-    <div>
-      <h4 data-ca="Enllaços" data-es="Enlaces" data-fr="Liens">Enllaços</h4>
-      <ul>
-        <li><a href="#carta" data-ca="Carta" data-es="Carta" data-fr="Carte">Carta</a></li>
-        <li><a href="#visit" data-ca="Horari" data-es="Horario" data-fr="Horaires">Horari</a></li>
-        <li><a href="#reserves" data-ca="Reserves" data-es="Reservas" data-fr="Réservations">Reserves</a></li>
-        <li><a href="https://www.google.com/maps/search/?api=1&query=El+Rio+Av+Joan+Marti+32+Encamp+Andorra" target="_blank" rel="noopener">Google Maps</a></li>
-      </ul>
-    </div>
-  </div>
-  <div class="footer-bottom">
-    <span>© 2026 Restaurant El Rio · Encamp, Andorra</span>
-    <span data-ca="Fet amb cura · 100% Halal"
-          data-es="Hecho con cariño · 100% Halal"
-          data-fr="Fait avec soin · 100% Halal">Fet amb cura · 100% Halal</span>
-  </div>
-</footer>
-
-</main>
-
-<!-- ════════════════════════ SCRIPTS ════════════════════════ -->
-<script src="translations.js" defer></script>
-<script src="main.js" defer></script>
-
-<!-- React for tweaks panel only -->
-<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
-<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
-<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
-<script type="text/babel" src="tweaks-panel.jsx"></script>
-<script type="text/babel" src="tweaks-app.jsx"></script>
-
-</body>
-</html>
+  .hero-visual { max-height: 60vh; max-width: 340px; justify-self: center; }
+  .hero-visual .badge { left: -10px; }
+
+  .specialties { padding: 80px 22px; }
+  .specialties-head { flex-direction: column; align-items: start; gap: 20px; }
+  .specialties-grid { grid-template-columns: 1fr; gap: 22px; }
+
+  .stats { padding: 70px 22px; }
+  .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 40px 0; }
+  .stat { padding: 0 22px; }
+  .stat:nth-child(3) { border-left: 0; padding-left: 0; }
+
+  .marquee-item { padding: 0 22px; }
+  .marquee-item + .marquee-item::before { margin-right: 44px; width: 9px; height: 9px; }
+
+  section { padding: 70px 22px; }
+  .about { grid-template-columns: 1fr; gap: 40px; }
+  .panel.active { grid-template-columns: 1fr; gap: 0; }
+  .visit-grid { grid-template-columns: 1fr; }
+  .reservations { grid-template-columns: 1fr; gap: 40px; }
+  .form-card { padding: 28px 22px; }
+  .footer-grid { grid-template-columns: 1fr 1fr; gap: 36px; }
+}
+@media (max-width: 540px) {
+  .field-row { grid-template-columns: 1fr; }
+  .hero-meta { gap: 14px 22px; font-size: 0.82rem; }
+  .hero-meta .big-rating { font-size: 2rem; }
+  .menu-tabs { padding: 6px; }
+  .tab { font-size: 0.78rem; padding: 10px 14px; min-width: 90px; }
+  .footer-grid { grid-template-columns: 1fr; }
+  .stats-grid { grid-template-columns: 1fr; gap: 30px; }
+  .stat { border-left: 0 !important; padding-left: 0 !important; padding-bottom: 30px; border-bottom: 1px solid var(--line); }
+  .stat:last-child { border-bottom: 0; padding-bottom: 0; }
+}
