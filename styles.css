@@ -1211,18 +1211,12 @@ footer {
 
   .hero {
     grid-template-columns: 1fr;
-    padding: 36px 22px 60px;
-    gap: 30px;
+    padding: 60px 22px 90px;
+    gap: 50px;
     text-align: left;
-    overflow-x: hidden;
-    min-height: unset;
   }
-  .hero h1 { font-size: clamp(2rem, 8vw, 3rem); margin: 14px 0 16px; }
-  .hero .lead { font-size: 0.95rem; }
-  .hero-cta { margin-bottom: 24px; gap: 10px; }
-  .hero .btn-primary, .hero .btn-secondary { padding: 14px 22px; font-size: 0.9rem; }
-  .hero-visual { max-height: 45vh; max-width: 260px; justify-self: center; }
-  .hero-visual .badge { left: -10px; font-size: 0.62rem; padding: 8px 12px; }
+  .hero-visual { max-height: 60vh; max-width: 340px; justify-self: center; }
+  .hero-visual .badge { left: -10px; }
 
   .specialties { padding: 80px 22px; }
   .specialties-head { flex-direction: column; align-items: start; gap: 20px; }
@@ -1252,13 +1246,6 @@ footer {
   .stats-grid { grid-template-columns: 1fr; gap: 30px; }
   .stat { border-left: 0 !important; padding-left: 0 !important; padding-bottom: 30px; border-bottom: 1px solid var(--line); }
   .stat:last-child { border-bottom: 0; padding-bottom: 0; }
-
-  /* Hero compact for small phones */
-  .hero { padding: 28px 20px 40px; gap: 20px; }
-  .hero h1 { font-size: clamp(1.7rem, 7vw, 2.4rem); margin: 10px 0 12px; }
-  .hero .lead { font-size: 0.88rem; line-height: 1.45; }
-  .hero-cta { gap: 8px; margin-bottom: 18px; }
-  .hero .btn-primary, .hero .btn-secondary { padding: 12px 18px; font-size: 0.85rem; }
-  .hero-meta { gap: 8px 16px; font-size: 0.78rem; }
-  .hero-visual { display: none; }
+  .hero-meta { gap: 14px 22px; font-size: 0.82rem; }
+  .hero-meta .big-rating { font-size: 2rem; }
 }
