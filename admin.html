@@ -111,7 +111,8 @@
     .theme-card.active .active-check { display:inline; color:var(--navy); }
 
     /* ── MODAL ── */
-    #modal-overlay { position:fixed; inset:0; background:rgba(0,0,0,.5); display:flex; align-items:center; justify-content:center; z-index:1000; padding:24px; }
+    #modal-overlay { display:none; position:fixed; inset:0; background:rgba(0,0,0,.5); align-items:center; justify-content:center; z-index:1000; padding:24px; }
+    #modal-overlay.open { display:flex; }
     .modal-box { background:var(--surface); border-radius:12px; width:100%; max-width:580px; max-height:90vh; overflow-y:auto; box-shadow:0 20px 60px rgba(0,0,0,.2); }
     .modal-header { display:flex; align-items:center; justify-content:space-between; padding:20px 24px 16px; border-bottom:1px solid var(--border); position:sticky; top:0; background:var(--surface); z-index:1; }
     .modal-header h2 { font-size:17px; font-weight:600; }
@@ -265,7 +266,7 @@
 </div>
 
 <!-- ════════ MODAL ════════ -->
-<div id="modal-overlay" hidden>
+<div id="modal-overlay">
   <div class="modal-box">
     <div class="modal-header">
       <h2 id="modal-title">Nou plat</h2>
@@ -522,16 +523,12 @@
   }
 
   function closeModal() {
-    const overlay = document.getElementById('modal-overlay');
-    overlay.hidden = true;
-    overlay.style.display = 'none';
+    document.getElementById('modal-overlay').classList.remove('open');
     editingId = null;
   }
 
   function openModal() {
-    const overlay = document.getElementById('modal-overlay');
-    overlay.style.display = '';
-    overlay.hidden = false;
+    document.getElementById('modal-overlay').classList.add('open');
   }
 
   async function saveItem(e) {
