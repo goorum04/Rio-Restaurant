@@ -53,6 +53,8 @@
     localStorage.setItem('elrio_lang', lang);
   }
 
+  window.elrioApplyLang = applyLang;
+
   document.querySelectorAll('.lang-switcher button').forEach(btn => {
     btn.addEventListener('click', () => applyLang(btn.dataset.lang));
   });
