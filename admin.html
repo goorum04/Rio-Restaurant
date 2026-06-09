@@ -24,6 +24,7 @@
       --r:       8px;
     }
     body { font-family:'Work Sans',system-ui,sans-serif; font-size:15px; color:var(--text); background:var(--bg); min-height:100vh; }
+    button, a { touch-action: manipulation; }
 
     /* ── HEADER ── */
     .admin-header { background:var(--navy); color:#fff; display:flex; align-items:center; justify-content:space-between; padding:0 24px; height:56px; position:sticky; top:0; z-index:100; }
@@ -330,17 +331,26 @@
   const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imd2YmNmamd4cmdudmpmdWVkdGZzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzg1MTA2NTMsImV4cCI6MjA5NDA4NjY1M30.fsregKbRRXmgG-k_Ylny8QkoNI7lLJGMUuSIJqODiMA';
 
   let sb, categories = [], currentSlug = null, editingId = null;
+  let uiReady = false;   // prevents ghost-click on mobile after page load
+  let booted  = false;   // prevents double bootDashboard
 
   /* ─── INIT ─── */
   window.addEventListener('DOMContentLoaded', async () => {
     sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
+    // Allow UI interactions only after 700ms (eliminates mobile ghost-clicks)
+    setTimeout(() => { uiReady = true; }, 700);
+
+    // Close modal with Escape key
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
     const { data: { session } } = await sb.auth.getSession();
     if (session) await bootDashboard();
 
     sb.auth.onAuthStateChange(async (event, s) => {
-      if (s) await bootDashboard();
-      else {
+      if (s && !booted) await bootDashboard();
+      if (!s) {
+        booted = false;
         document.getElementById('screen-dashboard').hidden = true;
         document.getElementById('screen-login').style.display = '';
       }
@@ -410,6 +420,7 @@
 
   /* ─── DASHBOARD ─── */
   async function bootDashboard() {
+    booted = true;
     document.getElementById('screen-login').style.display = 'none';
     document.getElementById('screen-dashboard').hidden = false;
     await Promise.all([loadCategories(), loadCurrentTheme()]);
@@ -480,14 +491,16 @@
 
   /* ─── MODAL ─── */
   function openNew() {
+    if (!uiReady) return;
     editingId = null;
     document.getElementById('modal-title').textContent = 'Nou plat';
     document.getElementById('form-item').reset();
     document.getElementById('f-active').value = 'true';
-    document.getElementById('modal-overlay').hidden = false;
+    openModal();
   }
 
   async function openEdit(id) {
+    if (!uiReady) return;
     const { data: item, error } = await sb.from('menu_items').select('*').eq('id', id).single();
     if (error || !item) { toast('No s\'ha pogut carregar el plat.'); return; }
     editingId = id;
@@ -504,12 +517,20 @@
     document.getElementById('f-veggie').checked = tags.includes('VEGGIE');
     document.getElementById('f-picant').checked = tags.includes('PICANT');
     document.getElementById('f-casa').checked   = tags.includes('CASA');
-    document.getElementById('modal-overlay').hidden = false;
+    openModal();
   }
 
   function closeModal() {
-    document.getElementById('modal-overlay').hidden = true;
+    const overlay = document.getElementById('modal-overlay');
+    overlay.hidden = true;
+    overlay.style.display = 'none';
     editingId = null;
+  }
+
+  function openModal() {
+    const overlay = document.getElementById('modal-overlay');
+    overlay.style.display = '';
+    overlay.hidden = false;
   }
 
   async function saveItem(e) {
