@@ -652,11 +652,11 @@ section:not(.hero) .btn-secondary:hover {
   letter-spacing: 0.05em;
 }
 .spec-card .photo {
-  aspect-ratio: 1/1;
+  aspect-ratio: 4/3;
   border-bottom: 1px solid var(--line);
 }
 .spec-card .photo.has-img img {
-  object-position: center;
+  object-position: center 50%;
 }
 .spec-body {
   padding: 26px 26px 32px;
