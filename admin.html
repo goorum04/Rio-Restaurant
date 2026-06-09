@@ -338,8 +338,12 @@
   window.addEventListener('DOMContentLoaded', async () => {
     sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
-    // Allow UI interactions only after 700ms (eliminates mobile ghost-clicks)
-    setTimeout(() => { uiReady = true; }, 700);
+    // Block ALL pointer events for 1s to kill mobile ghost-clicks after navigation
+    document.documentElement.style.pointerEvents = 'none';
+    setTimeout(() => {
+      document.documentElement.style.pointerEvents = '';
+      uiReady = true;
+    }, 1000);
 
     // Close modal with Escape key
     document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
