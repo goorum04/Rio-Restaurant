@@ -1200,13 +1200,13 @@ footer {
   color: color-mix(in oklch, var(--on-dark) 60%, transparent);
 }
 .admin-link {
-  font-size: 0.85rem;
-  opacity: 0.25;
+  font-size: 1rem;
+  opacity: 0.55;
   text-decoration: none;
   transition: opacity 0.2s;
   line-height: 1;
 }
-.admin-link:hover { opacity: 0.75; }
+.admin-link:hover { opacity: 1; }
 
 /* ============================================================
    RESPONSIVE
