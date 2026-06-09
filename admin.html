@@ -134,7 +134,7 @@
     #toast.show { opacity:1; }
 
     /* ── RESPONSIVE ── */
-    @media (max-width:600px) {
+    @media (max-width:640px) {
       .admin-header { padding:0 14px; }
       .admin-tabs button { padding:6px 10px; font-size:13px; }
       .admin-content { padding:14px; }
@@ -142,6 +142,10 @@
       .price-row { grid-template-columns:1fr; }
       .login-card { padding:28px 18px; }
       .brand span { display:none; }
+      .modal-body { padding:16px; }
+      .modal-header { padding:16px; }
+      .modal-footer { padding:14px 16px; }
+      .item-name { font-size:14px; }
     }
   </style>
 </head>
@@ -260,7 +264,7 @@
 <div id="modal-overlay" hidden>
   <div class="modal-box">
     <div class="modal-header">
-      <h2 id="modal-title">Plat</h2>
+      <h2 id="modal-title">Nou plat</h2>
       <button class="btn-close" onclick="closeModal()" aria-label="Tancar">✕</button>
     </div>
     <form id="form-item" onsubmit="saveItem(event)">
