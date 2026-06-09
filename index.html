@@ -89,6 +89,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Work+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400&family=Amiri:ital,wght@0,400;0,700;1,400&family=Noto+Naskh+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet" />
 
   <link rel="stylesheet" href="styles.css" />
+  <!-- Apply cached theme instantly to avoid flash -->
+  <script>(function(){var t=localStorage.getItem('elrio_theme');if(t&&['royal','desert','mountain'].includes(t))document.documentElement.setAttribute('data-theme',t);})();</script>
 </head>
 
 <body>
@@ -1042,8 +1044,10 @@
 </main>
 
 <!-- ════════════════════════ SCRIPTS ════════════════════════ -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
 <script src="translations.js" defer></script>
 <script src="main.js" defer></script>
+<script src="supabase-menu.js" defer></script>
 
 <!-- React for tweaks panel only -->
 <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>

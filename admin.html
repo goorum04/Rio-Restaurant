@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>El Rio — Admin</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --navy:    #1B3A6B;
+      --navy-dk: #132C55;
+      --gold:    #C4A45A;
+      --bg:      #F4F5F7;
+      --surface: #FFFFFF;
+      --text:    #1A1A2E;
+      --muted:   #6B7280;
+      --border:  #E5E7EB;
+      --danger:  #DC2626;
+      --success: #16A34A;
+      --r:       8px;
+    }
+    body { font-family:'Work Sans',system-ui,sans-serif; font-size:15px; color:var(--text); background:var(--bg); min-height:100vh; }
+
+    /* ── HEADER ── */
+    .admin-header { background:var(--navy); color:#fff; display:flex; align-items:center; justify-content:space-between; padding:0 24px; height:56px; position:sticky; top:0; z-index:100; }
+    .brand { font-weight:700; font-size:17px; color:var(--gold); letter-spacing:.3px; }
+    .brand span { color:#fff; font-weight:400; }
+    .admin-tabs { display:flex; gap:4px; }
+    .admin-tabs button { background:transparent; border:none; color:rgba(255,255,255,.65); padding:8px 16px; border-radius:var(--r); cursor:pointer; font:inherit; font-size:14px; font-weight:500; transition:all .15s; }
+    .admin-tabs button:hover { background:rgba(255,255,255,.1); color:#fff; }
+    .admin-tabs button.active { background:rgba(255,255,255,.18); color:#fff; }
+    .btn-logout { background:transparent; border:1px solid rgba(255,255,255,.3); color:rgba(255,255,255,.8); padding:6px 14px; border-radius:var(--r); cursor:pointer; font:inherit; font-size:13px; transition:all .15s; }
+    .btn-logout:hover { background:rgba(255,255,255,.1); color:#fff; }
+
+    /* ── LOGIN ── */
+    #screen-login { display:flex; align-items:center; justify-content:center; min-height:100vh; padding:24px; }
+    .login-card { background:var(--surface); border-radius:12px; padding:40px; width:100%; max-width:400px; box-shadow:0 4px 24px rgba(0,0,0,.08); }
+    .login-logo { text-align:center; margin-bottom:28px; }
+    .login-logo h1 { font-size:26px; font-weight:700; color:var(--navy); }
+    .login-logo p { font-size:13px; color:var(--muted); margin-top:4px; }
+    .form-group { margin-bottom:16px; }
+    .form-group label { display:block; font-size:13px; font-weight:500; margin-bottom:6px; }
+    .form-group input, .form-group select, .form-group textarea { width:100%; padding:10px 14px; border:1.5px solid var(--border); border-radius:var(--r); font:inherit; font-size:14px; background:var(--surface); color:var(--text); transition:border-color .15s; }
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus { outline:none; border-color:var(--navy); }
+    .form-group textarea { resize:vertical; min-height:70px; }
+    .btn-primary { width:100%; padding:11px; background:var(--navy); color:#fff; border:none; border-radius:var(--r); font:inherit; font-size:15px; font-weight:600; cursor:pointer; transition:background .15s; margin-top:4px; }
+    .btn-primary:hover { background:var(--navy-dk); }
+    .btn-primary:disabled { opacity:.6; cursor:not-allowed; }
+    .auth-switch { text-align:center; margin-top:18px; font-size:13px; color:var(--muted); }
+    .auth-switch a { color:var(--navy); cursor:pointer; text-decoration:underline; }
+    .msg-error { background:#FEE2E2; color:var(--danger); border-radius:var(--r); padding:10px 14px; font-size:13px; margin-bottom:14px; }
+    .msg-info  { background:#ECFDF5; color:var(--success); border-radius:var(--r); padding:10px 14px; font-size:13px; margin-bottom:14px; }
+
+    /* ── DASHBOARD ── */
+    #screen-dashboard { display:flex; flex-direction:column; min-height:100vh; }
+    .admin-content { flex:1; padding:24px; max-width:920px; margin:0 auto; width:100%; }
+
+    /* ── CATEGORY TABS ── */
+    .cat-tabs-wrap { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:20px; }
+    .cat-tab { background:var(--surface); border:1.5px solid var(--border); color:var(--muted); padding:7px 16px; border-radius:20px; cursor:pointer; font:inherit; font-size:13px; font-weight:500; transition:all .15s; }
+    .cat-tab:hover { border-color:var(--navy); color:var(--navy); }
+    .cat-tab.active { background:var(--navy); border-color:var(--navy); color:#fff; }
+
+    /* ── SECTION HEADER ── */
+    .section-header { display:flex; align-items:center; justify-content:space-between; margin-bottom:16px; }
+    .section-header h2 { font-size:18px; font-weight:600; }
+    .btn-add { background:var(--gold); border:none; color:var(--navy-dk); padding:9px 20px; border-radius:var(--r); font:inherit; font-size:14px; font-weight:600; cursor:pointer; transition:background .15s; }
+    .btn-add:hover { background:#b8943e; }
+
+    /* ── ITEMS LIST ── */
+    .items-list { background:var(--surface); border-radius:10px; border:1.5px solid var(--border); overflow:hidden; }
+    .item-row { display:flex; align-items:center; justify-content:space-between; padding:14px 18px; border-bottom:1px solid var(--border); gap:12px; transition:background .1s; }
+    .item-row:last-child { border-bottom:none; }
+    .item-row:hover { background:#FAFAFA; }
+    .item-row.inactive { opacity:.5; }
+    .item-info { flex:1; display:flex; align-items:center; gap:8px; flex-wrap:wrap; min-width:0; }
+    .item-name { font-weight:500; font-size:15px; }
+    .tag-badge { font-size:10px; font-weight:700; padding:2px 7px; border-radius:10px; text-transform:uppercase; letter-spacing:.4px; white-space:nowrap; }
+    .tag-veggie { background:#DCFCE7; color:#15803D; }
+    .tag-picant { background:#FEE2E2; color:#B91C1C; }
+    .tag-casa   { background:#FEF9C3; color:#854D0E; }
+    .tag-hidden { background:#F3F4F6; color:#6B7280; }
+    .item-actions { display:flex; align-items:center; gap:8px; flex-shrink:0; }
+    .item-price { font-weight:600; color:var(--navy); min-width:65px; text-align:right; font-size:14px; }
+    .btn-icon { background:none; border:1.5px solid var(--border); border-radius:6px; width:32px; height:32px; cursor:pointer; font-size:14px; display:flex; align-items:center; justify-content:center; transition:all .15s; }
+    .btn-edit:hover   { border-color:var(--navy); background:#EFF6FF; }
+    .btn-delete:hover { border-color:var(--danger); background:#FEF2F2; }
+    .items-empty { text-align:center; padding:40px; color:var(--muted); font-size:14px; }
+    .items-loading { text-align:center; padding:40px; color:var(--muted); font-size:14px; }
+
+    /* ── THEME ── */
+    .theme-section h2 { font-size:18px; font-weight:600; margin-bottom:6px; }
+    .theme-section .sub { color:var(--muted); font-size:14px; margin-bottom:22px; }
+    .theme-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(190px,1fr)); gap:16px; }
+    .theme-card { background:var(--surface); border:2.5px solid var(--border); border-radius:12px; padding:20px; cursor:pointer; transition:all .15s; }
+    .theme-card:hover { border-color:#9CA3AF; transform:translateY(-2px); box-shadow:0 4px 14px rgba(0,0,0,.08); }
+    .theme-card.active { border-color:var(--navy); box-shadow:0 0 0 3px rgba(27,58,107,.15); }
+    .swatches { display:flex; gap:6px; margin-bottom:14px; }
+    .swatch { width:28px; height:28px; border-radius:50%; border:1.5px solid rgba(0,0,0,.08); }
+    .theme-card h3 { font-size:15px; font-weight:600; margin-bottom:3px; }
+    .theme-card p { font-size:12px; color:var(--muted); }
+    .active-check { display:none; }
+    .theme-card.active .active-check { display:inline; color:var(--navy); }
+
+    /* ── MODAL ── */
+    #modal-overlay { position:fixed; inset:0; background:rgba(0,0,0,.5); display:flex; align-items:center; justify-content:center; z-index:1000; padding:24px; }
+    .modal-box { background:var(--surface); border-radius:12px; width:100%; max-width:580px; max-height:90vh; overflow-y:auto; box-shadow:0 20px 60px rgba(0,0,0,.2); }
+    .modal-header { display:flex; align-items:center; justify-content:space-between; padding:20px 24px 16px; border-bottom:1px solid var(--border); position:sticky; top:0; background:var(--surface); z-index:1; }
+    .modal-header h2 { font-size:17px; font-weight:600; }
+    .btn-close { background:none; border:none; cursor:pointer; font-size:20px; color:var(--muted); line-height:1; padding:4px; }
+    .btn-close:hover { color:var(--text); }
+    .modal-body { padding:22px 24px; }
+    .field-section { margin-bottom:20px; }
+    .field-section-label { font-size:12px; font-weight:600; text-transform:uppercase; letter-spacing:.6px; color:var(--muted); margin-bottom:10px; }
+    .lang-grid { display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px; }
+    .lang-label { font-size:11px; font-weight:600; text-transform:uppercase; letter-spacing:.5px; color:var(--navy); margin-bottom:4px; }
+    .price-row { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+    .tags-row { display:flex; gap:22px; flex-wrap:wrap; padding-top:4px; }
+    .tag-check { display:flex; align-items:center; gap:7px; font-size:14px; cursor:pointer; user-select:none; }
+    .tag-check input { width:16px; height:16px; cursor:pointer; accent-color:var(--navy); }
+    .modal-footer { display:flex; justify-content:flex-end; gap:10px; padding:16px 24px; border-top:1px solid var(--border); }
+    .btn-secondary { padding:9px 20px; background:none; border:1.5px solid var(--border); border-radius:var(--r); font:inherit; font-size:14px; font-weight:500; cursor:pointer; color:var(--text); transition:all .15s; }
+    .btn-secondary:hover { background:var(--bg); }
+    .btn-save { padding:9px 22px; background:var(--navy); border:none; border-radius:var(--r); font:inherit; font-size:14px; font-weight:600; cursor:pointer; color:#fff; transition:background .15s; }
+    .btn-save:hover { background:var(--navy-dk); }
+    .btn-save:disabled { opacity:.6; cursor:not-allowed; }
+
+    /* ── TOAST ── */
+    #toast { position:fixed; bottom:24px; left:50%; transform:translateX(-50%); background:#1A1A2E; color:#fff; padding:12px 26px; border-radius:8px; font-size:14px; font-weight:500; opacity:0; transition:opacity .2s; pointer-events:none; z-index:2000; white-space:nowrap; }
+    #toast.show { opacity:1; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width:600px) {
+      .admin-header { padding:0 14px; }
+      .admin-tabs button { padding:6px 10px; font-size:13px; }
+      .admin-content { padding:14px; }
+      .lang-grid { grid-template-columns:1fr; }
+      .price-row { grid-template-columns:1fr; }
+      .login-card { padding:28px 18px; }
+      .brand span { display:none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ════════ LOGIN ════════ -->
+<div id="screen-login">
+  <div class="login-card">
+    <div class="login-logo">
+      <h1>El Rio</h1>
+      <p>Panell d'administració</p>
+    </div>
+
+    <div id="msg-error" class="msg-error" hidden></div>
+    <div id="msg-info"  class="msg-info"  hidden></div>
+
+    <form id="form-login">
+      <div class="form-group">
+        <label for="login-email">Correu electrònic</label>
+        <input id="login-email" type="email" placeholder="admin@elrio.com" required autocomplete="email">
+      </div>
+      <div class="form-group">
+        <label for="login-pass">Contrasenya</label>
+        <input id="login-pass" type="password" placeholder="••••••••" required autocomplete="current-password">
+      </div>
+      <button type="submit" class="btn-primary" id="btn-login">Entrar</button>
+    </form>
+
+    <form id="form-register" hidden>
+      <div class="form-group">
+        <label for="reg-email">Correu electrònic</label>
+        <input id="reg-email" type="email" placeholder="admin@elrio.com" required autocomplete="email">
+      </div>
+      <div class="form-group">
+        <label for="reg-pass">Contrasenya (mínim 8 caràcters)</label>
+        <input id="reg-pass" type="password" placeholder="••••••••" required autocomplete="new-password" minlength="8">
+      </div>
+      <button type="submit" class="btn-primary" id="btn-register">Crear compte</button>
+    </form>
+
+    <div class="auth-switch" id="sw-to-register">
+      Primer accés? <a onclick="showRegForm()">Crear compte</a>
+    </div>
+    <div class="auth-switch" id="sw-to-login" hidden>
+      Ja tinc compte. <a onclick="showLoginForm()">Entrar</a>
+    </div>
+  </div>
+</div>
+
+<!-- ════════ DASHBOARD ════════ -->
+<div id="screen-dashboard" hidden>
+  <header class="admin-header">
+    <span class="brand">El Rio <span>Admin</span></span>
+    <nav class="admin-tabs">
+      <button class="active" id="tbtn-carta"   onclick="showTab('carta')">Carta</button>
+      <button             id="tbtn-aparenca" onclick="showTab('aparenca')">Aparença</button>
+    </nav>
+    <button class="btn-logout" onclick="doLogout()">Sortir</button>
+  </header>
+
+  <div class="admin-content">
+
+    <!-- TAB CARTA -->
+    <div id="tab-carta">
+      <div id="cat-tabs" class="cat-tabs-wrap"></div>
+      <div class="section-header">
+        <h2 id="cat-title">—</h2>
+        <button class="btn-add" onclick="openNew()">+ Nou plat</button>
+      </div>
+      <div class="items-list" id="items-list">
+        <div class="items-loading">Carregant…</div>
+      </div>
+    </div>
+
+    <!-- TAB APARENÇA -->
+    <div id="tab-aparenca" hidden>
+      <div class="theme-section">
+        <h2>Tema de la web</h2>
+        <p class="sub">El canvi és visible a tothom immediatament.</p>
+        <div class="theme-grid">
+          <div class="theme-card" data-theme="royal" onclick="setTheme('royal')">
+            <div class="swatches">
+              <div class="swatch" style="background:#1B3A6B"></div>
+              <div class="swatch" style="background:#C4A45A"></div>
+              <div class="swatch" style="background:#F7F4EE"></div>
+            </div>
+            <h3>Royal <span class="active-check">✓</span></h3>
+            <p>Blau marí i daurats elegants</p>
+          </div>
+          <div class="theme-card" data-theme="desert" onclick="setTheme('desert')">
+            <div class="swatches">
+              <div class="swatch" style="background:#7A4230"></div>
+              <div class="swatch" style="background:#B89050"></div>
+              <div class="swatch" style="background:#F5EFE6"></div>
+            </div>
+            <h3>Desert <span class="active-check">✓</span></h3>
+            <p>Tons càlids de terra i or</p>
+          </div>
+          <div class="theme-card" data-theme="mountain" onclick="setTheme('mountain')">
+            <div class="swatches">
+              <div class="swatch" style="background:#2A2E40"></div>
+              <div class="swatch" style="background:#C2A840"></div>
+              <div class="swatch" style="background:#F0F2F5"></div>
+            </div>
+            <h3>Mountain <span class="active-check">✓</span></h3>
+            <p>Gris blau i groc sorra</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ════════ MODAL ════════ -->
+<div id="modal-overlay" hidden>
+  <div class="modal-box">
+    <div class="modal-header">
+      <h2 id="modal-title">Plat</h2>
+      <button class="btn-close" onclick="closeModal()" aria-label="Tancar">✕</button>
+    </div>
+    <form id="form-item" onsubmit="saveItem(event)">
+      <div class="modal-body">
+
+        <div class="field-section">
+          <div class="field-section-label">Nom del plat</div>
+          <div class="lang-grid">
+            <div><div class="lang-label">CA</div><input id="f-name-ca" type="text" required placeholder="En català"></div>
+            <div><div class="lang-label">ES</div><input id="f-name-es" type="text" placeholder="En castellà"></div>
+            <div><div class="lang-label">FR</div><input id="f-name-fr" type="text" placeholder="En francès"></div>
+          </div>
+        </div>
+
+        <div class="field-section">
+          <div class="field-section-label">Descripció</div>
+          <div class="lang-grid">
+            <div><div class="lang-label">CA</div><textarea id="f-desc-ca" placeholder="En català"></textarea></div>
+            <div><div class="lang-label">ES</div><textarea id="f-desc-es" placeholder="En castellà"></textarea></div>
+            <div><div class="lang-label">FR</div><textarea id="f-desc-fr" placeholder="En francès"></textarea></div>
+          </div>
+        </div>
+
+        <div class="field-section">
+          <div class="price-row">
+            <div class="form-group">
+              <label for="f-price">Preu (€)</label>
+              <input id="f-price" type="number" step="0.01" min="0" max="999" required placeholder="12.50">
+            </div>
+            <div class="form-group">
+              <label for="f-active">Visibilitat</label>
+              <select id="f-active">
+                <option value="true">Visible a la carta</option>
+                <option value="false">Ocult (no es mostra)</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="field-section">
+          <div class="field-section-label">Etiquetes</div>
+          <div class="tags-row">
+            <label class="tag-check"><input type="checkbox" id="f-veggie"> VEGGIE</label>
+            <label class="tag-check"><input type="checkbox" id="f-picant"> PICANT</label>
+            <label class="tag-check"><input type="checkbox" id="f-casa">   ★ CASA</label>
+          </div>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn-secondary" onclick="closeModal()">Cancel·lar</button>
+        <button type="submit" class="btn-save" id="btn-save">Desar canvis</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- ════════ TOAST ════════ -->
+<div id="toast" role="status" aria-live="polite"></div>
+
+<script>
+  const SUPABASE_URL = 'https://gvbcfjgxrgnvjfuedtfs.supabase.co';
+  const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imd2YmNmamd4cmdudmpmdWVkdGZzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzg1MTA2NTMsImV4cCI6MjA5NDA4NjY1M30.fsregKbRRXmgG-k_Ylny8QkoNI7lLJGMUuSIJqODiMA';
+
+  let sb, categories = [], currentSlug = null, editingId = null;
+
+  /* ─── INIT ─── */
+  window.addEventListener('DOMContentLoaded', async () => {
+    sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+    const { data: { session } } = await sb.auth.getSession();
+    if (session) await bootDashboard();
+
+    sb.auth.onAuthStateChange(async (event, s) => {
+      if (s) await bootDashboard();
+      else {
+        document.getElementById('screen-dashboard').hidden = true;
+        document.getElementById('screen-login').style.display = '';
+      }
+    });
+
+    document.getElementById('form-login').addEventListener('submit', doLogin);
+    document.getElementById('form-register').addEventListener('submit', doRegister);
+  });
+
+  /* ─── AUTH ─── */
+  async function doLogin(e) {
+    e.preventDefault();
+    clearMsg();
+    const btn = document.getElementById('btn-login');
+    btn.disabled = true; btn.textContent = 'Entrant…';
+    const { error } = await sb.auth.signInWithPassword({
+      email:    document.getElementById('login-email').value.trim(),
+      password: document.getElementById('login-pass').value
+    });
+    btn.disabled = false; btn.textContent = 'Entrar';
+    if (error) showMsg(error.message, 'error');
+  }
+
+  async function doRegister(e) {
+    e.preventDefault();
+    clearMsg();
+    const btn = document.getElementById('btn-register');
+    btn.disabled = true; btn.textContent = 'Creant compte…';
+    const { error } = await sb.auth.signUp({
+      email:    document.getElementById('reg-email').value.trim(),
+      password: document.getElementById('reg-pass').value
+    });
+    btn.disabled = false; btn.textContent = 'Crear compte';
+    if (error) showMsg(error.message, 'error');
+    else showMsg('Compte creat! Comprova el teu correu i fes clic a l\'enllaç de confirmació.', 'info');
+  }
+
+  async function doLogout() {
+    await sb.auth.signOut();
+    window.location.reload();
+  }
+
+  function showRegForm() {
+    document.getElementById('form-login').hidden = true;
+    document.getElementById('form-register').hidden = false;
+    document.getElementById('sw-to-register').hidden = true;
+    document.getElementById('sw-to-login').hidden = false;
+    clearMsg();
+  }
+  function showLoginForm() {
+    document.getElementById('form-register').hidden = true;
+    document.getElementById('form-login').hidden = false;
+    document.getElementById('sw-to-login').hidden = true;
+    document.getElementById('sw-to-register').hidden = false;
+    clearMsg();
+  }
+  function showMsg(msg, type) {
+    const el = document.getElementById(type === 'error' ? 'msg-error' : 'msg-info');
+    const other = document.getElementById(type === 'error' ? 'msg-info' : 'msg-error');
+    other.hidden = true;
+    el.textContent = msg; el.hidden = false;
+  }
+  function clearMsg() {
+    document.getElementById('msg-error').hidden = true;
+    document.getElementById('msg-info').hidden  = true;
+  }
+
+  /* ─── DASHBOARD ─── */
+  async function bootDashboard() {
+    document.getElementById('screen-login').style.display = 'none';
+    document.getElementById('screen-dashboard').hidden = false;
+    await Promise.all([loadCategories(), loadCurrentTheme()]);
+  }
+
+  function showTab(name) {
+    document.getElementById('tab-carta').hidden    = (name !== 'carta');
+    document.getElementById('tab-aparenca').hidden = (name !== 'aparenca');
+    document.getElementById('tbtn-carta').classList.toggle('active',   name === 'carta');
+    document.getElementById('tbtn-aparenca').classList.toggle('active', name === 'aparenca');
+  }
+
+  /* ─── CATEGORIES ─── */
+  async function loadCategories() {
+    const { data, error } = await sb.from('menu_categories').select('*').order('sort_order');
+    if (error) { toast('Error carregant categories: ' + error.message); return; }
+    categories = data || [];
+    const container = document.getElementById('cat-tabs');
+    container.innerHTML = categories.map(c =>
+      `<button class="cat-tab" data-slug="${c.slug}" onclick="selectCat('${c.slug}')">${esc(c.name_ca)}</button>`
+    ).join('');
+    if (categories.length) selectCat(categories[0].slug);
+  }
+
+  async function selectCat(slug) {
+    currentSlug = slug;
+    document.querySelectorAll('.cat-tab').forEach(b => b.classList.toggle('active', b.dataset.slug === slug));
+    const cat = categories.find(c => c.slug === slug);
+    document.getElementById('cat-title').textContent = cat ? cat.name_ca : slug;
+    await loadItems(slug);
+  }
+
+  /* ─── ITEMS ─── */
+  async function loadItems(slug) {
+    const list = document.getElementById('items-list');
+    list.innerHTML = '<div class="items-loading">Carregant…</div>';
+    const { data, error } = await sb.from('menu_items').select('*').eq('category_slug', slug).order('sort_order');
+    if (error) { list.innerHTML = `<div class="items-empty">Error: ${esc(error.message)}</div>`; return; }
+    renderItems(data || []);
+  }
+
+  function renderItems(items) {
+    const list = document.getElementById('items-list');
+    if (!items.length) {
+      list.innerHTML = '<div class="items-empty">Cap plat en aquesta categoria. Afegeix-ne un!</div>';
+      return;
+    }
+    list.innerHTML = items.map(item => {
+      const tags = (item.tags || '').split(',').filter(Boolean).map(t => {
+        const k = t.trim().toLowerCase();
+        return `<span class="tag-badge tag-${k}">${esc(t.trim())}</span>`;
+      }).join('');
+      const price = Number(item.price).toFixed(2).replace('.', ',');
+      return `<div class="item-row${item.active ? '' : ' inactive'}">
+  <div class="item-info">
+    <span class="item-name">${esc(item.name_ca)}</span>
+    ${tags}
+    ${!item.active ? '<span class="tag-badge tag-hidden">OCULT</span>' : ''}
+  </div>
+  <div class="item-actions">
+    <span class="item-price">${price}&nbsp;€</span>
+    <button class="btn-icon btn-edit"   onclick="openEdit(${item.id})" title="Editar">✏️</button>
+    <button class="btn-icon btn-delete" onclick="delItem(${item.id})"  title="Eliminar">🗑️</button>
+  </div>
+</div>`;
+    }).join('');
+  }
+
+  /* ─── MODAL ─── */
+  function openNew() {
+    editingId = null;
+    document.getElementById('modal-title').textContent = 'Nou plat';
+    document.getElementById('form-item').reset();
+    document.getElementById('f-active').value = 'true';
+    document.getElementById('modal-overlay').hidden = false;
+  }
+
+  async function openEdit(id) {
+    const { data: item, error } = await sb.from('menu_items').select('*').eq('id', id).single();
+    if (error || !item) { toast('No s\'ha pogut carregar el plat.'); return; }
+    editingId = id;
+    document.getElementById('modal-title').textContent = 'Editar plat';
+    document.getElementById('f-name-ca').value = item.name_ca || '';
+    document.getElementById('f-name-es').value = item.name_es || '';
+    document.getElementById('f-name-fr').value = item.name_fr || '';
+    document.getElementById('f-desc-ca').value = item.desc_ca || '';
+    document.getElementById('f-desc-es').value = item.desc_es || '';
+    document.getElementById('f-desc-fr').value = item.desc_fr || '';
+    document.getElementById('f-price').value   = item.price   || '';
+    document.getElementById('f-active').value  = String(item.active !== false);
+    const tags = (item.tags || '').split(',').map(t => t.trim());
+    document.getElementById('f-veggie').checked = tags.includes('VEGGIE');
+    document.getElementById('f-picant').checked = tags.includes('PICANT');
+    document.getElementById('f-casa').checked   = tags.includes('CASA');
+    document.getElementById('modal-overlay').hidden = false;
+  }
+
+  function closeModal() {
+    document.getElementById('modal-overlay').hidden = true;
+    editingId = null;
+  }
+
+  async function saveItem(e) {
+    e.preventDefault();
+    const btn = document.getElementById('btn-save');
+    btn.disabled = true; btn.textContent = 'Desant…';
+
+    const tagsList = [];
+    if (document.getElementById('f-veggie').checked) tagsList.push('VEGGIE');
+    if (document.getElementById('f-picant').checked) tagsList.push('PICANT');
+    if (document.getElementById('f-casa').checked)   tagsList.push('CASA');
+
+    const payload = {
+      name_ca: document.getElementById('f-name-ca').value.trim(),
+      name_es: document.getElementById('f-name-es').value.trim(),
+      name_fr: document.getElementById('f-name-fr').value.trim(),
+      desc_ca: document.getElementById('f-desc-ca').value.trim(),
+      desc_es: document.getElementById('f-desc-es').value.trim(),
+      desc_fr: document.getElementById('f-desc-fr').value.trim(),
+      price:   parseFloat(document.getElementById('f-price').value),
+      active:  document.getElementById('f-active').value === 'true',
+      tags:    tagsList.join(',')
+    };
+
+    let error;
+    if (editingId) {
+      ({ error } = await sb.from('menu_items').update(payload).eq('id', editingId));
+    } else {
+      payload.category_slug = currentSlug;
+      payload.sort_order    = 999;
+      ({ error } = await sb.from('menu_items').insert(payload));
+    }
+
+    btn.disabled = false; btn.textContent = 'Desar canvis';
+    if (error) { toast('Error: ' + error.message); return; }
+    toast(editingId ? 'Plat actualitzat!' : 'Plat afegit a la carta!');
+    closeModal();
+    await loadItems(currentSlug);
+  }
+
+  async function delItem(id) {
+    if (!confirm('Eliminar aquest plat? Aquesta acció no es pot desfer.')) return;
+    const { error } = await sb.from('menu_items').delete().eq('id', id);
+    if (error) { toast('Error en eliminar: ' + error.message); return; }
+    toast('Plat eliminat de la carta');
+    await loadItems(currentSlug);
+  }
+
+  /* ─── THEME ─── */
+  async function loadCurrentTheme() {
+    const { data } = await sb.from('site_settings').select('value').eq('key', 'theme').single();
+    if (data?.value) markTheme(data.value);
+  }
+
+  async function setTheme(theme) {
+    const { error } = await sb.from('site_settings')
+      .upsert({ key: 'theme', value: theme, updated_at: new Date().toISOString() });
+    if (error) { toast('Error en canviar el tema'); return; }
+    markTheme(theme);
+    toast('Tema "' + theme + '" activat — visible a la web ara mateix!');
+  }
+
+  function markTheme(theme) {
+    document.querySelectorAll('.theme-card').forEach(c =>
+      c.classList.toggle('active', c.dataset.theme === theme));
+  }
+
+  /* ─── HELPERS ─── */
+  let _toastTimer;
+  function toast(msg) {
+    const el = document.getElementById('toast');
+    el.textContent = msg; el.classList.add('show');
+    clearTimeout(_toastTimer);
+    _toastTimer = setTimeout(() => el.classList.remove('show'), 3200);
+  }
+  function esc(s) {
+    return String(s || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  }
+
+  document.getElementById('modal-overlay').addEventListener('click', function(e) {
+    if (e.target === this) closeModal();
+  });
+</script>
+</body>
+</html>
