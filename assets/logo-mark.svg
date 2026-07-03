@@ -7,13 +7,10 @@
   </defs>
   <circle cx="32" cy="32" r="31" fill="url(#rioDisc)"/>
   <circle cx="32" cy="32" r="31" fill="none" stroke="#d4b06a" stroke-width="1.5"/>
-  <!-- Moroccan 8-point star (khatam): two overlapped rotated squares -->
-  <g fill="none" stroke="#d4b06a" stroke-width="1.3" stroke-linejoin="round" opacity="0.85">
-    <rect x="13.5" y="13.5" width="37" height="37" transform="rotate(0 32 32)"/>
-    <rect x="13.5" y="13.5" width="37" height="37" transform="rotate(45 32 32)"/>
-  </g>
+  <!-- Moroccan multifoil (scalloped arch) ring — no star polygon -->
+  <path d="M 37.56 11.23 A 6.90 6.90 0 0 1 47.20 16.80 A 6.90 6.90 0 0 1 52.77 26.44 A 6.90 6.90 0 0 1 52.77 37.56 A 6.90 6.90 0 0 1 47.20 47.20 A 6.90 6.90 0 0 1 37.56 52.77 A 6.90 6.90 0 0 1 26.44 52.77 A 6.90 6.90 0 0 1 16.80 47.20 A 6.90 6.90 0 0 1 11.23 37.56 A 6.90 6.90 0 0 1 11.23 26.44 A 6.90 6.90 0 0 1 16.80 16.80 A 6.90 6.90 0 0 1 26.44 11.23 A 6.90 6.90 0 0 1 37.56 11.23 Z" fill="none" stroke="#d4b06a" stroke-width="1.3" stroke-linejoin="round" opacity="0.9"/>
   <!-- Serif R monogram -->
   <text x="32" y="42.5" text-anchor="middle"
         font-family="Georgia, 'Times New Roman', serif"
-        font-size="30" font-weight="700" fill="#e6cf9a">R</text>
+        font-size="29" font-weight="700" fill="#e6cf9a">R</text>
 </svg>
