@@ -1263,3 +1263,94 @@ footer {
   .hero-meta { gap: 14px 22px; font-size: 0.82rem; }
   .hero-meta .big-rating { font-size: 2rem; }
 }
+
+/* ============================================================
+   MULTIPAGE ADDITIONS — gallery, lightbox, home CTA, form error,
+   zellige texture on stats (asset generated with Higgsfield)
+   ============================================================ */
+
+/* Current page in the nav */
+.site-nav a[aria-current="page"] { color: var(--primary); }
+.site-nav a[aria-current="page"]::after { width: 100%; left: 0; }
+
+/* Stats band: subtle zellige mosaic behind the numbers */
+.stats {
+  background-image:
+    linear-gradient(color-mix(in oklch, var(--bg-deep) 90%, transparent),
+                    color-mix(in oklch, var(--bg-deep) 96%, transparent)),
+    url('assets/zellige.webp');
+  background-size: auto, 420px;
+}
+
+/* Home CTA strip */
+.home-cta { text-align: center; }
+.home-cta-buttons {
+  display: flex; gap: 14px; flex-wrap: wrap; justify-content: center;
+}
+
+/* Gallery */
+.gallery-grid {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-auto-rows: 220px;
+  gap: 14px;
+}
+.gallery-item {
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  overflow: hidden;
+  padding: 0;
+  background: var(--bg-deep);
+  cursor: zoom-in;
+}
+.gallery-item.tall { grid-row: span 2; }
+.gallery-item img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform .6s ease;
+}
+.gallery-item:hover img { transform: scale(1.05); }
+@media (max-width: 720px) {
+  .gallery-grid { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 160px; }
+}
+
+/* Lightbox */
+.lightbox {
+  position: fixed; inset: 0; z-index: 300;
+  display: flex; align-items: center; justify-content: center;
+  background: color-mix(in oklch, var(--bg-dark) 92%, black);
+  padding: 4vh 4vw;
+  cursor: zoom-out;
+}
+.lightbox[hidden] { display: none; }
+.lightbox img {
+  max-width: 100%; max-height: 100%;
+  border-radius: 10px;
+  box-shadow: 0 30px 80px -20px rgba(0,0,0,.7);
+}
+.lightbox-close {
+  position: absolute; top: 18px; right: 22px;
+  width: 44px; height: 44px;
+  border-radius: 999px;
+  border: 1px solid color-mix(in oklch, var(--on-dark) 35%, transparent);
+  background: none;
+  color: var(--on-dark);
+  font-size: 1.5rem; line-height: 1;
+  cursor: pointer;
+}
+
+/* Reservation form error message */
+.form-error {
+  display: none;
+  margin-top: 18px;
+  padding: 14px 18px;
+  border-radius: 10px;
+  background: color-mix(in oklch, #c0392b 12%, transparent);
+  border: 1px solid color-mix(in oklch, #c0392b 45%, transparent);
+  color: #e57368;
+  font-size: 0.92rem;
+}
+.form-error.show { display: block; }

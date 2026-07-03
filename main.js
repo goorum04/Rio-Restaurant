@@ -72,16 +72,55 @@
   });
 
   /* ============== RESERVATION FORM ============== */
+  /* Reservations are stored in Supabase (table `reservations`, RLS grants
+     the anon role INSERT only). */
+  const RESERVATIONS_URL = 'https://qnuzcmdjpafbqnofpzfp.supabase.co/rest/v1/reservations';
+  const RESERVATIONS_KEY = 'sb_publishable_kIsUEkhtxqL8Ye1DkkBHhQ_kpKjx1Rp';
+
   const form = document.getElementById('reservation-form');
   if (form) {
-    form.addEventListener('submit', e => {
+    form.addEventListener('submit', async e => {
       e.preventDefault();
       const success = document.getElementById('form-success');
-      if (success) {
-        success.classList.add('show');
-        setTimeout(() => success.classList.remove('show'), 5000);
+      const error = document.getElementById('form-error');
+      if (success) success.classList.remove('show');
+      if (error) error.classList.remove('show');
+
+      const fd = new FormData(form);
+      const submitBtn = form.querySelector('[type="submit"]');
+      if (submitBtn) submitBtn.disabled = true;
+      try {
+        const res = await fetch(RESERVATIONS_URL, {
+          method: 'POST',
+          headers: {
+            apikey: RESERVATIONS_KEY,
+            Authorization: 'Bearer ' + RESERVATIONS_KEY,
+            'Content-Type': 'application/json',
+            Prefer: 'return=minimal'
+          },
+          body: JSON.stringify({
+            name: (fd.get('name') || '').toString().trim(),
+            phone: (fd.get('phone') || '').toString().trim(),
+            date: (fd.get('date') || '').toString(),
+            time: (fd.get('time') || '').toString(),
+            guests: (fd.get('guests') || '').toString(),
+            email: (fd.get('email') || '').toString().trim() || null,
+            notes: (fd.get('notes') || '').toString().trim() || null,
+            lang: localStorage.getItem('elrio_lang') || 'ca'
+          })
+        });
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+        if (success) {
+          success.classList.add('show');
+          setTimeout(() => success.classList.remove('show'), 8000);
+        }
+        form.reset();
+      } catch (err) {
+        console.error('Reservation submit failed', err);
+        if (error) error.classList.add('show');
+      } finally {
+        if (submitBtn) submitBtn.disabled = false;
       }
-      form.reset();
     });
     // Set min date = today
     const dateInput = document.getElementById('res-date');
@@ -106,6 +145,13 @@
       toggle.classList.remove('open');
     }));
   }
+
+  /* ============== CURRENT PAGE IN NAV ============== */
+  const path = location.pathname.replace(/\.html$/, '').replace(/\/$/, '') || '/';
+  document.querySelectorAll('.site-nav a[data-nav]').forEach(a => {
+    const target = a.getAttribute('href').replace(/\/$/, '') || '/';
+    if (target === path) a.setAttribute('aria-current', 'page');
+  });
 
   /* ============== UPDATE "TODAY" IN HOURS ============== */
   const dayIdx = new Date().getDay(); // 0=Sun..6=Sat

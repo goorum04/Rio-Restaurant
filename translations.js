@@ -186,7 +186,17 @@ window.ELRIO_I18N = {
 
     /* Placeholders */
     "El teu nom": "Your name",
-    "Aniversari, intolerància al gluten, terrassa...": "Birthday, gluten intolerance, terrace..."
+    "Aniversari, intolerància al gluten, terrassa...": "Birthday, gluten intolerance, terrace...",
+
+    /* Multipage additions */
+    "Inici": "Home",
+    "Galeria": "Gallery",
+    "La cuina, <em>de prop</em>": "The kitchen, <em>up close</em>",
+    "Plats de veritat, fets cada dia a la nostra cuina d'Encamp.": "Real dishes, made every day in our Encamp kitchen.",
+    "Veure la carta completa": "See the full menu",
+    "Reserva en línia i et confirmem en menys d'una hora. Som a l'Av. de Joan Martí, 32, Encamp.": "Book online and we confirm within the hour. Find us at Av. de Joan Martí 32, Encamp.",
+    "Com arribar-hi": "How to find us",
+    "No s'ha pogut enviar. Torna-ho a provar o truca'ns al 732 223.": "Could not send. Please try again or call us on 732 223."
   },
 
   ar: {
@@ -372,6 +382,16 @@ window.ELRIO_I18N = {
 
     /* Placeholders */
     "El teu nom": "اسمك",
-    "Aniversari, intolerància al gluten, terrassa...": "عيد ميلاد، حساسية غلوتين، تراس..."
+    "Aniversari, intolerància al gluten, terrassa...": "عيد ميلاد، حساسية غلوتين، تراس...",
+
+    /* Multipage additions */
+    "Inici": "الرئيسية",
+    "Galeria": "المعرض",
+    "La cuina, <em>de prop</em>": "المطبخ <em>عن قرب</em>",
+    "Plats de veritat, fets cada dia a la nostra cuina d'Encamp.": "أطباق حقيقية تُحضَّر كل يوم في مطبخنا في إنكامب.",
+    "Veure la carta completa": "شاهد القائمة الكاملة",
+    "Reserva en línia i et confirmem en menys d'una hora. Som a l'Av. de Joan Martí, 32, Encamp.": "احجز عبر الإنترنت ونؤكد لك في أقل من ساعة. عنواننا: شارع جوان مارتي 32، إنكامب.",
+    "Com arribar-hi": "كيف تصل إلينا",
+    "No s'ha pogut enviar. Torna-ho a provar o truca'ns al 732 223.": "تعذّر الإرسال. حاول مرة أخرى أو اتصل بنا على 732 223."
   }
 };
