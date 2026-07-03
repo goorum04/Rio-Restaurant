@@ -1361,3 +1361,45 @@ footer {
 @media (max-width: 720px) {
   .gallery-item.wide { grid-column: span 2; }
 }
+
+/* ============================================================
+   PAGE BANNER — photo header for inner pages (carta)
+   ============================================================ */
+.page-banner {
+  position: relative;
+  padding: 120px 40px 100px;
+  background: var(--bg-dark);
+  color: var(--on-dark);
+  overflow: hidden;
+}
+.page-banner > img {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  object-position: center 60%;
+  opacity: 0.38;
+}
+.page-banner::after {
+  content: "";
+  position: absolute; inset: 0;
+  background:
+    linear-gradient(to bottom,
+      color-mix(in oklch, var(--bg-dark) 55%, transparent) 0%,
+      transparent 35%,
+      color-mix(in oklch, var(--bg-dark) 82%, transparent) 100%);
+  pointer-events: none;
+}
+.page-banner .section-head {
+  position: relative; z-index: 2;
+  margin: 0 auto;
+  text-align: center;
+}
+.page-banner .section-head h2 { color: var(--on-dark); }
+.page-banner .section-head h2 em { color: var(--accent); }
+.page-banner .section-head p {
+  color: color-mix(in oklch, var(--on-dark) 82%, transparent);
+}
+.menu-after-banner { padding-top: 70px; }
+@media (max-width: 720px) {
+  .page-banner { padding: 90px 22px 70px; }
+}
