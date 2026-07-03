@@ -29,6 +29,11 @@ cpSync(resolve(appDir, "dist", "client"), resolve(out, "static"), {
 // SSR function: the whole self-contained server bundle plus the adapter.
 cpSync(resolve(appDir, "dist", "server"), fn, { recursive: true });
 
+// server.js and its assets/*.js chunks are ESM. Without this marker the
+// lambda runtime loads .js as CommonJS and the import crashes at cold start
+// (locally Node 22's module-syntax detection hides the problem).
+writeFileSync(resolve(fn, "package.json"), JSON.stringify({ type: "module" }));
+
 writeFileSync(
   resolve(fn, "index.mjs"),
   `import { Readable } from "node:stream";
