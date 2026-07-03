@@ -1,10 +1,12 @@
 // Server-only access to this app's Cloudflare bindings. Each is present ONLY if
 // opted into via app.manifest.json (D1 `DB`, R2 `STORAGE`, KV `KV`, and the
 // container `CONTAINER`) — so the accessors are optional; guard before use.
+//
 // `cloudflare:workers` is the Workers-runtime module that exposes the Worker
-// env (bindings) — usable inside any server-side code (server functions,
-// server routes). It is NOT bundled; the runtime provides it.
-import { env } from "cloudflare:workers";
+// env (bindings). It only exists on the workerd runtime, and this app also
+// deploys to Node hosts (Vercel), so it is loaded lazily: on Cloudflare the
+// dynamic import resolves and returns the bindings; anywhere else it throws
+// and we fall back to an empty env (callers already guard each binding).
 // Import the binding types directly — NOT via the global tsconfig `types` list,
 // which would clobber the DOM globals the client/SSR React code relies on.
 import type {
@@ -26,6 +28,15 @@ type AppEnv = {
   APP_SLUG?: string;
 };
 
-export function bindings(): AppEnv {
-  return env as unknown as AppEnv;
+let cached: AppEnv | undefined;
+
+export async function bindings(): Promise<AppEnv> {
+  if (cached) return cached;
+  try {
+    const mod = await import(/* @vite-ignore */ "cloudflare:workers");
+    cached = mod.env as unknown as AppEnv;
+  } catch {
+    cached = {};
+  }
+  return cached;
 }

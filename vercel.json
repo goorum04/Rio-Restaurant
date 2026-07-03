@@ -1,0 +1,6 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": null,
+  "installCommand": "cd higgsfield-site/app && npm install",
+  "buildCommand": "cd higgsfield-site/app && npm run build:vercel"
+}

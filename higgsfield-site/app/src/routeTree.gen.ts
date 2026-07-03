@@ -9,14 +9,19 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as VisitaRouteImport } from './routes/visita'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as RobotsDottxtRouteImport } from './routes/robots[.]txt'
-import { Route as VisitaRouteImport } from './routes/visita'
 import { Route as ReservesRouteImport } from './routes/reserves'
 import { Route as GaleriaRouteImport } from './routes/galeria'
 import { Route as CartaRouteImport } from './routes/carta'
 import { Route as IndexRouteImport } from './routes/index'
 
+const VisitaRoute = VisitaRouteImport.update({
+  id: '/visita',
+  path: '/visita',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   id: '/sitemap.xml',
   path: '/sitemap.xml',
@@ -25,11 +30,6 @@ const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
 const RobotsDottxtRoute = RobotsDottxtRouteImport.update({
   id: '/robots.txt',
   path: '/robots.txt',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const VisitaRoute = VisitaRouteImport.update({
-  id: '/visita',
-  path: '/visita',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ReservesRoute = ReservesRouteImport.update({
@@ -58,18 +58,18 @@ export interface FileRoutesByFullPath {
   '/carta': typeof CartaRoute
   '/galeria': typeof GaleriaRoute
   '/reserves': typeof ReservesRoute
-  '/visita': typeof VisitaRoute
   '/robots.txt': typeof RobotsDottxtRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/visita': typeof VisitaRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/carta': typeof CartaRoute
   '/galeria': typeof GaleriaRoute
   '/reserves': typeof ReservesRoute
-  '/visita': typeof VisitaRoute
   '/robots.txt': typeof RobotsDottxtRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/visita': typeof VisitaRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -77,9 +77,9 @@ export interface FileRoutesById {
   '/carta': typeof CartaRoute
   '/galeria': typeof GaleriaRoute
   '/reserves': typeof ReservesRoute
-  '/visita': typeof VisitaRoute
   '/robots.txt': typeof RobotsDottxtRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/visita': typeof VisitaRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -88,27 +88,27 @@ export interface FileRouteTypes {
     | '/carta'
     | '/galeria'
     | '/reserves'
-    | '/visita'
     | '/robots.txt'
     | '/sitemap.xml'
+    | '/visita'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/carta'
     | '/galeria'
     | '/reserves'
-    | '/visita'
     | '/robots.txt'
     | '/sitemap.xml'
+    | '/visita'
   id:
     | '__root__'
     | '/'
     | '/carta'
     | '/galeria'
     | '/reserves'
-    | '/visita'
     | '/robots.txt'
     | '/sitemap.xml'
+    | '/visita'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -116,13 +116,20 @@ export interface RootRouteChildren {
   CartaRoute: typeof CartaRoute
   GaleriaRoute: typeof GaleriaRoute
   ReservesRoute: typeof ReservesRoute
-  VisitaRoute: typeof VisitaRoute
   RobotsDottxtRoute: typeof RobotsDottxtRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
+  VisitaRoute: typeof VisitaRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/visita': {
+      id: '/visita'
+      path: '/visita'
+      fullPath: '/visita'
+      preLoaderRoute: typeof VisitaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/sitemap.xml': {
       id: '/sitemap.xml'
       path: '/sitemap.xml'
@@ -135,13 +142,6 @@ declare module '@tanstack/react-router' {
       path: '/robots.txt'
       fullPath: '/robots.txt'
       preLoaderRoute: typeof RobotsDottxtRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/visita': {
-      id: '/visita'
-      path: '/visita'
-      fullPath: '/visita'
-      preLoaderRoute: typeof VisitaRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/reserves': {
@@ -180,9 +180,9 @@ const rootRouteChildren: RootRouteChildren = {
   CartaRoute: CartaRoute,
   GaleriaRoute: GaleriaRoute,
   ReservesRoute: ReservesRoute,
-  VisitaRoute: VisitaRoute,
   RobotsDottxtRoute: RobotsDottxtRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
+  VisitaRoute: VisitaRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
