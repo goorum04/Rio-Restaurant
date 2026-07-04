@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <!-- PRIMARY SEO -->
-  <title>Rio · Restaurant Marroquí i Pizzeria · Encamp, Andorra · 100% Halal</title>
-  <meta name="description" content="Restaurant Rio a Encamp, Andorra. Cuina marroquí autèntica, pizzes artesanes, carns a la brasa i tapes. 100% Halal. Av. de Joan Martí 32, Encamp. Reserves 732 223." />
+  <title>Restaurant Rio · Halal, Pizzeria i Carns a la Brasa · Encamp, Andorra</title>
+  <meta name="description" content="Restaurant halal a Encamp (Andorra): cuina marroquí i àrab, pizzes artesanes, carns a la brasa, tajín i cuscús. Menjar oriental 100% Halal. Reserves 732 223." />
   <meta name="keywords" content="restaurant Encamp, restaurant Andorra, restaurant halal Andorra, halal Encamp, cuscús Andorra, tajín Andorra, pizza Encamp, restaurant marroquí Andorra, Rio Encamp, te menta marroquí, restaurant familiar Andorra, restaurant Av Joan Martí Encamp" />
   <meta name="robots" content="index, follow, max-image-preview:large" />
   <meta name="author" content="Restaurant Rio" />
@@ -23,7 +23,7 @@
   <meta property="og:locale" content="ca_AD" />
   <meta property="og:locale:alternate" content="es_ES" />
   <meta property="og:locale:alternate" content="fr_FR" />
-  <meta property="og:title" content="Rio · Restaurant Marroquí i Pizzeria · Encamp, Andorra · 100% Halal" />
+  <meta property="og:title" content="Restaurant Rio · Halal, Pizzeria i Carns a la Brasa · Encamp, Andorra" />
   <meta property="og:description" content="Cuina marroquí autèntica, pizzes artesanes i carns a la brasa al cor d'Andorra. 100% Halal." />
   <meta property="og:url" content="https://www.restaurantelrio.com/" />
   <meta property="og:site_name" content="Restaurant Rio" />
@@ -46,20 +46,33 @@
   <link rel="apple-touch-icon" href="/assets/logo-mark.svg" />
   <meta name="theme-color" content="#0d1830" />
 
+  <!-- Preload the LCP hero image (Core Web Vitals) -->
+  <link rel="preload" as="image" href="/assets/hero-rio.webp" fetchpriority="high" />
+
   <!-- SCHEMA.ORG · Local Business / Restaurant (critical for Google Maps SEO) -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "Restaurant",
-    "name": "Rio",
-    "alternateName": "Restaurant Rio Encamp",
-    "image": "photos/tajin-hero.jpg",
+    "@id": "https://www.restaurantelrio.com/#restaurant",
+    "name": "Restaurant Rio",
+    "alternateName": ["Rio Encamp", "Restaurant Halal Rio", "Pizzeria Rio Encamp"],
+    "description": "Restaurant halal a Encamp (Andorra): cuina marroquí i àrab, pizzeria artesana i carns a la brasa. Tajín, cuscús, harira, pizzes, brotxetes i entrecot. 100% Halal.",
+    "image": [
+      "https://www.restaurantelrio.com/assets/taula-rio.webp",
+      "https://www.restaurantelrio.com/assets/hero-rio.webp",
+      "https://www.restaurantelrio.com/photos/tajin-hero.jpg"
+    ],
+    "logo": "https://www.restaurantelrio.com/assets/logo-mark.svg",
     "url": "https://www.restaurantelrio.com/",
     "telephone": "+376732223",
     "priceRange": "€€",
-    "servesCuisine": ["Moroccan", "Mediterranean", "Italian", "Halal"],
+    "servesCuisine": ["Halal", "Moroccan", "Arab", "Middle Eastern", "Mediterranean", "Pizza", "Barbecue", "Grill", "Oriental"],
+    "keywords": "restaurant halal, restaurante halal, pizzeria, pizzería, carns a la brasa, carne a la brasa, comida árabe, comida oriental, cuina marroquí, cuina àrab, tajín, cuscús, restaurant Encamp, restaurant Andorra",
     "currenciesAccepted": "EUR",
     "paymentAccepted": "Cash, Credit Card",
+    "smokingAllowed": false,
+    "acceptsReservations": "True",
     "address": {
       "@type": "PostalAddress",
       "streetAddress": "Av. de Joan Martí, 32",
@@ -72,17 +85,60 @@
       "latitude": 42.5341,
       "longitude": 1.5816
     },
+    "hasMap": "https://www.google.com/maps/search/?api=1&query=El+Rio+Av+Joan+Marti+32+Encamp+Andorra",
+    "areaServed": [
+      { "@type": "City", "name": "Encamp" },
+      { "@type": "City", "name": "Andorra la Vella" },
+      { "@type": "City", "name": "Canillo" },
+      { "@type": "City", "name": "Escaldes-Engordany" },
+      { "@type": "Country", "name": "Andorra" }
+    ],
     "openingHoursSpecification": [
       { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Sunday"], "opens": "10:00", "closes": "23:30" },
       { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Friday","Saturday"], "opens": "10:00", "closes": "00:00" }
     ],
-    "acceptsReservations": "True",
     "aggregateRating": {
       "@type": "AggregateRating",
       "ratingValue": "4.2",
       "reviewCount": "329"
     },
+    "hasMenu": "https://www.restaurantelrio.com/carta",
     "menu": "https://www.restaurantelrio.com/carta"
+  }
+  </script>
+
+  <!-- SCHEMA.ORG · FAQ (rich results for halal / pizzeria / brasa / àrab queries) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "El Rio és un restaurant halal?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Sí. Tota la carn del Restaurant Rio és 100% halal certificada. Som un restaurant familiar a Encamp (Andorra) especialitzat en cuina marroquí i àrab." }
+      },
+      {
+        "@type": "Question",
+        "name": "El Rio és també pizzeria?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Sí, som també pizzeria. Fem pizzes artesanes al moment amb massa pròpia i ingredients frescos, com la nostra Pizza Rio de la casa." }
+      },
+      {
+        "@type": "Question",
+        "name": "Teniu carns a la brasa?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Sí. A la brasa servim brotxetes de pollastre, vedella i xai, entrecot, entranya, costella de xai i churrasco, tota la carn 100% halal." }
+      },
+      {
+        "@type": "Question",
+        "name": "Quin tipus de cuina serviu?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Cuina marroquí i àrab (tajín, cuscús, harira), plats mediterranis, pizzes artesanes i carns a la brasa. Menjar oriental i halal al cor d'Andorra." }
+      },
+      {
+        "@type": "Question",
+        "name": "On és el restaurant i com puc reservar?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Som a l'Av. de Joan Martí 32, Encamp (Andorra), obert cada dia de 10:00 a 23:30. Pots reservar en línia o trucant al +376 732 223." }
+      }
+    ]
   }
   </script>
 
@@ -312,6 +368,61 @@
   </div>
 </section>
 
+
+<!-- ════════════════════════ FAQ ════════════════════════ -->
+<section class="faq" id="faq" data-screen-label="FAQ">
+  <div class="section-head">
+    <span class="overline"
+      data-ca="Preguntes freqüents" data-es="Preguntas frecuentes" data-fr="Questions fréquentes">Preguntes freqüents</span>
+    <div class="divider"><span class="star8" aria-hidden="true"></span></div>
+    <h2 data-ca="Tot el que vols saber <em>del Rio</em>"
+        data-es="Todo lo que quieres saber <em>del Rio</em>"
+        data-fr="Tout savoir <em>sur le Rio</em>">Tot el que vols saber <em>del Rio</em></h2>
+  </div>
+
+  <div class="faq-list">
+    <details class="faq-item">
+      <summary data-ca="El Rio és un restaurant halal?"
+               data-es="¿El Rio es un restaurante halal?"
+               data-fr="Le Rio est-il un restaurant halal ?">El Rio és un restaurant halal?</summary>
+      <p data-ca="Sí. Tota la carn del Rio és 100% halal certificada. Som un restaurant familiar a Encamp especialitzat en cuina marroquí i àrab."
+         data-es="Sí. Toda la carne del Rio es 100% halal certificada. Somos un restaurante familiar en Encamp especializado en cocina marroquí y árabe."
+         data-fr="Oui. Toute la viande du Rio est 100% halal certifiée. Nous sommes un restaurant familial à Encamp spécialisé dans la cuisine marocaine et arabe.">Sí. Tota la carn del Rio és 100% halal certificada. Som un restaurant familiar a Encamp especialitzat en cuina marroquí i àrab.</p>
+    </details>
+    <details class="faq-item">
+      <summary data-ca="El Rio és també pizzeria?"
+               data-es="¿El Rio es también pizzería?"
+               data-fr="Le Rio est-il aussi une pizzeria ?">El Rio és també pizzeria?</summary>
+      <p data-ca="Sí, som també pizzeria. Fem pizzes artesanes al moment amb massa pròpia i ingredients frescos, com la Pizza Rio de la casa."
+         data-es="Sí, también somos pizzería. Hacemos pizzas artesanas al momento con masa propia e ingredientes frescos, como la Pizza Rio de la casa."
+         data-fr="Oui, nous sommes aussi une pizzeria. Nous faisons des pizzas artisanales minute avec notre pâte maison et des ingrédients frais, comme la Pizza Rio.">Sí, som també pizzeria. Fem pizzes artesanes al moment amb massa pròpia i ingredients frescos, com la Pizza Rio de la casa.</p>
+    </details>
+    <details class="faq-item">
+      <summary data-ca="Teniu carns a la brasa?"
+               data-es="¿Tenéis carnes a la brasa?"
+               data-fr="Avez-vous des grillades ?">Teniu carns a la brasa?</summary>
+      <p data-ca="Sí. A la brasa servim brotxetes de pollastre, vedella i xai, entrecot, entranya, costella de xai i churrasco, tota la carn 100% halal."
+         data-es="Sí. A la brasa servimos brochetas de pollo, ternera y cordero, entrecot, entraña, costilla de cordero y churrasco, toda la carne 100% halal."
+         data-fr="Oui. Aux braises : brochettes de poulet, bœuf et agneau, entrecôte, hampe, côtelettes d'agneau et churrasco, viande 100% halal.">Sí. A la brasa servim brotxetes de pollastre, vedella i xai, entrecot, entranya, costella de xai i churrasco, tota la carn 100% halal.</p>
+    </details>
+    <details class="faq-item">
+      <summary data-ca="Quin tipus de cuina serviu?"
+               data-es="¿Qué tipo de cocina servís?"
+               data-fr="Quel type de cuisine servez-vous ?">Quin tipus de cuina serviu?</summary>
+      <p data-ca="Cuina marroquí i àrab (tajín, cuscús, harira), plats mediterranis, pizzes artesanes i carns a la brasa. Menjar oriental i halal al cor d'Andorra."
+         data-es="Cocina marroquí y árabe (tajín, cuscús, harira), platos mediterráneos, pizzas artesanas y carnes a la brasa. Comida oriental y halal en el corazón de Andorra."
+         data-fr="Cuisine marocaine et arabe (tajine, couscous, harira), plats méditerranéens, pizzas artisanales et grillades. Cuisine orientale et halal au cœur de l'Andorre.">Cuina marroquí i àrab (tajín, cuscús, harira), plats mediterranis, pizzes artesanes i carns a la brasa. Menjar oriental i halal al cor d'Andorra.</p>
+    </details>
+    <details class="faq-item">
+      <summary data-ca="On sou i com puc reservar?"
+               data-es="¿Dónde estáis y cómo puedo reservar?"
+               data-fr="Où êtes-vous et comment réserver ?">On sou i com puc reservar?</summary>
+      <p data-ca="Som a l'Av. de Joan Martí 32, Encamp (Andorra), obert cada dia de 10:00 a 23:30. Pots reservar en línia o trucant al +376 732 223."
+         data-es="Estamos en la Av. de Joan Martí 32, Encamp (Andorra), abierto cada día de 10:00 a 23:30. Puedes reservar online o llamando al +376 732 223."
+         data-fr="Nous sommes Av. de Joan Martí 32, Encamp (Andorre), ouvert tous les jours de 10h00 à 23h30. Réservez en ligne ou au +376 732 223.">Som a l'Av. de Joan Martí 32, Encamp (Andorra), obert cada dia de 10:00 a 23:30. Pots reservar en línia o trucant al +376 732 223.</p>
+    </details>
+  </div>
+</section>
 
 <!-- ════════════════════════ RESERVE CTA ════════════════════════ -->
 <section class="home-cta" data-screen-label="CTA">

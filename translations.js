@@ -196,7 +196,21 @@ window.ELRIO_I18N = {
     "Veure la carta completa": "See the full menu",
     "Reserva en línia i et confirmem en menys d'una hora. Som a l'Av. de Joan Martí, 32, Encamp.": "Book online and we confirm within the hour. Find us at Av. de Joan Martí 32, Encamp.",
     "Com arribar-hi": "How to find us",
-    "No s'ha pogut enviar. Torna-ho a provar o truca'ns al 732 223.": "Could not send. Please try again or call us on 732 223."
+    "No s'ha pogut enviar. Torna-ho a provar o truca'ns al 732 223.": "Could not send. Please try again or call us on 732 223.",
+
+    /* FAQ (SEO) */
+    "Preguntes freqüents": "FAQ",
+    "Tot el que vols saber <em>del Rio</em>": "Everything you want to know <em>about Rio</em>",
+    "El Rio és un restaurant halal?": "Is Rio a halal restaurant?",
+    "Sí. Tota la carn del Rio és 100% halal certificada. Som un restaurant familiar a Encamp especialitzat en cuina marroquí i àrab.": "Yes. All the meat at Rio is 100% certified halal. We are a family restaurant in Encamp specialising in Moroccan and Arab cuisine.",
+    "El Rio és també pizzeria?": "Is Rio also a pizzeria?",
+    "Sí, som també pizzeria. Fem pizzes artesanes al moment amb massa pròpia i ingredients frescos, com la Pizza Rio de la casa.": "Yes, we are also a pizzeria. We make artisan pizzas to order with our own dough and fresh ingredients, like our house Pizza Rio.",
+    "Teniu carns a la brasa?": "Do you have grilled meats?",
+    "Sí. A la brasa servim brotxetes de pollastre, vedella i xai, entrecot, entranya, costella de xai i churrasco, tota la carn 100% halal.": "Yes. Over the coals we serve chicken, beef and lamb skewers, ribeye, skirt steak, lamb chops and churrasco, all 100% halal meat.",
+    "Quin tipus de cuina serviu?": "What kind of cuisine do you serve?",
+    "Cuina marroquí i àrab (tajín, cuscús, harira), plats mediterranis, pizzes artesanes i carns a la brasa. Menjar oriental i halal al cor d'Andorra.": "Moroccan and Arab cuisine (tagine, couscous, harira), Mediterranean dishes, artisan pizzas and grilled meats. Oriental and halal food in the heart of Andorra.",
+    "On sou i com puc reservar?": "Where are you and how can I book?",
+    "Som a l'Av. de Joan Martí 32, Encamp (Andorra), obert cada dia de 10:00 a 23:30. Pots reservar en línia o trucant al +376 732 223.": "We are at Av. de Joan Martí 32, Encamp (Andorra), open every day from 10:00 to 23:30. Book online or call +376 732 223."
   },
 
   ar: {
@@ -392,6 +406,20 @@ window.ELRIO_I18N = {
     "Veure la carta completa": "شاهد القائمة الكاملة",
     "Reserva en línia i et confirmem en menys d'una hora. Som a l'Av. de Joan Martí, 32, Encamp.": "احجز عبر الإنترنت ونؤكد لك في أقل من ساعة. عنواننا: شارع جوان مارتي 32، إنكامب.",
     "Com arribar-hi": "كيف تصل إلينا",
-    "No s'ha pogut enviar. Torna-ho a provar o truca'ns al 732 223.": "تعذّر الإرسال. حاول مرة أخرى أو اتصل بنا على 732 223."
+    "No s'ha pogut enviar. Torna-ho a provar o truca'ns al 732 223.": "تعذّر الإرسال. حاول مرة أخرى أو اتصل بنا على 732 223.",
+
+    /* FAQ (SEO) */
+    "Preguntes freqüents": "الأسئلة الشائعة",
+    "Tot el que vols saber <em>del Rio</em>": "كل ما تريد معرفته <em>عن ريو</em>",
+    "El Rio és un restaurant halal?": "هل ريو مطعم حلال؟",
+    "Sí. Tota la carn del Rio és 100% halal certificada. Som un restaurant familiar a Encamp especialitzat en cuina marroquí i àrab.": "نعم. جميع اللحوم في ريو حلال 100% ومعتمدة. نحن مطعم عائلي في إنكامب متخصص في المطبخ المغربي والعربي.",
+    "El Rio és també pizzeria?": "هل ريو أيضًا بيتزيريا؟",
+    "Sí, som també pizzeria. Fem pizzes artesanes al moment amb massa pròpia i ingredients frescos, com la Pizza Rio de la casa.": "نعم، نحن أيضًا بيتزيريا. نحضّر بيتزا حرفية في الحال بعجيننا الخاص ومكونات طازجة، مثل بيتزا ريو الخاصة بنا.",
+    "Teniu carns a la brasa?": "هل لديكم لحوم مشوية على الجمر؟",
+    "Sí. A la brasa servim brotxetes de pollastre, vedella i xai, entrecot, entranya, costella de xai i churrasco, tota la carn 100% halal.": "نعم. على الجمر نقدّم أسياخ الدجاج والبقر والخروف، والانتريكوت، والهامبر، وريش الخروف، والتشوراسكو، وكل اللحوم حلال 100%.",
+    "Quin tipus de cuina serviu?": "ما نوع المطبخ الذي تقدمونه؟",
+    "Cuina marroquí i àrab (tajín, cuscús, harira), plats mediterranis, pizzes artesanes i carns a la brasa. Menjar oriental i halal al cor d'Andorra.": "مطبخ مغربي وعربي (طاجين، كسكس، حريرة)، وأطباق متوسطية، وبيتزا حرفية، ولحوم مشوية. طعام شرقي وحلال في قلب أندورا.",
+    "On sou i com puc reservar?": "أين تقعون وكيف يمكنني الحجز؟",
+    "Som a l'Av. de Joan Martí 32, Encamp (Andorra), obert cada dia de 10:00 a 23:30. Pots reservar en línia o trucant al +376 732 223.": "نحن في شارع جوان مارتي 32، إنكامب (أندورا)، مفتوح كل يوم من 10:00 إلى 23:30. احجز عبر الإنترنت أو اتصل على 732 223 376+."
   }
 };
